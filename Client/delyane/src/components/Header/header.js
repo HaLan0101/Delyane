@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './Header.css';
+import './header.css';
 
 const Header = () => {
     const [links, setLinks] = useState(false)
