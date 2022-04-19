@@ -19,6 +19,8 @@ func main() {
 	// router.Static("/static", "./static") for static path
 
 	router.GET("/", controllers.GetRoot)
+	router.GET("/products", controllers.GetProducts)
+	router.GET("/product/:id", controllers.GetProductById)
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
