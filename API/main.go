@@ -19,11 +19,22 @@ func main() {
 	// router.Static("/static", "./static") for static path
 
 	router.GET("/", controllers.GetRoot)
+
+	router.GET("/user/:id", controllers.GetUserById)
+	// POST
+	// PUT
+	// DELETE
+
+	router.GET("/category/:id", controllers.GetCategoryById)
+	router.GET("/categories", controllers.GetCategories)
+
 	router.GET("/products", controllers.GetProducts)
 	router.GET("/product/:id", controllers.GetProductById)
+	router.POST("/product", controllers.PostProduct)
+	// PUT
+	// DELETE
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
-	// router.Run()
-	router.Run(":3000")
+	router.Run()
 }
