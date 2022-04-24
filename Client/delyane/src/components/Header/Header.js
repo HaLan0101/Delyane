@@ -21,7 +21,6 @@ const Header = () => {
                     </li>
                 </ul>
             </div>
-
             <ul className='header__nav'>
                 <li className='nav__item'>
                     <a href='/' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
@@ -35,7 +34,8 @@ const Header = () => {
             </ul>
             <button className='nav__burger' onClick={handleClick}>
                 <span className='burger__bar'></span>
-            </button>
+            </button> 
+            <hr />
         </div>
     );
 }

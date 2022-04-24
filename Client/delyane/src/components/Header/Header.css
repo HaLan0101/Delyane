@@ -16,7 +16,7 @@
     padding: 10px 20px;
 }
 .logo{
-    width: 100px;
+    width: 80px;
     height: 100px;
 }
 .name{
@@ -45,7 +45,10 @@
     color: inherit;
     display: none;
 }
-
+hr{
+    border-top: 3px solid grey;
+    width: 100%;
+}
 @media screen and (max-width:760px) {
     .header__nav {
         flex-direction: column;
