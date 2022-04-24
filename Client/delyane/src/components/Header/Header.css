@@ -7,19 +7,36 @@
     width: 100%;
     padding: 1rem;
     min-height: 75px;
-    background-color: var(--black-color);
     color: var(--white-color);
+    background-color: white;
 }
-
+.header__image {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+}
+.name{
+    padding-top: 27px;
+}
 .header__nav {
     display: flex;
 }
-
+.nav__item{
+    color: black;
+    height: 50px;
+    width: 50px;
+}
 .nav__link {
     padding: 0 0.3rem;
     color: inherit;
 }
-
+.nav__icon{
+    height: 60%;
+}
 .nav__burger {
     width: 40px;
     height: 40px;
