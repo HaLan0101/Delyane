@@ -21,7 +21,11 @@ const Footer = () => {
                 </li>
                 <li className='footer__item'>
                     <h3>Newsletter</h3>
-                    <input type="text" />
+                    <ul className='footer__letter'>
+                        <li className='letter__item'><input className='letter__input' type="text" placeholder='Souscrire à notre newsletter'/></li>
+                        <li className='letter__item'><FontAwesomeIcon className='letter__icon' icon="fa-solid fa-chevron-right" /></li>
+                        <hr className='letter__line' />
+                    </ul>
                 </li>
             </ul> 
             <div className='footer__text'> 

@@ -44,7 +44,7 @@
     color: inherit;
     display: none;
 }
-hr{
+.header__line{
     border-top: 3px solid grey;
     width: 100%;
 }

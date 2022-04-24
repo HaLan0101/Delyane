@@ -35,7 +35,7 @@ const Header = () => {
             <button className='nav__burger' onClick={handleClick}>
                 <span className='burger__bar'></span>
             </button> 
-            <hr />
+            <hr className='header__line'/>
         </div>
     );
 }
