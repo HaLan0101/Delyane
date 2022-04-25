@@ -71,3 +71,23 @@ func PostProduct(newProduct models.PostProduct) {
 		panic(err)
 	}
 }
+
+func PutProductById(uuid string, updatedProduct models.PostProduct) {
+	// dynamic
+	updateDynStmt := `update "product" SET title = $2,  description = $3, price = $4,  image = $5, uuid_category = $6,  uuid_user = $7 where uuid = $1`
+
+	_, err := currentDB.Exec(updateDynStmt, uuid, updatedProduct.Title, updatedProduct.Description, updatedProduct.Price, updatedProduct.Image, updatedProduct.UUID_category, updatedProduct.UUID_user)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func DeleteProductById(uuid string) {
+	// dynamic
+	deleteDynStmt := `delete from "product" where uuid = $1`
+
+	_, err := currentDB.Exec(deleteDynStmt, uuid)
+	if err != nil {
+		panic(err)
+	}
+}
