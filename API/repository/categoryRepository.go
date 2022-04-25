@@ -57,3 +57,23 @@ func PostCategory(newCategory models.PostCategory) {
 		panic(err)
 	}
 }
+
+func PutCategoryById(uuid string, updatedCategory models.PostCategory) {
+	// dynamic
+	updateDynStmt := `update "category" SET name = $2 where uuid = $1`
+
+	_, err := currentDB.Exec(updateDynStmt, uuid, updatedCategory.Name)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func DeleteCategoryById(uuid string) {
+	// dynamic
+	deleteDynStmt := `delete from "category" where uuid = $1`
+
+	_, err := currentDB.Exec(deleteDynStmt, uuid)
+	if err != nil {
+		panic(err)
+	}
+}

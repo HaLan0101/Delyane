@@ -4,6 +4,8 @@ import (
 	"delyaneAPI/controllers"
 
 	"github.com/gin-gonic/gin"
+
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -16,25 +18,34 @@ func main() {
 
 	router := gin.Default()
 
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
+
 	// router.Static("/static", "./static") for static path
 
 	router.GET("/", controllers.GetRoot)
 
 	router.GET("/user/:id", controllers.GetUserById)
+	router.PUT("/user/:id", controllers.PutUserById)
+	router.DELETE("/user/:id", controllers.DeleteUserById)
 	router.POST("/user", controllers.PostUser)
-	// PUT
-	// DELETE
-
-	router.GET("/category/:id", controllers.GetCategoryById)
-	router.POST("/category", controllers.PostCategory)
 
 	router.GET("/categories", controllers.GetCategories)
+	router.GET("/category/:id", controllers.GetCategoryById)
+	router.PUT("/category/:id", controllers.PutCategoryById)
+	router.DELETE("/category/:id", controllers.DeleteCategoryById)
+	router.POST("/category", controllers.PostCategory)
 
 	router.GET("/products", controllers.GetProducts)
 	router.GET("/product/:id", controllers.GetProductById)
+	router.PUT("/product/:id", controllers.PutProductById)
+	router.DELETE("/product/:id", controllers.DeleteProductById)
 	router.POST("/product", controllers.PostProduct)
-	// PUT
-	// DELETE
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
