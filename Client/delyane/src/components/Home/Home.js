@@ -1,5 +1,7 @@
 import React from 'react';
 import './Home.css';
+import List from '../List/List';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Home = () => {
     return (
         <>
@@ -7,10 +9,16 @@ const Home = () => {
             <img className='hero__img' src="/hero.png" alt="" />
         </div>
         <div className='main__bestSeller'>
-            Meilleurs Ventes
+            <h1>Meilleurs Ventes</h1>
+            <p>Découvrer les oeuvres que nos collectionneurs adorent</p>
+            <List></List>
         </div>
-        <div className='main__others'>
-            Coup de Coeur
+        <div className='main__other'>
+            <ul className='other__list'>
+                <li className='other__item'><h1>Coup de Coeur</h1></li>
+                <li className='other__item'><FontAwesomeIcon className='other__icon' icon="fa-solid fa-heart" /></li>
+            </ul>
+            <p>Découvrez nos oeuvres coup de coeur</p>
         </div>
         </>
     );

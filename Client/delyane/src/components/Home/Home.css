@@ -6,3 +6,11 @@
     width: 100%;
     padding-top: 50px;
 }
+.other__list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.other__icon{
+    height: 40px;
+    padding-left: 10px;
+}
