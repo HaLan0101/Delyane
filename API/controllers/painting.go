@@ -10,5 +10,5 @@ import (
 
 // GetRoot provide / with the entier place (GET)
 func GetRoot(c *gin.Context) {
-	c.JSON(http.StatusOK, repository.GetPaintingById(1))
+	c.JSON(http.StatusOK, repository.GetPaintingById("1"))
 }

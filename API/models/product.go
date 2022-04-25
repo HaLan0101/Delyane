@@ -15,6 +15,6 @@ type PostProduct struct {
 	Description   string `json:"description"`
 	Price         uint   `json:"price"`
 	Image         string `json:"image"`
-	UUID_category uint   `json:"uuid_category"`
-	UUID_user     uint   `json:"uuid_user"`
+	UUID_category string `json:"uuid_category"`
+	UUID_user     string `json:"uuid_user"`
 }

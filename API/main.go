@@ -21,11 +21,13 @@ func main() {
 	router.GET("/", controllers.GetRoot)
 
 	router.GET("/user/:id", controllers.GetUserById)
-	// POST
+	router.POST("/user", controllers.PostUser)
 	// PUT
 	// DELETE
 
 	router.GET("/category/:id", controllers.GetCategoryById)
+	router.POST("/category", controllers.PostCategory)
+
 	router.GET("/categories", controllers.GetCategories)
 
 	router.GET("/products", controllers.GetProducts)

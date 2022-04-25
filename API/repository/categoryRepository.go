@@ -2,7 +2,7 @@ package repository
 
 import "delyaneAPI/models"
 
-func GetCategoryById(id int) models.Category {
+func GetCategoryById(id string) models.Category {
 	rows, err := currentDB.Query("SELECT * FROM category WHERE uuid = $1", id)
 
 	if err != nil {
@@ -46,4 +46,14 @@ func GetCategories() []models.Category {
 	}
 
 	return categories
+}
+
+func PostCategory(newCategory models.PostCategory) {
+	// dynamic
+	insertDynStmt := `insert into "category"("name") values($1)`
+
+	_, err := currentDB.Exec(insertDynStmt, newCategory.Name)
+	if err != nil {
+		panic(err)
+	}
 }
