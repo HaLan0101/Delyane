@@ -6,19 +6,17 @@ const ListItem = () => {
     return (
         <div>
             <div className='listItem'>
-            <img className='image' src="/product.png" alt="" />
-            <div className="itemInfo">
-                <div className="icons">
-                    <FontAwesomeIcon icon="fa-solid fa-heart-circle-plus" />
+                <div className='itemImage'>
+                    <img className='image' src="/product.png" alt="" />
+                    <FontAwesomeIcon className="icon" icon="fa-solid fa-heart-circle-plus" />
                 </div>
-                <div className='itemNameArtist'>Name here</div>
-                <div className="itemNameProduct">
-                    <span className='year'>Year</span>
-                    <span className="size">49x49</span>
-                    <span>Edition</span>
+                <div className='itemContent'>
+                    <h5>Name Artist</h5>
+                    <h5>Name Product, Year</h5>
+                    <h5>59x59</h5>
+                    <h5>Edition</h5>
+                    <h5>520e</h5>
                 </div>
-                <div className="price">320e</div>
-            </div>
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 .listItem {
     width: 250px;
-    height: 320px;
-    background-color: black;
+    height: 350px;
+    background-color: white;
     margin-right: 5px;
     overflow: hidden;
     cursor: pointer;
@@ -10,43 +10,17 @@
 .image {
     height: 200px;
     width: 100%;
-}
-.itemInfo {
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    z-index: 9;
-}
-.icons {
-    display: flex;
-    margin-bottom: 10px;
+    position: relative;
 }
 .icon {
-    border: 2px solid black;
-    padding: 5px;
-    border-radius: 50%;
-    margin-right: 10px;
-    font-size: 16px;
+    color: black;
+    height: 40px;
+    position: absolute;
+    top: 170px;
+    left: 200px;
 } 
-.itemNameArtist {
-    font-size: 20px;
-}
-.itemNameProduct {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 600;
-    color: gray;
-}
-.size {
-    border: 1px solid gray;
-    padding: 1px 3px;
-    margin: 0 10px;
-}
-  
-.price {
-    font-size: 13px;
-    margin-bottom: 10px;
+.itemContent h5{
+    color: black;
+    text-align: center;
 }
   

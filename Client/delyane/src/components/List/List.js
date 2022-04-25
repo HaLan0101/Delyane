@@ -36,6 +36,13 @@ const List = () => {
                         <ListItem></ListItem>
                         <ListItem></ListItem>
                         <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
+                        <ListItem></ListItem>
                         
                     </div>
                 <FontAwesomeIcon icon="fa-solid fa-chevron-right" className="sliderArrow right" onClick={() => handleClick("right")} />
