@@ -4,7 +4,7 @@ import (
 	"delyaneAPI/models"
 )
 
-func GetProductById(id int) models.Product {
+func GetProductById(id string) models.Product {
 
 	rows, err := currentDB.Query("SELECT * FROM product WHERE uuid = $1", id)
 

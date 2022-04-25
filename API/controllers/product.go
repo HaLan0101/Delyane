@@ -4,15 +4,12 @@ import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func GetProductById(c *gin.Context) {
-	prodcutId, _ := strconv.Atoi(c.Params.ByName("id"))
-
-	c.JSON(http.StatusOK, repository.GetProductById(prodcutId))
+	c.JSON(http.StatusOK, repository.GetProductById(c.Params.ByName("id")))
 }
 
 func GetProducts(c *gin.Context) {
