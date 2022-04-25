@@ -11,7 +11,9 @@ const Home = () => {
         <div className='main__bestSeller'>
             <h1>Meilleurs Ventes</h1>
             <p>Découvrer les oeuvres que nos collectionneurs adorent</p>
-            <List></List>
+            <div className='main__list'>
+                <List></List>
+            </div>
         </div>
         <div className='main__other'>
             <ul className='other__list'>
