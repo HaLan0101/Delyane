@@ -21,6 +21,12 @@ const Home = () => {
                 <li className='other__item'><FontAwesomeIcon className='other__icon' icon="fa-solid fa-heart" /></li>
             </ul>
             <p>Découvrez nos oeuvres coup de coeur</p>
+            <div className='main__product'>
+                <img className='img1' src="/img1.png" alt="" />
+                <img className='img2' src="/img2.png" alt="" />
+                <br />
+                <img className='img3' src="/img3.png" alt="" />
+            </div>
         </div>
         </>
     );

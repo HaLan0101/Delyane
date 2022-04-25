@@ -10,14 +10,11 @@
 .image {
     height: 200px;
     width: 100%;
-    position: relative;
 }
 .icon {
     color: black;
-    height: 40px;
-    position: absolute;
-    top: 170px;
-    left: 200px;
+    height: 35px;
+    padding-left: 170px;
 } 
 .itemContent h5{
     color: black;

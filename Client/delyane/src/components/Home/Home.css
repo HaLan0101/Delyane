@@ -17,3 +17,22 @@
 .main__list{
     overflow: hidden;
 }
+.main__bestSeller{
+    padding: 20px 20px;
+}
+.main__other{
+    padding: 20px 20px;
+}
+.main__product{
+    padding: 20px 300px;
+}
+.img1{
+    width: 40%;
+    padding: 50px 50px;
+}
+.img2{
+    width: 60%;
+}
+.img3{
+    width: 50%;
+}
