@@ -9,7 +9,7 @@ func GetCategoryById(id int) models.Category {
 		panic(err)
 	}
 
-	var uuid uint
+	var uuid string
 	var name string
 
 	for rows.Next() {
@@ -30,7 +30,7 @@ func GetCategories() []models.Category {
 		panic(err)
 	}
 
-	var uuid uint
+	var uuid string
 	var name string
 
 	var categories []models.Category

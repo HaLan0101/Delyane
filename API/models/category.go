@@ -1,6 +1,6 @@
 package models
 
 type Category struct {
-	UUID uint   `json:"uuid"`
+	UUID string `json:"uuid"`
 	Name string `json:"name"`
 }
