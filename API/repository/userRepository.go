@@ -13,7 +13,7 @@ func GetUserById(id int) models.User {
 		panic(err)
 	}
 
-	var uuid uint
+	var uuid string
 	var username string
 	var password string
 	var email string

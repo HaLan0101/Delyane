@@ -12,13 +12,13 @@ func GetProductById(id int) models.Product {
 		panic(err)
 	}
 
-	var uuid uint
+	var uuid string
 	var title string
 	var description string
 	var price uint
 	var image string
-	var uuid_category uint
-	var uuid_user uint
+	var uuid_category string
+	var uuid_user string
 
 	for rows.Next() {
 		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user)
@@ -38,13 +38,13 @@ func GetProducts() []models.Product {
 		panic(err)
 	}
 
-	var uuid uint
+	var uuid string
 	var title string
 	var description string
 	var price uint
 	var image string
-	var uuid_category uint
-	var uuid_user uint
+	var uuid_category string
+	var uuid_user string
 
 	var products []models.Product
 
