@@ -12,8 +12,11 @@ import (
 
 var currentDB *sql.DB
 
+// Provide initialisation of the database in the code
 func init() {
 	godotenv.Load(".env")
+
+	// TODO : Support for information abour database init + handle time if failed
 
 	connStr := "host=" + os.Getenv("DB_HOST") + " port=" + os.Getenv("DB_PORT") + " dbname=" + os.Getenv("DB_NAME") + " user=" + os.Getenv("DB_USER") + " password=" + os.Getenv("DB_PASS") + " sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
@@ -27,5 +30,6 @@ func init() {
 		log.Fatal(err)
 	}
 
+	// Save the db in the package localy so repo can acces it
 	currentDB = db
 }
