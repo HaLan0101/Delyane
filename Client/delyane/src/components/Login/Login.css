@@ -1,0 +1,26 @@
+.login__main{
+    background-image: url("/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login__form{
+    padding: 300px 500px;
+}
+form{
+    width: 500px;
+    height: 600px;
+    padding: 40px;
+    border-radius: 5px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.forgetPassword{
+    text-align: right;
+    color: black;
+}
+.new{
+    text-align: center;
+    color: black;
+}
