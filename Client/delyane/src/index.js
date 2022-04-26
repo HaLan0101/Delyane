@@ -1,8 +1,12 @@
 import App from './App';
+// import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
+
+//axios.defaults.serveurURL = process.env.SERVER_URL;
+// axios.defaults.withCredentials = true;
 
 import './index.css';
 
