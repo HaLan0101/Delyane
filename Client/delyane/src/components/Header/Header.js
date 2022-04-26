@@ -26,7 +26,7 @@ const Header = () => {
                     <a href='/' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
                 </li>
                 <li className='nav__item'>
-                    <a href='/' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-user" /></a>
+                    <a href='/login' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-user" /></a>
                 </li>
                 <li className='nav__item'>
                     <a href='/' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-heart" /></a>

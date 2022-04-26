@@ -4,6 +4,7 @@ import React from 'react';
 
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
+import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBasketShopping,faUser,faHeart,faChevronRight,faChevronLeft,faHeartCirclePlus} from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +16,7 @@ const App = () => {
       <Header />
       <Switch >
         <Route exact path='/' component={Home} />
+        <Route exact path='/login' component={Login} />
       </Switch>
       <Footer />
     </div>

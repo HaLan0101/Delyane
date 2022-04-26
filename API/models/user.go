@@ -1,11 +1,20 @@
 package models
 
+// User is the struct used to return an existing user
 type User struct {
-	UUID      uint   `json:"uuid"`
+	UUID      string `json:"uuid"`
 	Username  string `json:"username"`
 	Password  string `json:"password"`
 	Email     string `json:"email"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
-	Number    uint   `json:"number"`
+}
+
+// PostUser is the struct used to create a new user and edit an existing one
+type PostUser struct {
+	Username  string `json:"username"`
+	Password  string `json:"password"`
+	Email     string `json:"email"`
+	FirstName string `json:"firstname"`
+	LastName  string `json:"lastname"`
 }
