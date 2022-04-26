@@ -26,21 +26,26 @@ func main() {
 		AllowCredentials: true,
 	}))
 
-	// router.Static("/static", "./static") for static path
+	router.Static("/images", "./images") // for static path
 
+	// Demo
 	router.GET("/", controllers.GetRoot)
+	router.POST("/upload", controllers.SaveImage)
 
+	// User CRUD
 	router.GET("/user/:id", controllers.GetUserById)
 	router.PUT("/user/:id", controllers.PutUserById)
 	router.DELETE("/user/:id", controllers.DeleteUserById)
 	router.POST("/user", controllers.PostUser)
 
+	// Category CRUD
 	router.GET("/categories", controllers.GetCategories)
 	router.GET("/category/:id", controllers.GetCategoryById)
 	router.PUT("/category/:id", controllers.PutCategoryById)
 	router.DELETE("/category/:id", controllers.DeleteCategoryById)
 	router.POST("/category", controllers.PostCategory)
 
+	// Product CRUD
 	router.GET("/products", controllers.GetProducts)
 	router.GET("/product/:id", controllers.GetProductById)
 	router.PUT("/product/:id", controllers.PutProductById)

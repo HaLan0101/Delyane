@@ -2,6 +2,7 @@ package repository
 
 import "delyaneAPI/models"
 
+// GetCategoryById get a single category by id from db
 func GetCategoryById(id string) models.Category {
 	rows, err := currentDB.Query("SELECT * FROM category WHERE uuid = $1", id)
 
@@ -23,6 +24,29 @@ func GetCategoryById(id string) models.Category {
 	return models.Category{UUID: uuid, Name: name}
 }
 
+// GetCategoryByName get a single category by name from db
+func GetCategoryByName(title string) models.Category {
+	rows, err := currentDB.Query("SELECT * FROM category WHERE name = $1", title)
+
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var name string
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &name)
+
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	return models.Category{UUID: uuid, Name: name}
+}
+
+// GetCategories get all categories from db
 func GetCategories() []models.Category {
 	rows, err := currentDB.Query("SELECT * FROM category")
 
@@ -48,6 +72,7 @@ func GetCategories() []models.Category {
 	return categories
 }
 
+// PostCategory create a new category in db
 func PostCategory(newCategory models.PostCategory) {
 	// dynamic
 	insertDynStmt := `insert into "category"("name") values($1)`
@@ -58,6 +83,7 @@ func PostCategory(newCategory models.PostCategory) {
 	}
 }
 
+// PutCategoryById update an existing category in the db
 func PutCategoryById(uuid string, updatedCategory models.PostCategory) {
 	// dynamic
 	updateDynStmt := `update "category" SET name = $2 where uuid = $1`
@@ -68,6 +94,7 @@ func PutCategoryById(uuid string, updatedCategory models.PostCategory) {
 	}
 }
 
+// DeleteCategoryById delete an existing category in the db
 func DeleteCategoryById(uuid string) {
 	// dynamic
 	deleteDynStmt := `delete from "category" where uuid = $1`
