@@ -1,9 +1,9 @@
 .btn {
     border: none;
-    padding: 7px 17px;
+    padding: 20px 17px;
     background-color: none;
     transition: 0.3s all;
-    background: rgba(0, 0, 0, 0.4);
+    background: black;
     color: #fff;
     border-radius: 3px;
     font-weight: 600;
