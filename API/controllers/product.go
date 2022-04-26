@@ -93,7 +93,7 @@ func PutProductById(c *gin.Context) {
 
 // DeleteProductById handle /product/id for deleting an existing product (DELETE)
 func DeleteProductById(c *gin.Context) {
-	if repository.GetProductById(c.Params.ByName("id")).UUID != "" {
+	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
 		c.JSON(http.StatusConflict, gin.H{"err": "This product desn't exist"})
 		return
 	}

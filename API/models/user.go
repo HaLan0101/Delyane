@@ -18,3 +18,9 @@ type PostUser struct {
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
 }
+
+// LoginUser is the struct used to log a user
+type LoginUser struct {
+	Identifier string `json:"Identifier"`
+	Password   string `json:"password"`
+}

@@ -30,7 +30,7 @@ func GetUserById(id string) models.User {
 }
 
 // GetUserByEmail return a user from db using email
-func GetUserByEmail(mail string) models.User {
+func GetUserByEmail(mail string) []models.User {
 	rows, err := currentDB.Query("SELECT * FROM customer WHERE email = $1", mail)
 
 	if err != nil {
@@ -44,14 +44,49 @@ func GetUserByEmail(mail string) models.User {
 	var firstname string
 	var lastname string
 
+	var users []models.User
+
 	for rows.Next() {
 		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname)
 
 		if err != nil {
 			panic(err)
 		}
+
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname})
+
 	}
-	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname}
+	return users
+}
+
+// GetUserByUsername return a user from db using username
+func GetUserByUsername(name string) []models.User {
+	rows, err := currentDB.Query("SELECT * FROM customer WHERE username = $1", name)
+
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var username string
+	var password string
+	var email string
+	var firstname string
+	var lastname string
+
+	var users []models.User
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname)
+
+		if err != nil {
+			panic(err)
+		}
+
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname})
+	}
+
+	return users
 }
 
 // PostUser create a new user in db

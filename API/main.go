@@ -25,6 +25,8 @@ func main() {
 	router.POST("/upload", controllers.SaveImage)
 
 	// User CRUD
+	router.POST("/user/login", controllers.LoginUser)
+
 	router.GET("/user/:id", controllers.GetUserById)
 	router.PUT("/user/:id", controllers.PutUserById)
 	router.DELETE("/user/:id", controllers.DeleteUserById)
