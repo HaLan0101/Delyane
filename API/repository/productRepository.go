@@ -24,7 +24,10 @@ func GetProductById(id string) models.Product {
 		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user)
 
 		if err != nil {
-			panic(err)
+			if uuid_category == "" {
+			} else {
+				panic(err)
+			}
 		}
 	}
 

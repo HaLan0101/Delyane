@@ -100,6 +100,7 @@ func PostUser(newUser models.PostUser) {
 	}
 }
 
+
 // PutUserById update an existing user in db
 func PutUserById(uuid string, updatedUser models.PostUser) {
 	// dynamic
@@ -110,6 +111,7 @@ func PutUserById(uuid string, updatedUser models.PostUser) {
 		panic(err)
 	}
 }
+
 
 // DeleteUserById delete an existing user in db
 func DeleteUserById(uuid string) {
