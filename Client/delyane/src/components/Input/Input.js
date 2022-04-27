@@ -7,10 +7,10 @@ const Input = (props) => {
             <input type={props.type}
             id={props.id}
             name={props.name}
-            onChange={props.handleChange}
+            onChange={props.onChange}
             required={props.required}
             placeholder={props.placeholder}
-            className={props.classes}
+            className={props.className}
             value={props.value}
             />
         </div>

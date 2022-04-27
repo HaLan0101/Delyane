@@ -3,10 +3,15 @@ import './Login.css';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 const Login = () => {
+    const bannerStyle = {
+        backgroundImage: 'url(https://desenio.fr/bilder/inspiration/5a9559030b21a.jpg)',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+    }
     return (
-        <div className='login__main'>
+        <div className='login__main' style={bannerStyle}>
             <div className='login__form'>
-                <form>
+                <form className='login__form__content'>
                     <h1>Login Individual Account!</h1>
                     <hr className='header__line'/>
                     <Input
@@ -14,7 +19,7 @@ const Login = () => {
                     name="email"
                     id="email"
                     type="email"
-                    classes="input"
+                    className="register__input"
                     required={true}
                     placeholder="Entrer email address"
                         />
@@ -23,14 +28,14 @@ const Login = () => {
                     name="password"
                     id="password"
                     type="password"
-                    classes="input"
+                    className="register__input"
                     required={true}
                     placeholder="Enter Password"
                         />
-                    <Button title="Login Account" type="submit" classes="btn"></Button>
-                    <h3 className='forgetPassword'>Mot de passe perdu</h3>
-                    <h3 className='new'>
-                        Nouveau client ? <b><a href="/register">Créer un compte</a></b>
+                    <Button title="Login Account" type="submit" className="register__button"></Button>
+                    <h3 className='forgetPassword'>Forgot password</h3>
+                    <h3 className='register__text'>
+                        New customer ? <b><a href="/authentification">Register</a></b>
                     </h3>
                 </form>
             </div>

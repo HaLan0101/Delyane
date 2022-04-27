@@ -58,7 +58,7 @@ func PutCategoryById(c *gin.Context) {
 
 // DeleteCategoryById handle /category/id for deleting an existing category (DELETE)
 func DeleteCategoryById(c *gin.Context) {
-	if repository.GetCategoryById(c.Params.ByName("id")).UUID != "" {
+	if repository.GetCategoryById(c.Params.ByName("id")).UUID == "" {
 		c.String(http.StatusNoContent, "Category with this ID doesn't exist")
 		return
 	}

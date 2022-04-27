@@ -1,8 +1,6 @@
-.btn {
+.register__button {
     border: none;
     padding: 20px 17px;
-    background-color: none;
-    transition: 0.3s all;
     background: black;
     color: #fff;
     border-radius: 3px;

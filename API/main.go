@@ -3,9 +3,8 @@ package main
 import (
 	"delyaneAPI/controllers"
 
-	"github.com/gin-gonic/gin"
-
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -18,13 +17,37 @@ func main() {
 
 	router := gin.Default()
 
-	router.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-	}))
+	// // CORS for https://foo.com and https://github.com origins, allowing:
+	// // - PUT and PATCH methods
+	// // - Origin header
+	// // - Credentials share
+	// // - Preflight requests cached for 12 hours
+	// router.Use(cors.New(cors.Config{
+	// 	AllowOrigins:     []string{"https://foo.com"},
+	// 	AllowMethods:     []string{"PUT", "PATCH"},
+	// 	AllowHeaders:     []string{"Origin"},
+	// 	ExposeHeaders:    []string{"Content-Length"},
+	// 	AllowCredentials: true,
+	// 	AllowOriginFunc: func(origin string) bool {
+	// 		return origin == "https://github.com"
+	// 	},
+	// 	MaxAge: 12 * time.Hour,
+	// }))
+
+	// same as
+	// config := cors.DefaultConfig()
+	// config.AllowAllOrigins = true
+	// router.Use(cors.New(config))
+	router.Use(cors.Default())
+
+	// router.Use(cors.New(cors.Config{
+
+	// 	AllowAllOrigins: true,
+	// 	AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
+	// 	// AllowHeaders:     []string{"Origin"},
+	// 	ExposeHeaders:    []string{"Content-Length", "Content-Type"},
+	// 	AllowCredentials: true,
+	// }))
 
 	router.Static("/images", "./images") // for static path
 
@@ -33,6 +56,8 @@ func main() {
 	router.POST("/upload", controllers.SaveImage)
 
 	// User CRUD
+	router.POST("/user/login", controllers.LoginUser)
+
 	router.GET("/user/:id", controllers.GetUserById)
 	router.PUT("/user/:id", controllers.PutUserById)
 	router.DELETE("/user/:id", controllers.DeleteUserById)
