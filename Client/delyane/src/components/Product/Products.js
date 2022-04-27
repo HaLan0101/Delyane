@@ -12,6 +12,7 @@ const Product = () => {
             try {
                 const result = await axios.get('http://localhost:8080/products')
                 setProducts(result.data);
+                console.log(result.data);
             } catch (err) {
                 console.log(err)
             }
@@ -26,7 +27,7 @@ const Product = () => {
             {products.map(product => {
                 return (
                     <div className='product__content' key={product.uuid}>
-                        <p>{product.image}</p>
+                        <img src={`http://localhost:8080/${product.image}`} alt={product.title} />
                         <p>{product.title}</p>
                         <p>Artist</p>
                         <p>Dimensions</p>
