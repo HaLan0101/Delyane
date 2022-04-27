@@ -1,9 +1,11 @@
+
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import '../Login/Login.css';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
+
 const Register = () => {
     const [user, setUser] = useState({});
 
@@ -17,6 +19,7 @@ const Register = () => {
             console.log(err)
         }
     };
+
     const bannerStyle = {
         backgroundImage: 'url(https://desenio.fr/bilder/inspiration/5a9559030b21a.jpg)',
         backgroundPosition: 'center',
@@ -67,6 +70,7 @@ const Register = () => {
             </div>
             
         </div>
+
     );
 }
 

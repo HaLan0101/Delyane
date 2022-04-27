@@ -25,13 +25,17 @@ const Product = () => {
 
     return (
 
+
         <div className='product__main'>
             <p className='product__technique'>Technique </p>
             <p className='product__dimension'>Dimensions </p>
             <p className='product__tirage'>Tirage </p>
             <p className='product__auth'>Authentification </p>
+
         </div>
     );
 }
 
+
 export default Product;
+

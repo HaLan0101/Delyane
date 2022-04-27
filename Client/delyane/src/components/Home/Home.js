@@ -2,6 +2,7 @@ import React from 'react';
 import './Home.css';
 import List from '../List/List';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const Home = () => {
     return (
         <>

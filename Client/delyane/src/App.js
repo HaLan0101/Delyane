@@ -13,6 +13,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBasketShopping,faUser,faHeart,faChevronRight,faChevronLeft,faHeartCirclePlus} from "@fortawesome/free-solid-svg-icons";
 import { faCcPaypal,faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons'
 library.add(faBasketShopping,faUser,faHeart,faCcPaypal,faCcVisa, faCcMastercard,faChevronRight,faChevronLeft,faHeartCirclePlus);
+
 const App = () => {
   return (
     <div className="App">
@@ -21,8 +22,10 @@ const App = () => {
         <Route exact path='/' component={Home} />
         <Route exact path='/painting' component={Products} />
         <Route exact path='/painting/:uuid' component={Product} />
+
         <Route exact path='/login' component={Login} />
         <Route exact path='/authentification' component={Register} />
+
         <Route component={Error} />
       </Switch>
       <Footer />

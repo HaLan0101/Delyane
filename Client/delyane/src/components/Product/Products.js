@@ -32,6 +32,7 @@ const Product = () => {
                         <p className='product__artist'>Artist</p>
                         <p className='product__dimension'>Dimensions</p>
                         <p className='product__price'>{product.price} €</p>
+
                         <Link to={`/painting/${product.uuid}`}>
                             <button>Click</button>
                         </Link>
@@ -44,3 +45,4 @@ const Product = () => {
 }
 
 export default Product;
+
