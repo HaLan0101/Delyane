@@ -23,12 +23,12 @@ func PostUser(c *gin.Context) {
 		return
 	}
 
-	if len(repository.GetUserByEmail(input.Email)) != 1 {
+	if len(repository.GetUserByEmail(input.Email)) != 0 {
 		c.JSON(http.StatusConflict, gin.H{"error": "User with this mail already exist"})
 		return
 	}
 
-	if len(repository.GetUserByUsername(input.Username)) != 1 {
+	if len(repository.GetUserByUsername(input.Username)) != 0 {
 		c.JSON(http.StatusConflict, gin.H{"error": "This username is already taken by another user"})
 		return
 	}
