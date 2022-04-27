@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
-import axios from 'axios';
 
-import './Register.css';
+import React from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import '../Login/Login.css';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 const Register = () => {
     const [user, setUser] = useState({});
@@ -22,45 +25,50 @@ const Register = () => {
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     }
-
     return (
-        <div className='register__main' style={bannerStyle}>
-            <div className='register__content'>
-                <form className='register__form' onSubmit={(e) => submitRegister(e)}>
-                    <h1 className='register__title'>Delyane</h1>
-                    <h2 className='register__subtitle'>The Art is yours</h2>
-                    <input
-                        label='Username'
-                        name='username'
-                        id='username'
-                        type='text'
-                        placeholder='Enter a username'
-                        className='register__input'
-                        onChange={(e) => setUser({ ...user, username: e.target.value })}
-                    />
-                    <input
-                        label='Email'
-                        name='email'
-                        id='email'
-                        type='mail'
-                        placeholder='Enter a email'
-                        className='register__input'
-                        onChange={(e) => setUser({ ...user, email: e.target.value })}
-                    />
-                    <input
-                        label='Password'
-                        name='password'
-                        id='password'
-                        type='password'
-                        placeholder='Enter a password'
-                        className='register__input'
-                        onChange={(e) => setUser({ ...user, password: e.target.value })}
-
-                    />
-                    <button className='register__button' type='submit'>Register</button>
-                    <p className='register__text'>Already customer? <a className='register__login' href='/'>Log in</a></p>
+        <div className='login__main' style={bannerStyle}>
+            <div className='login__form' >
+                <form className='login__form__content' onSubmit={(e) => submitRegister(e)}>
+                    <h1>Register Individual Account!</h1>
+                    <p>For the purpose of gamers regulation, your details are required.</p>
+                    <hr className='header__line'/>
+                    <Input
+                    label="Username"
+                    name="username"
+                    id="username"
+                    type="text"
+                    className="register__input"
+                    required={true}
+                    placeholder="Entrer a username"
+                    onChange={(e) => setUser({ ...user, username: e.target.value })}
+                        />
+                    <Input
+                    label="Email address*"
+                    name="email"
+                    id="email"
+                    type="email"
+                    className="register__input"
+                    required={true}
+                    placeholder="Entrer email address"
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
+                        />
+                    <Input
+                    label="Create password*"
+                    name="password"
+                    id="password"
+                    type="password"
+                    className="register__input"
+                    required={true}
+                    placeholder="Password"
+                    onChange={(e) => setUser({ ...user, password: e.target.value })}
+                        />
+                    <Button title="Register Account" type="submit" className="register__button"></Button>
+                    <h3 className='register__text'>
+                    Already customer? <b><a href="/login">Login</a></b>
+                    </h3>
                 </form>
             </div>
+            
         </div>
 
     );

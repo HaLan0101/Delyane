@@ -1,1 +1,38 @@
-
+.hero__img{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    width: 100%;
+    padding-top: 50px;
+}
+.other__list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.other__icon{
+    height: 40px;
+    padding-left: 10px;
+}
+.main__list{
+    overflow: hidden;
+}
+.main__bestSeller{
+    padding: 20px 20px;
+}
+.main__other{
+    padding: 20px 20px;
+}
+.main__product{
+    padding: 20px 300px;
+}
+.img1{
+    width: 40%;
+    padding: 50px 50px;
+}
+.img2{
+    width: 60%;
+}
+.img3{
+    width: 50%;
+}

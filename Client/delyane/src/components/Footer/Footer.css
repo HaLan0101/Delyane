@@ -1,1 +1,43 @@
-
+.footer__main{
+    background-color: black;
+    color: white;
+}
+.footer__list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+.footer__payment{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.payment__icon{
+    height: 30px;
+    width: 50px;
+}
+.footer__text{
+    text-align: center;
+}
+.text__item{
+    font-size: 10px;
+    padding-bottom: 10px;
+}
+.footer__letter{
+    display: flex;
+    flex-wrap: wrap;
+}
+.letter__icon{
+    color: white;
+    height: 25px;
+    padding-left: 10px;
+}
+.letter__input{
+    background-color: black;
+    border: none;
+}
+.letter__line{
+    border-top: 1px solid white;
+    width: 100%;
+}

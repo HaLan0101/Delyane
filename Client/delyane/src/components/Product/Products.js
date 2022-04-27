@@ -28,10 +28,11 @@ const Product = () => {
                 return (
                     <div className='product__content' key={product.uuid}>
                         <img src={`http://localhost:8080/${product.image}`} alt={product.title} />
-                        <p>{product.title}</p>
-                        <p>Artist</p>
-                        <p>Dimensions</p>
-                        <p>{product.price} €</p>
+                        <p className='product__title'>{product.title}</p>
+                        <p className='product__artist'>Artist</p>
+                        <p className='product__dimension'>Dimensions</p>
+                        <p className='product__price'>{product.price} €</p>
+
                         <Link to={`/painting/${product.uuid}`}>
                             <button>Click</button>
                         </Link>
@@ -44,3 +45,4 @@ const Product = () => {
 }
 
 export default Product;
+

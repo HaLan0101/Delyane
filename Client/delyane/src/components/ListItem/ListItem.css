@@ -1,0 +1,23 @@
+.listItem {
+    width: 250px;
+    height: 350px;
+    background-color: white;
+    margin-right: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    color: #ffffff;
+}
+.image {
+    height: 200px;
+    width: 100%;
+}
+.icon {
+    color: black;
+    height: 35px;
+    padding-left: 170px;
+} 
+.itemContent h5{
+    color: black;
+    text-align: center;
+}
+  
