@@ -1,21 +1,32 @@
-import App from './App';
-// import axios from 'axios';
-import React from 'react';
-import ReactDOM from 'react-dom';
+// import App from './App';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 
-//axios.defaults.serveurURL = process.env.SERVER_URL;
-// axios.defaults.withCredentials = true;
+// import './index.css';
 
-import './index.css';
+// ReactDOM.render(
+//   <BrowserRouter>
+//     <App />
+//   </BrowserRouter>,
+//   document.getElementById('root')
+// );
 
-ReactDOM.render(
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>,
-  document.getElementById('root')
+  </BrowserRouter>
 );
+
+reportWebVitals();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

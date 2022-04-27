@@ -3,5 +3,7 @@
 # misc
 .DS_Store
 .env
+
+#images
 images/
 test/

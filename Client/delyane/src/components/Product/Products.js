@@ -9,11 +9,14 @@ const Product = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const result = await axios.get('http://localhost:8080/products')
-            setProducts(result.data);
-            console.log(result.data);
+            try {
+                const result = await axios.get('http://localhost:8080/products')
+                setProducts(result.data);
+            } catch (err) {
+                console.log(err)
+            }
         }
-        getData()
+        getData();
     }, []);
 
     return (
@@ -28,7 +31,7 @@ const Product = () => {
                         <p>Artist</p>
                         <p>Dimensions</p>
                         <p>{product.price} €</p>
-                        <Link to={`painting/${product.uuid}`}>
+                        <Link to={`/painting/${product.uuid}`}>
                             <button>Click</button>
                         </Link>
                     </div>
