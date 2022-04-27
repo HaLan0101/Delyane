@@ -38,16 +38,16 @@ func main() {
 	// config := cors.DefaultConfig()
 	// config.AllowAllOrigins = true
 	// router.Use(cors.New(config))
-	// router.Use(cors.Default())
+	router.Use(cors.Default())
 
-	router.Use(cors.New(cors.Config{
+	// router.Use(cors.New(cors.Config{
 
-		AllowAllOrigins: true,
-		AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
-		// AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length", "Content-Type"},
-		AllowCredentials: true,
-	}))
+	// 	AllowAllOrigins: true,
+	// 	AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
+	// 	// AllowHeaders:     []string{"Origin"},
+	// 	ExposeHeaders:    []string{"Content-Length", "Content-Type"},
+	// 	AllowCredentials: true,
+	// }))
 
 	router.Static("/images", "./images") // for static path
 
