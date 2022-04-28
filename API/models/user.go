@@ -21,6 +21,6 @@ type PostUser struct {
 
 // LoginUser is the struct used to log a user
 type LoginUser struct {
-	Identifier string `json:"Identifier"`
+	Identifier string `json:"identifier"`
 	Password   string `json:"password"`
 }
