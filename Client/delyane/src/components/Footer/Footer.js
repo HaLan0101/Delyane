@@ -6,31 +6,37 @@ const Footer = () => {
     return (
         <div className='footer__main'>
             <ul className='footer__list'>
-                <li className='footer__item'><a href=""><h3>Oeuvres</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Artistes</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Favoris</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Contactez-nous</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Mon compte</h3></a></li>
+                <li className='footer__item'><a href='/painting'><h3>Artworks</h3></a></li>
+                <li className='footer__item'><a href=""><h3>Artists</h3></a></li>
+                <li className='footer__item'><a href=""><h3>Contact us</h3></a></li>
+                <li className='footer__item'><a href=""><h3>My account</h3></a></li>
                 <li className='footer__item'>
-                    <h4>Paiements sécurisés</h4>
-                    <ul className='footer__payment'>
+                    <h3>Secure payment</h3>
+                    <ul className='footer__payment payment__responsive'>
                         <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-paypal" /></li>
                         <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-visa" /></li>
                         <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-mastercard" /></li>
                     </ul>
                 </li>
-                <li className='footer__item'>
-                    <h3>Newsletter</h3>
-                    <ul className='footer__letter'>
-                        <li className='letter__item'><input className='letter__input' type="text" placeholder='Souscrire à notre newsletter'/></li>
-                        <li className='letter__item'><FontAwesomeIcon className='letter__icon' icon="fa-solid fa-chevron-right" /></li>
-                        <hr className='letter__line' />
-                    </ul>
-                </li>
-            </ul> 
-            <div className='footer__text'> 
-                <p className='text__item' >DelYane est une place de marché dédiée à la vente d'œuvres d'art contemporain en ligne. Galeries d'art, exposez vos œuvres sur Internet avec Artsper. Amateurs d'art, concrétisez votre achat de tableau contemporain, de photo d'art ou encore de sculpture <br></br> contemporaine à travers des milliers d'œuvres d'art en ligne, issues d'artistes contemporains rigoureusement sélectionnés ! </p>
-                <p className='text__item' >Copyright ©2022 all rights reserved DelYane</p>
+            </ul>
+
+            <div className='footer__newsletter'>
+                <h3 className='newsletter__title'>Let's stay in touch! We'll let you know about the latest sales and new releases!</h3>
+                <div className='newsletter__content'>
+                    <input
+                        label='Email'
+                        name='email'
+                        id='email'
+                        type='mail'
+                        placeholder='Enter your email'
+                        className='newsletter__input'
+                    />
+                    <button className='newsletter__button'>Sign up</button>
+                </div>
+            </div>
+
+            <div className='footer__copyright'>
+                <p>Copyright ©2022. All Rights Reserved.</p>
             </div>
         </div>
     );

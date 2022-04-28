@@ -1,34 +1,40 @@
 import React from 'react';
+
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
+import List from '../Caroussel/List/List';
+
 import './Home.css';
-import List from '../List/List';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = () => {
     return (
         <>
-        <div className='hero__main'>
-            <img className='hero__img' src="/hero.png" alt="" />
-        </div>
-        <div className='main__bestSeller'>
-            <h1>Meilleurs Ventes</h1>
-            <p>Découvrer les oeuvres que nos collectionneurs adorent</p>
-            <div className='main__list'>
-                <List></List>
+            <Header />
+            <div className='hero__main'>
+                <img className='hero__img' src="/hero.png" alt="" />
             </div>
-        </div>
-        <div className='main__other'>
-            <ul className='other__list'>
-                <li className='other__item'><h1>Coup de Coeur</h1></li>
-                <li className='other__item'><FontAwesomeIcon className='other__icon' icon="fa-solid fa-heart" /></li>
-            </ul>
-            <p>Découvrez nos oeuvres coup de coeur</p>
-            <div className='main__product'>
-                <img className='img1' src="/img1.png" alt="" />
-                <img className='img2' src="/img2.png" alt="" />
-                <br />
-                <img className='img3' src="/img3.png" alt="" />
+            <div className='home__main'>
+                <div className='main__bestSeller'>
+                    <h1>Bestsellers</h1>
+                    <p>Discover artworks our collectors love</p>
+                    <div className='main__list'>
+                        <List></List>
+                    </div>
+                </div>
+                <div className='main__other'>
+                    <ul className='other__list'>
+                        <li className='other__item'><h1>Coup de Coeur</h1></li>
+                    </ul>
+                    <p>Découvrez nos oeuvres coup de coeur</p>
+                    <div className='main__product'>
+                        <img className='img1' src="/img1.png" alt="" />
+                        <img className='img2' src="/img2.png" alt="" />
+                        <br />
+                        <img className='img3' src="/img3.png" alt="" />
+                    </div>
+                </div>
             </div>
-        </div>
+            <Footer />
         </>
     );
 }
