@@ -2,7 +2,7 @@
     padding: 0 6% 0 6%;
 }
 
-.hero__img{
+.swiper__img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -10,33 +10,42 @@
     width: 100%;
     padding-top: 50px;
 }
-.other__list{
+
+.other__list {
     display: flex;
     flex-wrap: wrap;
 }
-.other__icon{
+
+.other__icon {
     height: 40px;
     padding-left: 10px;
 }
-.main__list{
+
+.bestsellers__swiper {
     overflow: hidden;
 }
-.main__bestSeller{
+
+.home__bestsellers {
     padding: 20px 20px;
 }
-.main__other{
+
+.main__other {
     padding: 20px 20px;
 }
-.main__product{
+
+.main__product {
     padding: 20px 300px;
 }
-.img1{
+
+.img1 {
     width: 40%;
     padding: 50px 50px;
 }
-.img2{
+
+.img2 { 
     width: 60%;
 }
-.img3{
+
+.img3 {
     width: 50%;
 }

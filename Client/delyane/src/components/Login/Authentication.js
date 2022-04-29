@@ -1,13 +1,18 @@
 import React from 'react';
-import './Login.css';
-import Input from '../Input/Input';
+
 import Button from '../Button/Button';
-const Login = () => {
+import Input from '../Input/Input';
+
+import './Authentication.css';
+
+const Authentication = () => {
+
     const bannerStyle = {
         backgroundImage: 'url(https://desenio.fr/bilder/inspiration/5a9559030b21a.jpg)',
         backgroundPosition: 'center',
         backgroundSize: 'cover'
     }
+
     return (
         <div className='login__main' style={bannerStyle}>
             <div className='login__form'>
@@ -32,16 +37,14 @@ const Login = () => {
                         required={true}
                         placeholder="Enter Password"
                     />
-                    <Button title="Login Account" type="submit" className="register__button"></Button>
-                    <h3 className='forgetPassword'>Forgot password</h3>
+                    <Button title="Login Account" type="submit" className="register__button" />
                     <h3 className='register__text'>
-                        New customer ? <b><a href="/authentification">Register</a></b>
+                        New customer? <b><a href="/authentification">Register</a></b>
                     </h3>
                 </form>
             </div>
-
         </div>
     );
 }
 
-export default Login;
+export default Authentication;
