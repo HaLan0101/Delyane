@@ -6,12 +6,12 @@ const Footer = () => {
     return (
         <div className='footer__main'>
             <ul className='footer__list'>
-                <li className='footer__item'><a href='/painting'><h3>Artworks</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Artists</h3></a></li>
-                <li className='footer__item'><a href=""><h3>Contact us</h3></a></li>
-                <li className='footer__item'><a href=""><h3>My account</h3></a></li>
-                <li className='footer__item'>
-                    <h3>Secure payment</h3>
+                <li className='footer__items'><a href='/painting'><h3 className='footer__item'>Artworks</h3></a></li>
+                <li className='footer__items'><a href=""><h3 className='footer__item'>Artists</h3></a></li>
+                <li className='footer__items'><a href=""><h3 className='footer__item'>Contact us</h3></a></li>
+                <li className='footer__items'><a href=""><h3 className='footer__item'>My account</h3></a></li>
+                <li className='footer__items'>
+                    <h3 className='footer__item'>Secure payment</h3>
                     <ul className='footer__payment payment__responsive'>
                         <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-paypal" /></li>
                         <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-visa" /></li>

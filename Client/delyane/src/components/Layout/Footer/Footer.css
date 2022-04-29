@@ -10,9 +10,14 @@
     justify-content: space-between;
 }
 
-.footer__item {
+.footer__items {
     font-size: 12px;
 }
+
+.footer__item {
+    color: var(--white-color);
+}
+
 
 .footer__payment {
     display: flex;
@@ -41,6 +46,7 @@
 .newsletter__input {
     border: 1px solid var(--white-color);
     background: var(--black-color);
+    color: var(--white-color);
     padding: 10px;
     width: 40%;
     height: 30px;

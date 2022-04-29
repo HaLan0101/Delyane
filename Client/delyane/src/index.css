@@ -2,4 +2,11 @@
     /*-- GENERAL --*/
     --white-color: #FFFFFF;
     --black-color: #000000;
+
+    /*-- COLOR PALETTE --*/
+    --darkpurple-color: #3D0066;
+    --purple-color: #C670FF;
+    --lightpurple-color: #EEC7FC;
+    --yellow-color: #FFCE1F;
+    --lightyellow-color: #FFE047;
 }
