@@ -12,11 +12,6 @@ const Footer = () => {
                 <li className='footer__items'><a href=""><h3 className='footer__item'>My account</h3></a></li>
                 <li className='footer__items'>
                     <h3 className='footer__item'>Secure payment</h3>
-                    <ul className='footer__payment payment__responsive'>
-                        <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-paypal" /></li>
-                        <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-visa" /></li>
-                        <li className='payment__item'><FontAwesomeIcon className='payment__icon' icon="fa-brands fa-cc-mastercard" /></li>
-                    </ul>
                 </li>
             </ul>
 

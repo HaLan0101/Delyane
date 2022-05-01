@@ -13,7 +13,18 @@
     padding: 0 5% 0 5%;
     background: linear-gradient(white, 98%, lightgrey)
 }
-
+.header__logo{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 20px;
+}
+.header__img{
+    width: 80px;
+    height: 100px;
+}
+.header__name{
+    padding-top: 27px;
+}
 .header__nav {
     display: flex;
 }
