@@ -42,7 +42,7 @@ const Authentication = () => {
                     />
                     <Button title="Login Account" type="submit" className="register__button" />
                     <h3 className='register__text'>
-                        New customer? <b><a href="/authentification">Register</a></b>
+                        New customer? <b><a href="/register">Register</a></b>
                     </h3>
                 </form>
             </div>

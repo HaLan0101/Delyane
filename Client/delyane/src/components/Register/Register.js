@@ -61,7 +61,7 @@ const Register = () => {
 
                     />
                     <button className='register__button' type='submit'>Register</button>
-                    <p className='register__text'>Already customer? <a className='register__login' href='/'>Log in</a></p>
+                    <p className='register__text'>Already customer? <a className='register__login' href='/authentication'>Log in</a></p>
                 </form>
             </div>
         </div>
