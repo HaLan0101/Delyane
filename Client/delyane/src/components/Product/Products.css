@@ -1,6 +1,24 @@
-/* .product__content {
+.product__main{
+    height: 200vh;
+}
+.product__title{
+    text-align: center;
+}
+.product__content{
+    color: var(--black-color);
+    position: absolute;
+    top: 20%;
+    right: 0;
+    left: 0;
+}
+.product__list {
     display: flex;
-    flex-wrap:wrap;
-    padding-top: 15px;
-    margin: auto;
-} */
+    padding: 80px 200px; 
+    align-items: center;
+    justify-content: space-between;
+}
+.product__art{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}

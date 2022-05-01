@@ -7,7 +7,7 @@ const ListItem = () => {
         <div>
             <div className='listItem'>
                 <div className='itemImage'>
-                    <img className='image' src="/product.png" alt="" />
+                    <img className='image' src="https://desenio.fr/bilder/artiklar/zoom/16059_2.jpg?imgwidth=435&qt=Berlin%20Shapes%20No1%20Affiche" alt="" />
                     <FontAwesomeIcon className="icon" icon="fa-solid fa-heart-circle-plus" />
                 </div>
                 <div className='itemContent'>
