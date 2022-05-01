@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Header from '../Layout/Header/Header';
+import Footer from '../Layout/Footer/Footer';
 import './Register.css';
 
 const Register = () => {
@@ -24,6 +25,8 @@ const Register = () => {
     }
 
     return (
+        <>
+        <Header />
         <div className='register__main' style={bannerStyle}>
             <div className='register__content'>
                 <form className='register__form' onSubmit={(e) => submitRegister(e)}>
@@ -62,7 +65,8 @@ const Register = () => {
                 </form>
             </div>
         </div>
-
+        <Footer/>
+        </>
     );
 }
 

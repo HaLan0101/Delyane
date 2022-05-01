@@ -2,7 +2,8 @@ import React from 'react';
 
 import Button from '../Button/Button';
 import Input from '../Input/Input';
-
+import Header from '../Layout/Header/Header';
+import Footer from '../Layout/Footer/Footer';
 import './Authentication.css';
 
 const Authentication = () => {
@@ -14,6 +15,8 @@ const Authentication = () => {
     }
 
     return (
+        <>
+        <Header />
         <div className='login__main' style={bannerStyle}>
             <div className='login__form'>
                 <form className='login__form__content'>
@@ -44,6 +47,8 @@ const Authentication = () => {
                 </form>
             </div>
         </div>
+        <Footer/>
+        </>
     );
 }
 

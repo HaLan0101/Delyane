@@ -3,7 +3,7 @@
 }
 
 .register__content {
-  position: fixed;
+  position: absolute;
   top: 15%;
   left: 15%;
 }
