@@ -31,8 +31,26 @@ const Product = () => {
 
                 <ul className='product__list'>
                     <li className='product__filter'>
-                        <div className='product__category'>Category</div>
-                        <div className='product__prix'>Prix</div>
+                        <div className='product__category'>
+                            <select name="genre" id="genre">
+                                <option>Category</option>
+                                <option value="1" >Painting</option>
+                                <option value="2" >Photography</option>
+                                <option value="3" >Editing</option>
+                                <option value="4" >Sculpture</option>
+                                <option value="5" >Design</option>
+                            </select>
+                        </div>
+                        <div className='product__prix'>
+                            <select name="genre" id="genre">
+                                <option>Price</option>
+                                <option value="1" > Lower than 500€ </option>
+                                <option value="2" > 501€ - 1 000€</option>
+                                <option value="3" > 1 001€ - 5 000€</option>
+                                <option value="4" > 5 001€ - 10 000€</option>
+                                <option value="5" > Higher than 10 000€</option>
+                            </select>
+                        </div>
                     </li>
                     <li className='product__art'>
                         <ListItem></ListItem>
