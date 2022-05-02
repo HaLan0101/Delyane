@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import axios from 'axios';
-
+import Header from '../../Layout/Header/Header';
+import Footer from '../../Layout/Footer/Footer';
 const Product = () => {
     const [product, setProduct] = useState({});
     console.log(product);
@@ -24,15 +25,21 @@ const Product = () => {
     console.log("TEST", uuid);
 
     return (
-
+        <>
+        <Header />
 
         <div className='product__main'>
-            <p className='product__technique'>Technique </p>
-            <p className='product__dimension'>Dimensions </p>
-            <p className='product__tirage'>Tirage </p>
-            <p className='product__auth'>Authentification </p>
-
+            <div className='product__content'>
+                <div className='product__image'></div>
+                <div className='product__info'></div>
+                <p className='product__technique'>Technique </p>
+                <p className='product__dimension'>Dimensions </p>
+                <p className='product__tirage'>Tirage </p>
+                <p className='product__auth'>Authentification </p>
+            </div>
         </div>
+        <Footer/>
+        </>
     );
 }
 

@@ -53,35 +53,13 @@ const Product = () => {
                         </div>
                     </li>
                     <li className='product__art'>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
+                        {products.map(product => {
+                            return (
+                            <ListItem title={product.title} description={product.description} category={product.category} price={product.price} image={product.image} uuid={product.uuid}></ListItem>
+                            )
+                        })}
                     </li>
                 </ul>
-                {/* {products.map(product => {
-                    return (
-                        <div className='product__content' key={product.uuid}>
-                            <img src={`http://localhost:8080/${product.image}`} alt={product.title} />
-                            <p className='product__title'>{product.title}</p>
-                            <p className='product__artist'>Artist</p>
-                            <p className='product__dimension'>Dimensions</p>
-                            <p className='product__price'>{product.price} €</p>
-
-                            <Link to={`/painting/${product.uuid}`}>
-                                <button>Click</button>
-                            </Link>
-                        </div>
-                    )
-                })} */}
             </div>
 
         </div>

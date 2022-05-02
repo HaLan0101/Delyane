@@ -1,6 +1,6 @@
 .listItem {
     width: 250px;
-    height: 350px;
+    height: 400px;
     background-color: white;
     margin-right: 5px;
     overflow: hidden;
@@ -19,5 +19,8 @@
 .itemContent h5{
     color: black;
     text-align: center;
+}
+.itemButton{
+    padding: 10px 75px;
 }
   
