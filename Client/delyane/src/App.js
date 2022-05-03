@@ -6,6 +6,7 @@ import './App.css';
 import Authentication from './components/Authentication/Authentication';
 import Error from './components/Error/Error';
 import Home from './components/Home/Home';
+import Favorite from './components/Favorite/Favorite';
 import Product from './components/Product/[uuid]/Product';
 import Products from './components/Product/Products';
 import Register from './components/Register/Register';
@@ -21,6 +22,7 @@ const App = () => {
       <Switch >
         <Route exact path='/' component={Home} />
         <Route exact path='/authentication' component={Authentication} />
+        <Route exact path='/favorite' component={Favorite} />
         <Route exact path='/painting' component={Products} />
         <Route exact path='/painting/:uuid' component={Product} />
         <Route exact path='/register' component={Register} />
