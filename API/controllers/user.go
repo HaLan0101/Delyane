@@ -122,11 +122,10 @@ func LoginUser(c *gin.Context) {
 			Token: signedToken,
 		}
 
-		c.JSON(200, tokenResponse)
 		c.JSON(http.StatusOK, gin.H{
 			"status": "loged in",
 			"user":   userUsername,
-			"token":  tokenResponse,
+			"token":  tokenResponse.Token,
 		})
 	}
 }
