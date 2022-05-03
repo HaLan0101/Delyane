@@ -1,5 +1,7 @@
 package models
 
+import "golang.org/x/crypto/bcrypt"
+
 // User is the struct used to return an existing user
 type User struct {
 	UUID      string `json:"uuid"`
@@ -23,4 +25,18 @@ type PostUser struct {
 type LoginUser struct {
 	Identifier string `json:"identifier"`
 	Password   string `json:"password"`
+}
+
+func (user *PostUser) EncryptPassword() {
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
+	user.Password = string(bytes)
+}
+
+func (user *LoginUser) EncryptPassword() {
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
+	user.Password = string(bytes)
+}
+
+func (user *User) CheckPassword(password string) error {
+	return bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 }

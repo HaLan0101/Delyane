@@ -3,10 +3,10 @@ package controllers
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 )
 
 // GetUserById handle /user/id (GET)
@@ -33,8 +33,7 @@ func PostUser(c *gin.Context) {
 		return
 	}
 
-	bytes, _ := bcrypt.GenerateFromPassword([]byte(input.Password), 14)
-	input.Password = string(bytes)
+	input.EncryptPassword()
 
 	repository.PostUser(input)
 
@@ -60,8 +59,7 @@ func PutUserById(c *gin.Context) {
 		return
 	}
 
-	bytes, _ := bcrypt.GenerateFromPassword([]byte(input.Password), 14)
-	input.Password = string(bytes)
+	input.EncryptPassword()
 
 	repository.PutUserById(c.Params.ByName("id"), input)
 
@@ -100,13 +98,35 @@ func LoginUser(c *gin.Context) {
 
 	// USER FOUND in DB
 
-	if bcrypt.CompareHashAndPassword([]byte(userUsername.Password), []byte(input.Password)) != nil {
+	if userUsername.CheckPassword(input.Password) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"err": "Wrong password"})
 	} else {
 
+		jwtWrapper := models.JwtWrapper{
+			SecretKey:       "verysecretkey",
+			Issuer:          "AuthService",
+			ExpirationHours: 24,
+		}
+
+		signedToken, err := jwtWrapper.GenerateToken(userUsername.Email)
+		if err != nil {
+			log.Println(err)
+			c.JSON(500, gin.H{
+				"msg": "error signing token",
+			})
+			c.Abort()
+			return
+		}
+
+		tokenResponse := models.LoginResponse{
+			Token: signedToken,
+		}
+
+		c.JSON(200, tokenResponse)
 		c.JSON(http.StatusOK, gin.H{
 			"status": "loged in",
 			"user":   userUsername,
+			"token":  tokenResponse,
 		})
 	}
 }
