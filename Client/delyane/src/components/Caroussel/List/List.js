@@ -1,9 +1,10 @@
-import React from 'react';
-import './List.css';
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import React, { useState, useRef } from 'react';
+
 import ListItem from "../ListItem/ListItem";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import './List.css';
 
 const List = () => {
     const [isMoved, setIsMoved] = useState(false);
@@ -23,31 +24,24 @@ const List = () => {
             listRef.current.style.transform = `translateX(${-230 + distance}px)`;
         }
     };
+
     return (
-        <>
-            <div className='list'>
-                <div className="wrapper">
-                    <FontAwesomeIcon icon="fa-solid fa-chevron-left" className="sliderArrow left" onClick={() => handleClick("left")} style={{ display: !isMoved && "none" }} />
-                    <div className="container" ref={listRef}>
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                        <ListItem />
-                    </div>
-                    <FontAwesomeIcon icon="fa-solid fa-chevron-right" className="sliderArrow right" onClick={() => handleClick("right")} />
+        <div className='list__main'>
+            <div className="list__wrapper">
+                <FontAwesomeIcon icon="fa-solid fa-chevron-left" className="sliderArrow left" onClick={() => handleClick("left")} style={{ display: !isMoved && "none" }} />
+                <div className="list__container" ref={listRef}>
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
+                    <ListItem />
                 </div>
+                <FontAwesomeIcon icon="fa-solid fa-chevron-right" className="sliderArrow right" onClick={() => handleClick("right")} />
             </div>
-        </>
+        </div>
     );
 }
 

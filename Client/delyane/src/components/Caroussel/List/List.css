@@ -1,22 +1,25 @@
-.list {
+.list__main {
     width: 100%;
     margin-top: 10px;
 }  
-.wrapper {
+
+.list__wrapper {
     position: relative;
 }
+
 .sliderArrow {
+    background-color: rgb(22, 22, 22, 0.5);
+    color: var(--white-color);
+    position: absolute;
     width: 50px;
     height: 100%;
-    background-color: rgb(22, 22, 22, 0.5);
-    color: white;
-    position: absolute;
     z-index: 2;
     top: 0;
     bottom: 0;
     margin: auto;
     cursor: pointer;
 }
+
 .left {
     left: 0;
 }
@@ -24,7 +27,8 @@
 .right {
     right: 0;
 }
-.container {
+
+.list__container {
     margin-left: 50px;
     display: flex;
     margin-top: 10px;

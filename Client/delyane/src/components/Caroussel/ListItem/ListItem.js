@@ -1,19 +1,20 @@
-import React from 'react';
-
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 import './ListItem.css';
 
 const ListItem = (props) => {
+    const [favorite, setFavorite] = useState(false);
 
     return (
         <div>
             <div className='listItem__main' key={props.uuid}>
                 <div className='listItem__top'>
-                    <button className='listItem__favorite'>
-                        <FavoriteBorderIcon className='listItem__icon' />
+                    <button className='listItem__favorite' onClick={() => setFavorite(!favorite)}>
+                        {favorite ? <FavoriteIcon className='listItem__icon' /> : <FavoriteBorderIcon className='listItem__icon' />}
                     </button>
                     <Link to={`/painting/${props.uuid}`}>
                         <img className='listItem__image' src={props.image} alt={props.title} />
