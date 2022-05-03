@@ -29,9 +29,9 @@ const Home = () => {
                     <p className='home__subtitle'>The artists you should be keeping an eyes on</p>
                     {/* ----------- To do : Grid ------------  */}
                     <div className='main__product'>
-                        <img className='img1' src='/img1.png' alt='' />
-                        <img className='img2' src='/img2.png' alt='' />
-                        <img className='img3' src='/img3.png' alt='' />
+                        <img className='img1' src='https://desenio.fr/bilder/artiklar/zoom/17002_2.jpg?imgwidth=435&qt=Pivoines%20roses%20abstraites' alt='' />
+                        <img className='img2' src='https://desenio.fr/bilder/artiklar/zoom/16040_2.jpg?imgwidth=435&qt=Vase%20en%20or' alt='' />
+                        <img className='img3' src='https://desenio.fr/bilder/artiklar/zoom/3802_2.jpg?imgwidth=435&qt=Femme%20%C3%A0%20Paris' alt='' />
                     </div>
                 </div>
             </div>

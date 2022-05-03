@@ -34,18 +34,17 @@
 }
 
 .main__product {
-    padding: 20px 300px;
+    padding: 20px 20px;
 }
 
 .img1 {
-    width: 40%;
-    padding: 50px 50px;
+    width: 30%;
 }
 
 .img2 { 
-    width: 60%;
+    width: 40%;
 }
 
 .img3 {
-    width: 50%;
+    width: 30%;
 }

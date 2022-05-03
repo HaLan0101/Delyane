@@ -41,7 +41,7 @@ const Product = () => {
                                 <option value="5" >Design</option>
                             </select>
                         </div>
-                        <div className='product__prix'>
+                        <div className='product__price'>
                             <select name="genre" id="genre">
                                 <option>Price</option>
                                 <option value="1" > Lower than 500€ </option>
