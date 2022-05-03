@@ -29,21 +29,20 @@ const List = () => {
                 <div className="wrapper">
                     <FontAwesomeIcon icon="fa-solid fa-chevron-left" className="sliderArrow left" onClick={() => handleClick("left")} style={{ display: !isMoved && "none" }} />
                     <div className="container" ref={listRef}>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-                        <ListItem></ListItem>
-
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
+                        <ListItem />
                     </div>
                     <FontAwesomeIcon icon="fa-solid fa-chevron-right" className="sliderArrow right" onClick={() => handleClick("right")} />
                 </div>
