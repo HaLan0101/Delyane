@@ -47,6 +47,10 @@ func main() {
 	router.DELETE("/product/:id", controllers.MiddlewareBasicAuth, controllers.DeleteProductById)
 	router.POST("/product", controllers.MiddlewareBasicAuth, controllers.PostProduct)
 
+	// Newsletter CRUD
+	router.GET("/newsletters", controllers.GetNewsletters)
+	router.POST("/newsletter", controllers.PostNewsletter)
+
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
 	router.Run()
