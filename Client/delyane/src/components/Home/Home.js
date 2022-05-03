@@ -12,7 +12,7 @@ const Home = () => {
             <Header />
             {/* ----------- To do : Carrousel ------------  */}
             <div className='home__swiper'>
-                <img className='swiper__img' src='/hero.png' alt='' />
+                <img className='swiper__picture' src='/hero.png' alt='' />
             </div>
 
             <div className='home__main'>
@@ -21,17 +21,16 @@ const Home = () => {
                     <p className='home__subtitle'>Discover artworks our collectors love</p>
                     {/* ----------- To do : Carrousel ------------  */}
                     <div className='bestsellers__swiper'>
-                        <List></List>
+                        <List />
                     </div>
                 </div>
                 <div className='home__artists'>
                     <h1 className='home__title'>Featured Artists</h1>
                     <p className='home__subtitle'>The artists you should be keeping an eyes on</p>
-                    {/* ----------- To do : Grid ------------  */}
                     <div className='main__product'>
-                        <img className='img1' src='https://desenio.fr/bilder/artiklar/zoom/17002_2.jpg?imgwidth=435&qt=Pivoines%20roses%20abstraites' alt='' />
-                        <img className='img2' src='https://desenio.fr/bilder/artiklar/zoom/16040_2.jpg?imgwidth=435&qt=Vase%20en%20or' alt='' />
-                        <img className='img3' src='https://desenio.fr/bilder/artiklar/zoom/3802_2.jpg?imgwidth=435&qt=Femme%20%C3%A0%20Paris' alt='' />
+                        <img className='first__picture' src='https://desenio.fr/bilder/artiklar/zoom/17002_2.jpg?imgwidth=435&qt=Pivoines%20roses%20abstraites' alt='' />
+                        <img className='second__picture' src='https://desenio.fr/bilder/artiklar/zoom/16040_2.jpg?imgwidth=435&qt=Vase%20en%20or' alt='' />
+                        <img className='third__picture' src='https://desenio.fr/bilder/artiklar/zoom/3802_2.jpg?imgwidth=435&qt=Femme%20%C3%A0%20Paris' alt='' />
                     </div>
                 </div>
             </div>

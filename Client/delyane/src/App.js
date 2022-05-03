@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
-import Authentication from './components/Login/Authentication';
+import Authentication from './components/Authentication/Authentication';
 import Error from './components/Error/Error';
 import Home from './components/Home/Home';
 import Product from './components/Product/[uuid]/Product';
