@@ -91,3 +91,20 @@
         display: none;
     }
 }
+
+@media screen and (max-width: 420px) {
+    .newsletter__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .newsletter__input {
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .newsletter__button {
+        width: 50%;
+    }
+}

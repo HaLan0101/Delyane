@@ -11,14 +11,7 @@ const Header = () => {
 
     return (
         <div className={`header__main ${links ? 'show__nav' : 'hide__nav'}`}>
-                <ul className='header__logo'>
-                    <li>
-                        <a href="/"><img className='header__img' src="/logo.png" alt="logo" /></a>
-                    </li>
-                    <li>
-                        <a href="/"><div className='header__name'>DELYANE</div></a>
-                    </li>
-                </ul>
+            <div className='header__logo'>DELYANE</div>
 
             <ul className='header__nav'>
                 <li className='nav__item'>
@@ -34,7 +27,7 @@ const Header = () => {
                     <a href='/authentication' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-heart" /></a>
                 </li>
                 <li className='nav__item'>
-                <a href='/authentication' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
+                    <a href='/authentication' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
                 </li>
             </ul>
             <button className='nav__burger' onClick={handleClick}>

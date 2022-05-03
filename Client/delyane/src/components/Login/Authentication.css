@@ -1,4 +1,4 @@
-.login__form{
+/* .login__form{
     padding: 200px 400px;
 }
 form{
@@ -14,11 +14,11 @@ form{
 .register__text{
     text-align: center;
     color: black;
-}
+} */
 
 /* ------- RESPONSIVE -------  */
 
-@media screen and (max-width: 860px) {
+/* @media screen and (max-width: 860px) {
     .login__form {
         position: fixed;
         top: 50%;
@@ -32,4 +32,4 @@ form{
         width: 350px;
     }
 
-}
+} */
