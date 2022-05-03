@@ -1,28 +1,32 @@
-import React from 'react';
-import './ListItem.css';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import Button from '../../Button/Button';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
+import './ListItem.css';
 
 const ListItem = (props) => {
+    const [favorite, setFavorite] = useState(false);
+
     return (
         <div>
-            <div className='listItem' key={props.uuid}>
-                <div className='itemImage'>
-                    <img className='image' src={props.image} alt="" />
-                    <FontAwesomeIcon className="icon" icon="fa-solid fa-heart-circle-plus" />
-                </div>
-                <div className='itemContent'>
-                    <h5>{props.title}</h5>
-                    <h5>{props.description}</h5>
-                    <h5>{props.category}</h5>
-                    <h5>Artist</h5>
-                    <h5>{props.price}</h5>
-                </div>
-                <div className="itemButton">
+            <div className='listItem__main' key={props.uuid}>
+                <div className='listItem__top'>
+                    <button className='listItem__favorite' onClick={() => setFavorite(!favorite)}>
+                        {favorite ? <FavoriteIcon className='listItem__icon' /> : <FavoriteBorderIcon className='listItem__icon' />}
+                    </button>
                     <Link to={`/painting/${props.uuid}`}>
-                        <Button title="See more" className="item__button"/>
+                        <img className='listItem__image' src={props.image} alt={props.title} />
                     </Link>
+                </div>
+                <div className='listItem__content'>
+                    <p className='listItem__text'>Jérôme Mesnager</p>
+                    <p className='listItem__text'>Dansons sous les arbres, 2022</p>
+                    <p className='listItem__text listItem__style'>220 €</p>
+                    <p className='listItem__text'>{props.title}</p>
+                    <p className='listItem__text'>{props.description}</p>
+                    <p className='listItem__text'>{props.price}</p>
                 </div>
             </div>
         </div>

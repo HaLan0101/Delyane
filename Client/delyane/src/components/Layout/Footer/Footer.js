@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const [newsletter, setNewsletter] = useState({});
@@ -20,10 +21,26 @@ const Footer = () => {
     return (
         <div className='footer__main'>
             <ul className='footer__list'>
-                <li className='footer__items'><a href='/painting'><h3 className='footer__item'>Artworks</h3></a></li>
-                <li className='footer__items'><a href=""><h3 className='footer__item'>Artists</h3></a></li>
-                <li className='footer__items'><a href=""><h3 className='footer__item'>Contact us</h3></a></li>
-                <li className='footer__items'><a href=""><h3 className='footer__item'>My account</h3></a></li>
+                <li className='footer__items'>
+                    <Link href='/painting'>
+                        <h3 className='footer__item'>Artworks</h3>
+                    </Link>
+                </li>
+                <li className='footer__items'>
+                    <Link href='/'>
+                        <h3 className='footer__item'>Artists</h3>
+                    </Link>
+                </li>
+                <li className='footer__items'>
+                    <Link href='/'>
+                        <h3 className='footer__item'>Contacts us</h3>
+                    </Link>
+                </li>
+                <li className='footer__items'>
+                    <Link href='/'>
+                        <h3 className='footer__item'>My account</h3>
+                    </Link>
+                </li>
                 <li className='footer__items'>
                     <h3 className='footer__item'>Secure payment</h3>
                 </li>

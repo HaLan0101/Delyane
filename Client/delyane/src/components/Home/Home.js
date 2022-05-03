@@ -8,14 +8,14 @@ import './Home.css';
 
 const Home = () => {
     return (
-        <>
+        <div className='home__main'>
             <Header />
             {/* ----------- To do : Carrousel ------------  */}
             <div className='home__swiper'>
                 <img className='swiper__picture' src='/hero.png' alt='' />
             </div>
 
-            <div className='home__main'>
+            <div className='home__content'>
                 <div className='home__bestsellers'>
                     <h1 className='home__title'>Bestsellers</h1>
                     <p className='home__subtitle'>Discover artworks our collectors love</p>
@@ -35,7 +35,7 @@ const Home = () => {
                 </div>
             </div>
             <Footer />
-        </>
+        </div>
     );
 }
 
