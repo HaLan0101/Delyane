@@ -103,6 +103,10 @@ func LoginUser(c *gin.Context) {
 	if bcrypt.CompareHashAndPassword([]byte(userUsername.Password), []byte(input.Password)) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"err": "Wrong password"})
 	} else {
-		c.JSON(http.StatusOK, gin.H{"status": "loged in"})
+
+		c.JSON(http.StatusOK, gin.H{
+			"status": "loged in",
+			"user":   userUsername,
+		})
 	}
 }
