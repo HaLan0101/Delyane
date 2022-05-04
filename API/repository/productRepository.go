@@ -90,7 +90,6 @@ func GetProducts() []models.Product {
 		}
 
 		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category, UUID_user: uuid_user})
-
 	}
 
 	return products

@@ -70,3 +70,6 @@ func main() {
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+// - Handle missing category for a product (resulting into server crash)

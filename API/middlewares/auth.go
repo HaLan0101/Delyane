@@ -65,5 +65,4 @@ func JWT(c *gin.Context) {
 	c.Set("email", claims.Email)
 
 	c.Next()
-
 }
