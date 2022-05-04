@@ -49,12 +49,12 @@ func PutUserById(c *gin.Context) {
 		return
 	}
 
-	if len(repository.GetUserByEmail(input.Email)) != 1 {
+	if len(repository.GetUserByEmail(input.Email)) > 1 {
 		c.JSON(http.StatusConflict, gin.H{"error": "This email is already taken by another user"})
 		return
 	}
 
-	if len(repository.GetUserByUsername(input.Username)) != 1 {
+	if len(repository.GetUserByUsername(input.Username)) > 1 {
 		c.JSON(http.StatusConflict, gin.H{"error": "This username is already taken by another user"})
 		return
 	}
