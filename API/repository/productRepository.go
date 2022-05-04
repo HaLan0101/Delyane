@@ -2,6 +2,7 @@ package repository
 
 import (
 	"delyaneAPI/models"
+	"fmt"
 )
 
 // GetProductById return a unique product with id from db
@@ -24,10 +25,7 @@ func GetProductById(id string) models.Product {
 		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user)
 
 		if err != nil {
-			if uuid_category == "" {
-			} else {
-				panic(err)
-			}
+			panic(err)
 		}
 	}
 
@@ -84,9 +82,10 @@ func GetProducts() []models.Product {
 
 		if err != nil {
 			if uuid_category == "" {
-			} else {
-				panic(err)
+				break
 			}
+			fmt.Println("break")
+			panic(err)
 		}
 
 		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category, UUID_user: uuid_user})

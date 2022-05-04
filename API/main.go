@@ -73,3 +73,4 @@ func main() {
 
 // TODO :
 // - Handle missing category for a product (resulting into server crash)
+// - Handle POST and PUT product with UUID of the user using JWT and not a specified UUID from front
