@@ -18,15 +18,16 @@ func GetUserById(id string) models.User {
 	var email string
 	var firstname string
 	var lastname string
+	var image string
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
 
 		if err != nil {
 			panic(err)
 		}
 	}
-	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname}
+	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname, Image: image}
 }
 
 // GetUserByEmail return a user from db using email
@@ -43,19 +44,20 @@ func GetUserByEmail(mail string) []models.User {
 	var email string
 	var firstname string
 	var lastname string
+	var image string
 
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
 
 		if err != nil {
 			panic(err)
 		}
 
-		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname})
-
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname, Image: image})
 	}
+
 	return users
 }
 
@@ -73,17 +75,18 @@ func GetUserByUsername(name string) []models.User {
 	var email string
 	var firstname string
 	var lastname string
+	var image string
 
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
 
 		if err != nil {
 			panic(err)
 		}
 
-		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname})
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname, LastName: lastname, Image: image})
 	}
 
 	return users
@@ -92,26 +95,24 @@ func GetUserByUsername(name string) []models.User {
 // PostUser create a new user in db
 func PostUser(newUser models.PostUser) {
 	// dynamic
-	insertDynStmt := `insert into "customer"("username", "password", "email", "firstname", "lastname") values($1, $2, $3, $4, $5)`
+	insertDynStmt := `insert into "customer"("username", "password", "email", "firstname", "lastname", "image") values($1, $2, $3, $4, $5, $6)`
 
-	_, err := currentDB.Exec(insertDynStmt, newUser.Username, newUser.Password, newUser.Email, newUser.FirstName, newUser.LastName)
+	_, err := currentDB.Exec(insertDynStmt, newUser.Username, newUser.Password, newUser.Email, newUser.FirstName, newUser.LastName, newUser.Image)
 	if err != nil {
 		panic(err)
 	}
 }
-
 
 // PutUserById update an existing user in db
 func PutUserById(uuid string, updatedUser models.PostUser) {
 	// dynamic
-	updateDynStmt := `update "customer" SET username = $2, password = $3, email = $4, firstname = $5, lastname = $6 where uuid = $1`
+	updateDynStmt := `update "customer" SET username = $2, password = $3, email = $4, firstname = $5, lastname = $6, lastname = $7  where uuid = $1`
 
-	_, err := currentDB.Exec(updateDynStmt, uuid, updatedUser.Username, updatedUser.Password, updatedUser.Email, updatedUser.FirstName, updatedUser.LastName)
+	_, err := currentDB.Exec(updateDynStmt, uuid, updatedUser.Username, updatedUser.Password, updatedUser.Email, updatedUser.FirstName, updatedUser.LastName, updatedUser.Image)
 	if err != nil {
 		panic(err)
 	}
 }
-
 
 // DeleteUserById delete an existing user in db
 func DeleteUserById(uuid string) {
