@@ -10,6 +10,7 @@ type User struct {
 	Email     string `json:"email"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
+	Image     string `json:"image"`
 }
 
 // PostUser is the struct used to create a new user and edit an existing one
@@ -19,6 +20,7 @@ type PostUser struct {
 	Email     string `json:"email"`
 	FirstName string `json:"firstname"`
 	LastName  string `json:"lastname"`
+	Image     string `json:"image"`
 }
 
 // LoginUser is the struct used to log a user
