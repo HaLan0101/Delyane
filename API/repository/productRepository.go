@@ -91,11 +91,11 @@ func GetProducts() []models.Product {
 }
 
 // PostProduct create a new product in the db
-func PostProduct(newProduct models.PostProduct) {
+func PostProduct(newProduct models.PostProduct, userUUID string) {
 	// dynamic
 	insertDynStmt := `insert into "product"("title", "description", "price", "image", "uuid_category", "uuid_user") values($1, $2, $3, $4, $5, $6)`
 
-	_, err := currentDB.Exec(insertDynStmt, newProduct.Title, newProduct.Description, newProduct.Price, newProduct.Image, newProduct.UUID_category, newProduct.UUID_user)
+	_, err := currentDB.Exec(insertDynStmt, newProduct.Title, newProduct.Description, newProduct.Price, newProduct.Image, newProduct.UUID_category, userUUID)
 	if err != nil {
 		panic(err)
 	}
@@ -104,9 +104,9 @@ func PostProduct(newProduct models.PostProduct) {
 // PutProductById update an existing product in the db
 func PutProductById(uuid string, updatedProduct models.PostProduct) {
 	// dynamic
-	updateDynStmt := `update "product" SET title = $2,  description = $3, price = $4,  image = $5, uuid_category = $6,  uuid_user = $7 where uuid = $1`
+	updateDynStmt := `update "product" SET title = $2,  description = $3, price = $4,  image = $5, uuid_category = $6 where uuid = $1`
 
-	_, err := currentDB.Exec(updateDynStmt, uuid, updatedProduct.Title, updatedProduct.Description, updatedProduct.Price, updatedProduct.Image, updatedProduct.UUID_category, updatedProduct.UUID_user)
+	_, err := currentDB.Exec(updateDynStmt, uuid, updatedProduct.Title, updatedProduct.Description, updatedProduct.Price, updatedProduct.Image, updatedProduct.UUID_category)
 	if err != nil {
 		panic(err)
 	}

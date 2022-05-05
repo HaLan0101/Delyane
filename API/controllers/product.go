@@ -3,6 +3,7 @@ package controllers
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -29,6 +30,8 @@ func GetProducts(c *gin.Context) {
 
 // PostProduct handle /product for creating a new product (POST)
 func PostProduct(c *gin.Context) {
+	email, _ := c.Get("email")
+
 	var input models.PostProduct
 
 	input.Title = c.PostForm("title")
@@ -42,7 +45,6 @@ func PostProduct(c *gin.Context) {
 	price, _ := strconv.Atoi(c.PostForm("price"))
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
-	input.UUID_user = c.PostForm("uuid_user")
 
 	// single file
 	image, err := c.FormFile("image")
@@ -52,18 +54,22 @@ func PostProduct(c *gin.Context) {
 
 	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
 
+	var imageNamePath string = strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+
 	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/products/"+strconv.FormatInt(time.Now().UnixMilli(), 10)+"."+format)
+	c.SaveUploadedFile(image, "./images/products/"+imageNamePath)
 
-	input.Image = "/images/products/" + strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+	input.Image = "/images/products/" + imageNamePath
 
-	repository.PostProduct(input)
+	repository.PostProduct(input, repository.GetUserByEmail(fmt.Sprint(email))[0].UUID)
 
 	c.JSON(http.StatusCreated, input)
 }
 
 // PutProductById handle /product/id for editing an existing product (PUT)
 func PutProductById(c *gin.Context) {
+	email, _ := c.Get("email")
+
 	var input models.PostProduct
 
 	input.Title = c.PostForm("title")
@@ -73,11 +79,15 @@ func PutProductById(c *gin.Context) {
 		return
 	}
 
+	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductByTitle(input.Title).UUID_user {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not the owner of this product"})
+		return
+	}
+
 	input.Description = c.PostForm("description")
 	price, _ := strconv.Atoi(c.PostForm("price"))
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
-	input.UUID_user = c.PostForm("uuid_user")
 
 	// single file
 	image, err := c.FormFile("image")
@@ -87,10 +97,12 @@ func PutProductById(c *gin.Context) {
 
 	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
 
-	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/products/"+strconv.FormatInt(time.Now().UnixMilli(), 10)+"."+format)
+	var imageNamePath string = strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
 
-	input.Image = "/images/products/" + strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+	// Upload the file to specific dst.
+	c.SaveUploadedFile(image, "./images/products/"+imageNamePath)
+
+	input.Image = "/images/products/" + imageNamePath
 
 	repository.PutProductById(c.Params.ByName("id"), input)
 
