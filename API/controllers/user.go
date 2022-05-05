@@ -17,10 +17,12 @@ func GetUserById(c *gin.Context) {
 
 // PostUser handle /user for creating a new user (POST)
 func PostUser(c *gin.Context) {
-	var input models.PostUser
-
-	input.Email = c.PostForm("email")
-	input.Username = c.PostForm("username")
+	// Validate input
+	var input models.CreateUser
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
 	if len(repository.GetUserByEmail(input.Email)) != 0 {
 		c.JSON(http.StatusConflict, gin.H{"error": "User with this mail already exist"})
@@ -32,23 +34,7 @@ func PostUser(c *gin.Context) {
 		return
 	}
 
-	input.FirstName = c.PostForm("firstname")
-	input.LastName = c.PostForm("lastname")
-	input.Password = c.PostForm("password")
 	input.EncryptPassword()
-
-	// single file
-	image, err := c.FormFile("image")
-	if err != nil {
-		panic(err)
-	}
-
-	imageName := generateImageName(image)
-
-	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/users/"+imageName)
-
-	input.Image = "/images/users/" + imageName
 
 	repository.PostUser(input)
 
@@ -57,15 +43,18 @@ func PostUser(c *gin.Context) {
 
 // PutUserById handle /user/id for editing an existing user
 func PutUserById(c *gin.Context) {
+	if repository.GetUserById(c.Params.ByName("id")).UUID == "" {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User with this id doesn't exist"})
+		return
+	}
+
 	email, _ := c.Get("email")
 
 	var input models.PostUser
 
 	input.Email = c.PostForm("email")
 
-	// TODO :
-	//  - Issue if the user want to change his current mail (should get uesr with his old email before editing)
-	if fmt.Sprint(email) != input.Email {
+	if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
 		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}
@@ -90,8 +79,12 @@ func PutUserById(c *gin.Context) {
 	// single file
 	image, err := c.FormFile("image")
 	if err != nil {
-		panic(err)
+		if err.Error() != "http: no such file" {
+			panic(err)
+		}
 	}
+
+	// Forced to have a pic when updating a user... for now
 
 	imageName := generateImageName(image)
 
@@ -109,6 +102,13 @@ func PutUserById(c *gin.Context) {
 func DeleteUserById(c *gin.Context) {
 	if repository.GetUserById(c.Params.ByName("id")).UUID == "" {
 		c.JSON(http.StatusConflict, gin.H{"err": "User with this ID does not exist"})
+		return
+	}
+
+	email, _ := c.Get("email")
+
+	if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}
 
