@@ -70,3 +70,6 @@ func main() {
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+//  - Can't edit a product without changing the current name of it

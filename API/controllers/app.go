@@ -2,7 +2,11 @@ package controllers
 
 import (
 	"fmt"
+	"mime/multipart"
 	"net/http"
+	"strconv"
+	"strings"
+	"time"
 
 	"delyaneAPI/repository"
 
@@ -30,4 +34,11 @@ func SaveImage(c *gin.Context) {
 	c.SaveUploadedFile(file, "./images/"+file.Filename)
 
 	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
+}
+
+// generateImageName generate an image name based on time and format
+func generateImageName(image *multipart.FileHeader) string {
+	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
+
+	return strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
 }

@@ -74,13 +74,15 @@ func PutProductById(c *gin.Context) {
 
 	input.Title = c.PostForm("title")
 
-	if repository.GetProductByTitle(input.Title).UUID != "" {
-		c.JSON(http.StatusConflict, gin.H{"err": "A product already have this name"})
+	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductByTitle(input.Title).UUID_user {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not the owner of this product"})
 		return
 	}
 
-	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductByTitle(input.Title).UUID_user {
-		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not the owner of this product"})
+	// TODO :
+	// - here for fixing name changing of a product
+	if repository.GetProductByTitle(input.Title).UUID != "" {
+		c.JSON(http.StatusConflict, gin.H{"err": "A product already have this name"})
 		return
 	}
 
@@ -111,8 +113,15 @@ func PutProductById(c *gin.Context) {
 
 // DeleteProductById handle /product/id for deleting an existing product (DELETE)
 func DeleteProductById(c *gin.Context) {
+	email, _ := c.Get("email")
+
 	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
 		c.JSON(http.StatusConflict, gin.H{"err": "This product desn't exist"})
+		return
+	}
+
+	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You can only delete your own products..."})
 		return
 	}
 

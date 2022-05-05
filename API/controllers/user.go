@@ -3,6 +3,7 @@ package controllers
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -16,12 +17,10 @@ func GetUserById(c *gin.Context) {
 
 // PostUser handle /user for creating a new user (POST)
 func PostUser(c *gin.Context) {
-	// Validate input
 	var input models.PostUser
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
+
+	input.Email = c.PostForm("email")
+	input.Username = c.PostForm("username")
 
 	if len(repository.GetUserByEmail(input.Email)) != 0 {
 		c.JSON(http.StatusConflict, gin.H{"error": "User with this mail already exist"})
@@ -33,7 +32,23 @@ func PostUser(c *gin.Context) {
 		return
 	}
 
+	input.FirstName = c.PostForm("firstname")
+	input.LastName = c.PostForm("lastname")
+	input.Password = c.PostForm("password")
 	input.EncryptPassword()
+
+	// single file
+	image, err := c.FormFile("image")
+	if err != nil {
+		panic(err)
+	}
+
+	imageName := generateImageName(image)
+
+	// Upload the file to specific dst.
+	c.SaveUploadedFile(image, "./images/users/"+imageName)
+
+	input.Image = "/images/users/" + imageName
 
 	repository.PostUser(input)
 
@@ -42,12 +57,20 @@ func PostUser(c *gin.Context) {
 
 // PutUserById handle /user/id for editing an existing user
 func PutUserById(c *gin.Context) {
-	// Validate input
+	email, _ := c.Get("email")
+
 	var input models.PostUser
-	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+
+	input.Email = c.PostForm("email")
+
+	// TODO :
+	//  - Issue if the user want to change his current mail (should get uesr with his old email before editing)
+	if fmt.Sprint(email) != input.Email {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}
+
+	input.Username = c.PostForm("username")
 
 	if len(repository.GetUserByEmail(input.Email)) > 1 {
 		c.JSON(http.StatusConflict, gin.H{"error": "This email is already taken by another user"})
@@ -59,7 +82,23 @@ func PutUserById(c *gin.Context) {
 		return
 	}
 
+	input.FirstName = c.PostForm("firstname")
+	input.LastName = c.PostForm("lastname")
+	input.Password = c.PostForm("password")
 	input.EncryptPassword()
+
+	// single file
+	image, err := c.FormFile("image")
+	if err != nil {
+		panic(err)
+	}
+
+	imageName := generateImageName(image)
+
+	// Upload the file to specific dst.
+	c.SaveUploadedFile(image, "./images/users/"+imageName)
+
+	input.Image = "/images/users/" + imageName
 
 	repository.PutUserById(c.Params.ByName("id"), input)
 
