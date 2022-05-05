@@ -1,8 +1,8 @@
 package repository
 
 import (
+	"database/sql"
 	"delyaneAPI/models"
-	"fmt"
 )
 
 // GetProductById return a unique product with id from db
@@ -18,7 +18,7 @@ func GetProductById(id string) models.Product {
 	var description string
 	var price uint
 	var image string
-	var uuid_category string
+	var uuid_category sql.NullString
 	var uuid_user string
 
 	for rows.Next() {
@@ -29,7 +29,7 @@ func GetProductById(id string) models.Product {
 		}
 	}
 
-	return models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category, UUID_user: uuid_user}
+	return models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user}
 }
 
 // GetProductByTitle return a unique product with title from db
@@ -45,7 +45,7 @@ func GetProductByTitle(name string) models.Product {
 	var description string
 	var price uint
 	var image string
-	var uuid_category string
+	var uuid_category sql.NullString
 	var uuid_user string
 
 	for rows.Next() {
@@ -56,7 +56,7 @@ func GetProductByTitle(name string) models.Product {
 		}
 	}
 
-	return models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category, UUID_user: uuid_user}
+	return models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user}
 }
 
 // GetProducts return all products from db
@@ -72,7 +72,7 @@ func GetProducts() []models.Product {
 	var description string
 	var price uint
 	var image string
-	var uuid_category string
+	var uuid_category sql.NullString
 	var uuid_user string
 
 	var products []models.Product
@@ -81,14 +81,10 @@ func GetProducts() []models.Product {
 		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user)
 
 		if err != nil {
-			if uuid_category == "" {
-				break
-			}
-			fmt.Println("break")
 			panic(err)
 		}
 
-		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category, UUID_user: uuid_user})
+		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user})
 	}
 
 	return products
