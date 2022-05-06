@@ -33,7 +33,7 @@ func GetProductById(id string) models.Product {
 }
 
 // GetProductByTitle return a unique product with title from db
-func GetProductByTitle(name string) models.Product {
+func GetProductByTitle(name string) []models.Product {
 	rows, err := currentDB.Query("SELECT * FROM product WHERE title = $1", name)
 
 	if err != nil {
@@ -48,15 +48,19 @@ func GetProductByTitle(name string) models.Product {
 	var uuid_category sql.NullString
 	var uuid_user string
 
+	var products []models.Product
+
 	for rows.Next() {
 		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user)
 
 		if err != nil {
 			panic(err)
 		}
+
+		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user})
 	}
 
-	return models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user}
+	return products
 }
 
 // GetProducts return all products from db
