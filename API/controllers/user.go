@@ -85,20 +85,34 @@ func PutUserById(c *gin.Context) {
 	// TODO :
 	//  - Allow the user to not provide a pic => If no pic then use a default pic stored on the API
 
+	var hasImage bool = true
+
 	// single file
 	image, err := c.FormFile("image")
 	if err != nil {
 		if err.Error() != "http: no such file" {
 			panic(err)
+		} else {
+			hasImage = false
 		}
 	}
 
-	imageName := generateImageName(image)
+	if hasImage {
+		// Deleting old image if available
+		if imagePath := repository.GetUserById(c.Params.ByName("id")).Image; imagePath != "/images/static/profile.png" {
+			os.Remove("." + imagePath)
+		}
 
-	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/users/"+imageName)
+		// Saving new image
+		imageName := generateImageName(image)
 
-	input.Image = "/images/users/" + imageName
+		// Upload the file to specific dst.
+		c.SaveUploadedFile(image, "./images/users/"+imageName)
+
+		input.Image = "/images/users/" + imageName
+	} else {
+		input.Image = repository.GetUserById(c.Params.ByName("id")).Image
+	}
 
 	repository.PutUserById(c.Params.ByName("id"), input)
 
@@ -119,8 +133,7 @@ func DeleteUserById(c *gin.Context) {
 		return
 	}
 
-	// Delete the image stored on the API if she exist
-	if imagePath := repository.GetUserById(c.Params.ByName("id")).Image; imagePath != "" {
+	if imagePath := repository.GetUserById(c.Params.ByName("id")).Image; imagePath != "/images/static/profile.png" {
 		os.Remove("." + imagePath)
 	}
 

@@ -102,6 +102,9 @@ func PutProductById(c *gin.Context) {
 		panic(err)
 	}
 
+	// TODO :
+	// - Should delete old images if image is updated
+
 	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
 
 	var imageNamePath string = strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
@@ -129,6 +132,9 @@ func DeleteProductById(c *gin.Context) {
 		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You can only delete your own products..."})
 		return
 	}
+
+	// TODO :
+	// Should handle image deletion
 
 	repository.DeleteProductById(c.Params.ByName("id"))
 

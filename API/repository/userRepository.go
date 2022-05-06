@@ -96,9 +96,9 @@ func GetUserByUsername(name string) []models.User {
 // PostUser create a new user in db
 func PostUser(newUser models.CreateUser) {
 	// dynamic
-	insertDynStmt := `insert into "user"("username", "password", "email") values($1, $2, $3)`
+	insertDynStmt := `insert into "user"("username", "password", "email", "image") values($1, $2, $3, $4)`
 
-	_, err := currentDB.Exec(insertDynStmt, newUser.Username, newUser.Password, newUser.Email)
+	_, err := currentDB.Exec(insertDynStmt, newUser.Username, newUser.Password, newUser.Email, "/images/static/profile.png")
 	if err != nil {
 		panic(err)
 	}
