@@ -5,9 +5,8 @@ import (
 	"delyaneAPI/repository"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
-	"strings"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -52,14 +51,12 @@ func PostProduct(c *gin.Context) {
 		panic(err)
 	}
 
-	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
-
-	var imageNamePath string = strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+	imageName := generateImageName(image)
 
 	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/products/"+imageNamePath)
+	c.SaveUploadedFile(image, "./images/products/"+imageName)
 
-	input.Image = "/images/products/" + imageNamePath
+	input.Image = "/images/products/" + imageName
 
 	repository.PostProduct(input, repository.GetUserByEmail(fmt.Sprint(email))[0].UUID)
 
@@ -102,17 +99,15 @@ func PutProductById(c *gin.Context) {
 		panic(err)
 	}
 
-	// TODO :
-	// - Should delete old images if image is updated
+	// Deleting old image
+	os.Remove("." + repository.GetProductById(c.Params.ByName("id")).Image)
 
-	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
-
-	var imageNamePath string = strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+	imageName := generateImageName(image)
 
 	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/products/"+imageNamePath)
+	c.SaveUploadedFile(image, "./images/products/"+imageName)
 
-	input.Image = "/images/products/" + imageNamePath
+	input.Image = "/images/products/" + imageName
 
 	repository.PutProductById(c.Params.ByName("id"), input)
 
@@ -133,8 +128,7 @@ func DeleteProductById(c *gin.Context) {
 		return
 	}
 
-	// TODO :
-	// Should handle image deletion
+	os.Remove("." + repository.GetProductById(c.Params.ByName("id")).Image)
 
 	repository.DeleteProductById(c.Params.ByName("id"))
 

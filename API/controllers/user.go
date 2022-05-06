@@ -82,9 +82,6 @@ func PutUserById(c *gin.Context) {
 	input.Password = c.PostForm("password")
 	input.EncryptPassword()
 
-	// TODO :
-	//  - Allow the user to not provide a pic => If no pic then use a default pic stored on the API
-
 	var hasImage bool = true
 
 	// single file
