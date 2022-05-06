@@ -34,7 +34,7 @@ func SaveImage(c *gin.Context) {
 	c.String(http.StatusOK, fmt.Sprintf("'%s' uploaded!", file.Filename))
 }
 
-// generateImageName generate an image name based on time and format
+// generateImageName generate an image name based on id and format
 func generateImageName(image *multipart.FileHeader, id string) string {
 	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
 
