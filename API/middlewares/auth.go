@@ -3,7 +3,6 @@ package middlewares
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -20,7 +19,7 @@ func BasicAuth(c *gin.Context) {
 		if len(user) == 1 {
 			if username == user[0].Username {
 				if bcrypt.CompareHashAndPassword([]byte(user[0].Password), []byte(password)) == nil {
-					fmt.Println("User " + username + " logged in from BasicAuth")
+					c.Next()
 					return
 				}
 			}
@@ -28,14 +27,14 @@ func BasicAuth(c *gin.Context) {
 	}
 	c.Abort()
 	c.Writer.Header().Set("WWW-Authenticate", "Basic realm=Restricted")
-	c.String(http.StatusUnauthorized, "")
+	c.JSON(http.StatusUnauthorized, "Wrong username or password")
 }
 
 // JWT validates token and authorizes users
 func JWT(c *gin.Context) {
 	clientToken := c.Request.Header.Get("Authorization")
 	if clientToken == "" {
-		c.JSON(403, "No Authorization header provided")
+		c.JSON(http.StatusForbidden, "No Authorization header provided")
 		c.Abort()
 		return
 	}
@@ -45,7 +44,7 @@ func JWT(c *gin.Context) {
 	if len(extractedToken) == 2 {
 		clientToken = strings.TrimSpace(extractedToken[1])
 	} else {
-		c.JSON(400, "Incorrect Format of Authorization Token")
+		c.JSON(http.StatusBadRequest, "Incorrect Format of Authorization Token")
 		c.Abort()
 		return
 	}
@@ -57,8 +56,13 @@ func JWT(c *gin.Context) {
 
 	claims, err := jwtWrapper.ValidateToken(clientToken)
 	if err != nil {
-		c.JSON(401, err.Error())
+		c.JSON(http.StatusUnauthorized, err.Error())
 		c.Abort()
+		return
+	}
+
+	if len(repository.GetUserByEmail(claims.Email)) == 0 {
+		c.JSON(http.StatusUnauthorized, "Token no more linked to a user")
 		return
 	}
 

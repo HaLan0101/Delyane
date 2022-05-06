@@ -12,23 +12,23 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetProductById handle /product/id (GET)
+// GetProductById handle /product/id (GET) - PUBLIC
 func GetProductById(c *gin.Context) {
 	// Does the product with this ID exist
-	if product := repository.GetProductById(c.Params.ByName("id")); product.UUID != "" {
-		c.JSON(http.StatusOK, product)
+	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
 
-	c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+	c.JSON(http.StatusOK, repository.GetProductById(c.Params.ByName("id")))
 }
 
-// GetProducts handle /products for all products (GET)
+// GetProducts handle /products for all products (GET) - PUBLIC
 func GetProducts(c *gin.Context) {
 	c.JSON(http.StatusOK, repository.GetProducts())
 }
 
-// PostProduct handle /product for creating a new product (POST)
+// PostProduct handle /product for creating a new product (POST) - PRIVATE
 func PostProduct(c *gin.Context) {
 	email, _ := c.Get("email")
 
@@ -66,8 +66,13 @@ func PostProduct(c *gin.Context) {
 	c.JSON(http.StatusCreated, input)
 }
 
-// PutProductById handle /product/id for editing an existing product (PUT)
+// PutProductById handle /product/id for editing an existing product (PUT) - PRIVATE
 func PutProductById(c *gin.Context) {
+	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		return
+	}
+
 	email, _ := c.Get("email")
 
 	var input models.PostProduct
@@ -111,14 +116,14 @@ func PutProductById(c *gin.Context) {
 	c.JSON(http.StatusOK, input)
 }
 
-// DeleteProductById handle /product/id for deleting an existing product (DELETE)
+// DeleteProductById handle /product/id for deleting an existing product (DELETE) - PRIVATE
 func DeleteProductById(c *gin.Context) {
-	email, _ := c.Get("email")
-
 	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
 		c.JSON(http.StatusConflict, gin.H{"err": "This product desn't exist"})
 		return
 	}
+
+	email, _ := c.Get("email")
 
 	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
 		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You can only delete your own products..."})
