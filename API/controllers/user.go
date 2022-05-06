@@ -101,7 +101,7 @@ func PutUserById(c *gin.Context) {
 		}
 
 		// Saving new image
-		imageName := generateImageName(image)
+		imageName := generateImageName(image, c.Params.ByName("id"))
 
 		// Upload the file to specific dst.
 		c.SaveUploadedFile(image, "./images/users/"+imageName)

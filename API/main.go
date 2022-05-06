@@ -72,4 +72,4 @@ func main() {
 }
 
 // TODO :
-//  - Can't edit a product without changing the current name of it
+//  - Handle undefied category id!

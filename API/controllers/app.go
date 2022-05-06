@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"mime/multipart"
 	"net/http"
-	"strconv"
 	"strings"
-	"time"
 
 	"delyaneAPI/repository"
 
@@ -37,8 +35,8 @@ func SaveImage(c *gin.Context) {
 }
 
 // generateImageName generate an image name based on time and format
-func generateImageName(image *multipart.FileHeader) string {
+func generateImageName(image *multipart.FileHeader, id string) string {
 	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
 
-	return strconv.FormatInt(time.Now().UnixMilli(), 10) + "." + format
+	return id + "." + format
 }

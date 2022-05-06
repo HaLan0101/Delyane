@@ -46,7 +46,7 @@ func PostProduct(c *gin.Context) {
 		panic(err)
 	}
 
-	imageName := generateImageName(image)
+	imageName := generateImageName(image, c.Params.ByName("id"))
 
 	// Upload the file to specific dst.
 	c.SaveUploadedFile(image, "./images/products/"+imageName)
@@ -90,7 +90,7 @@ func PutProductById(c *gin.Context) {
 	// Deleting old image
 	os.Remove("." + repository.GetProductById(c.Params.ByName("id")).Image)
 
-	imageName := generateImageName(image)
+	imageName := generateImageName(image, c.Params.ByName("id"))
 
 	// Upload the file to specific dst.
 	c.SaveUploadedFile(image, "./images/products/"+imageName)
