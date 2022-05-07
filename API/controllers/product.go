@@ -70,7 +70,13 @@ func PostProduct(c *gin.Context) {
 
 // PutProductById handle /product/id for editing an existing product (PUT) - PRIVATE
 func PutProductById(c *gin.Context) {
-	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+	// Does the product with this ID exist
+	if len(c.Params.ByName("id")) == 36 {
+		if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+			return
+		}
+	} else {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
@@ -119,8 +125,14 @@ func PutProductById(c *gin.Context) {
 
 // DeleteProductById handle /product/id for deleting an existing product (DELETE) - PRIVATE
 func DeleteProductById(c *gin.Context) {
-	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
-		c.JSON(http.StatusConflict, gin.H{"error": "This product desn't exist"})
+	// Does the product with this ID exist
+	if len(c.Params.ByName("id")) == 36 {
+		if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+			return
+		}
+	} else {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 		return
 	}
 
