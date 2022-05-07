@@ -153,14 +153,14 @@ func LoginUser(c *gin.Context) {
 	if len(repository.GetUserByUsername(input.Identifier)) == 1 {
 		userUsername = repository.GetUserByUsername(input.Identifier)[0]
 	} else {
-		c.JSON(http.StatusUnauthorized, gin.H{"err": "User not found"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Wrong username or password"})
 		return
 	}
 
 	// USER FOUND in DB
 
 	if userUsername.CheckPassword(input.Password) != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"err": "Wrong password"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Wrong username or password"})
 	} else {
 
 		jwtWrapper := models.JwtWrapper{

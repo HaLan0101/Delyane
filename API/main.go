@@ -72,4 +72,4 @@ func main() {
 }
 
 // TODO :
-//  - Handle undefied category id!
+//  - if a user is deleted -> should also delete pictures of product linked to him

@@ -13,6 +13,9 @@ import (
 
 // GetProductById handle /product/id (GET) - PUBLIC
 func GetProductById(c *gin.Context) {
+	fmt.Println(c.Params.ByName("id"))
+	fmt.Println(repository.GetProductById(c.Params.ByName("id")))
+
 	// Does the product with this ID exist
 	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
