@@ -22,11 +22,9 @@ const ListItem = (props) => {
                 </div>
                 <div className='listItem__content'>
                     <p className='listItem__text'>Jérôme Mesnager</p>
-                    <p className='listItem__text'>Dansons sous les arbres, 2022</p>
-                    <p className='listItem__text listItem__style'>220 €</p>
                     <p className='listItem__text'>{props.title}</p>
+                    <p className='listItem__text listItem__style'>{props.price}€</p>
                     <p className='listItem__text'>{props.description}</p>
-                    <p className='listItem__text'>{props.price}</p>
 çç                </div>
   
   3          </div>

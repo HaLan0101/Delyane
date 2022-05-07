@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router";
+import {useParams} from "react-router-dom";
 import axios from 'axios';
 import Header from '../../Layout/Header/Header';
 import Footer from '../../Layout/Footer/Footer';
@@ -9,24 +9,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Product.css';
 const Product = () => {
     const [product, setProduct] = useState({});
-    console.log(product);
-
-    const { uuid } = useParams();
-
+    const {uuid} = useParams();
     useEffect(() => {
         const getData = async () => {
             try {
                 const result = await axios.get(`http://90.22.250.124:8080/product/${uuid}`)
-                setProduct(result);
-                console.log("RESULT", result);
+                setProduct(result.data);
             } catch (err) {
-                console.log(err)
+                console.log(err);
             }
         }
         getData();
     }, [uuid]);
 
-    console.log("TEST", uuid);
+    
 
     return (
         <>
@@ -36,12 +32,12 @@ const Product = () => {
             <div className='product__content'>
                 <div className='product__detail'>
                     <div className='product__image'>
-                        <img src="https://desenio.fr/bilder/artiklar/zoom/11331_2.jpg?imgwidth=435&qt=Promenade%20%C3%A0%20Paris" alt="" />
+                        <img src={`http://90.22.250.124:8080${product.image}`} alt={product.image} />
                     </div>
                     <div className='product__info'>
-                        <p className='product__title'>Title</p>
-                        <p className='product__description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem atque in et veritatis doloremque unde dolor consectetur, officia velit tenetur corrupti quo, eligendi sed id nihil, repudiandae possimus exercitationem. Repudiandae?</p>
-                        <p className='product__price'>500€</p>
+                        <p className='product__title'>{product.title}</p>
+                        <p className='product__description'>{product.description}</p>
+                        <p className='product__price'>{product.price}</p>
                         <Button title="Add to cart" className="product__button"/><br />
                         <FontAwesomeIcon className="product__favorite" icon="fa-solid fa-heart-circle-plus" />
                     </div>
