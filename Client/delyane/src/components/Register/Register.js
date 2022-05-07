@@ -10,7 +10,7 @@ const Register = () => {
     const submitRegister = async (e) => {
         console.log(user);
         e.preventDefault();
-        const url = 'http://localhost:8080/user';
+        const url = 'http://90.22.250.124:8080/user';
         try {
             await axios.post(url, user);
         } catch (err) {

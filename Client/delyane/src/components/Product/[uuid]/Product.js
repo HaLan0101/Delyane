@@ -16,7 +16,7 @@ const Product = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const result = await axios.get(`http://localhost:8080/product/${uuid}`)
+                const result = await axios.get(`http://90.22.250.124:8080/product/${uuid}`)
                 setProduct(result);
                 console.log("RESULT", result);
             } catch (err) {

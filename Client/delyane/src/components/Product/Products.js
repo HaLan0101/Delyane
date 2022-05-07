@@ -13,7 +13,7 @@ const Product = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const result = await axios.get('http://localhost:8080/products')
+                const result = await axios.get('http://90.22.250.124:8080/products')
                 setProducts(result.data);
                 console.log(result.data);
             } catch (err) {
