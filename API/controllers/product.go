@@ -19,6 +19,9 @@ func GetProductById(c *gin.Context) {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
 			return
 		}
+	} else {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+		return
 	}
 
 	c.JSON(http.StatusOK, repository.GetProductById(c.Params.ByName("id")))
