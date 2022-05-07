@@ -1,16 +1,22 @@
 .home__content {
     padding: 0 6% 0 6%;
+    margin-top: 100px;
 }
-
+.home__swiper{
+    padding-top: 80px;
+    height: 500px;
+}
 .swiper__picture {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     height: 500px;
     width: 100%;
-    /* padding-top: 50px; */
 }
-
+.swiper{
+    height: 500px;
+    width: 100%;
+}
 .home__bestsellers {
     padding: 4% 0 4% 0;
 }
