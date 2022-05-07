@@ -13,13 +13,12 @@ import (
 
 // GetProductById handle /product/id (GET) - PUBLIC
 func GetProductById(c *gin.Context) {
-	fmt.Println(c.Params.ByName("id"))
-	fmt.Println(repository.GetProductById(c.Params.ByName("id")))
-
 	// Does the product with this ID exist
-	if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
-		return
+	if len(c.Params.ByName("id")) == 32 {
+		if repository.GetProductById(c.Params.ByName("id")).UUID == "" {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Product not found"})
+			return
+		}
 	}
 
 	c.JSON(http.StatusOK, repository.GetProductById(c.Params.ByName("id")))
