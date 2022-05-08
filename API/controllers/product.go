@@ -37,6 +37,10 @@ func PostProduct(c *gin.Context) {
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
 	input.UUID_user = c.PostForm("uuid_user")
+	input.Technical = c.PostForm("technical")
+	input.Dimension = c.PostForm("dimension")
+	input.Authentification = c.PostForm("authentification")
+	input.Support = c.PostForm("support")
 
 	// single file
 	image, err := c.FormFile("image")
@@ -72,6 +76,10 @@ func PutProductById(c *gin.Context) {
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
 	input.UUID_user = c.PostForm("uuid_user")
+	input.Technical = c.PostForm("technical")
+	input.Dimension = c.PostForm("dimension")
+	input.Authentification = c.PostForm("authentification")
+	input.Support = c.PostForm("support")
 
 	// single file
 	image, err := c.FormFile("image")

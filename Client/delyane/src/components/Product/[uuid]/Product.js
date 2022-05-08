@@ -47,28 +47,28 @@ const Product = () => {
                     <hr class="dividerSolid__bolder"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__technical'>Technical </p>
-                        <p className='product__technical'>Technical name</p>
+                        <p className='product__technical'>{product.technical}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__dimension'>Dimension </p>
-                        <p className='product__dimension'>500x450</p>
+                        <p className='product__dimension'>{product.dimension}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__support'>Support </p>
-                        <p className='product__support'>Support here</p>
+                        <p className='product__support'>{product.support}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__auth'>Authentification </p>
-                        <p className='product__auth'>bla bla bla bla bla</p>
+                        <p className='product__auth'>{product.authentification}</p>
                     </div>
                     <hr class="dividerSolid__bolder"></hr>
                 </div>
                 <div className='product__sameStyle'>
                     <h2>Same Style</h2>
-                    <List></List>
+                    <List/>
                 </div>
             </div>
         </div>
