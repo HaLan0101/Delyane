@@ -3,6 +3,7 @@ import React from 'react';
 import Header from '../Layout/Header/Header';
 import Footer from '../Layout/Footer/Footer';
 import List from '../Caroussel/List/List';
+import Slider from '../Caroussel/Slider/Slider';
 
 import './Home.css';
 
@@ -12,7 +13,7 @@ const Home = () => {
             <Header />
             {/* ----------- To do : Carrousel ------------  */}
             <div className='home__swiper'>
-                <img className='swiper__picture' src='/hero.png' alt='' />
+                <Slider/>
             </div>
 
             <div className='home__content'>

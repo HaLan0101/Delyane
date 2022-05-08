@@ -5,6 +5,10 @@
     padding: 0px 200px;
     align-items: center;
 }
+.product__image img{
+    width: 600px;
+    height: 700px;
+}
 .product__info{
     text-align: center;
 }

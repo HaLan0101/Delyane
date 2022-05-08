@@ -17,18 +17,17 @@ const ListItem = (props) => {
                         {favorite ? <FavoriteIcon className='listItem__icon' /> : <FavoriteBorderIcon className='listItem__icon' />}
                     </button>
                     <Link to={`/painting/${props.uuid}`}>
-                        <img className='listItem__image' src={props.image} alt={props.title} />
+                        <img className='listItem__image' src={`http://90.22.250.124:8080${props.image}`} alt={props.title} />
                     </Link>
                 </div>
                 <div className='listItem__content'>
                     <p className='listItem__text'>Jérôme Mesnager</p>
-                    <p className='listItem__text'>Dansons sous les arbres, 2022</p>
-                    <p className='listItem__text listItem__style'>220 €</p>
                     <p className='listItem__text'>{props.title}</p>
+                    <p className='listItem__text listItem__style'>{props.price}€</p>
                     <p className='listItem__text'>{props.description}</p>
-                    <p className='listItem__text'>{props.price}</p>
-                </div>
-            </div>
+çç                </div>
+  
+  3          </div>
         </div>
     );
 }
