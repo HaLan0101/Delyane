@@ -44,6 +44,10 @@ func PostProduct(c *gin.Context) {
 	price, _ := strconv.Atoi(c.PostForm("price"))
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
+	input.Technical = c.PostForm("technical")
+	input.Dimension = c.PostForm("dimension")
+	input.Authentification = c.PostForm("authentification")
+	input.Support = c.PostForm("support")
 
 	if repository.GetCategoryById(input.UUID_category).UUID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
@@ -96,6 +100,10 @@ func PutProductById(c *gin.Context) {
 	price, _ := strconv.Atoi(c.PostForm("price"))
 	input.Price = uint(price)
 	input.UUID_category = c.PostForm("uuid_category")
+	input.Technical = c.PostForm("technical")
+	input.Dimension = c.PostForm("dimension")
+	input.Authentification = c.PostForm("authentification")
+	input.Support = c.PostForm("support")
 
 	if repository.GetCategoryById(input.UUID_category).UUID == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
