@@ -59,3 +59,11 @@ func LoginAdmin(c *gin.Context) {
 		})
 	}
 }
+
+// isAdmin return true if an email is linked to an admin account
+func isAdmin(email string) bool {
+	if len(repository.GetAdminByEmail(email)) == 1 {
+		return true
+	}
+	return false
+}

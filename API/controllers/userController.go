@@ -60,7 +60,21 @@ func PutUserById(c *gin.Context) {
 
 	input.Email = c.PostForm("email")
 
-	if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+	var allowedToEdit bool = false
+
+	if isAdmin(fmt.Sprint(email)) {
+		allowedToEdit = true
+	}
+
+	if !allowedToEdit {
+		if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+			allowedToEdit = false
+		} else {
+			allowedToEdit = true
+		}
+	}
+
+	if !allowedToEdit {
 		c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}
@@ -125,7 +139,21 @@ func DeleteUserById(c *gin.Context) {
 
 	email, _ := c.Get("email")
 
-	if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+	var allowedToEdit bool = false
+
+	if isAdmin(fmt.Sprint(email)) {
+		allowedToEdit = true
+	}
+
+	if !allowedToEdit {
+		if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+			allowedToEdit = false
+		} else {
+			allowedToEdit = true
+		}
+	}
+
+	if !allowedToEdit {
 		c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}

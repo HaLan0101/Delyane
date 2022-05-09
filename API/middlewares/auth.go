@@ -61,8 +61,9 @@ func JWT(c *gin.Context) {
 		return
 	}
 
-	if len(repository.GetUserByEmail(claims.Email)) == 0 {
-		c.JSON(http.StatusUnauthorized, "Token no more linked to a user")
+	if len(repository.GetUserByEmail(claims.Email)) == 0 && len(repository.GetAdminByEmail(claims.Email)) == 0 {
+		c.JSON(http.StatusUnauthorized, "Token is not linked to a user or admin")
+		c.Abort()
 		return
 	}
 

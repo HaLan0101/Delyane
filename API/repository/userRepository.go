@@ -28,6 +28,7 @@ func GetUserById(id string) models.User {
 			panic(err)
 		}
 	}
+
 	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String}
 }
 

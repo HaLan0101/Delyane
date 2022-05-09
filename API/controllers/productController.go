@@ -146,8 +146,22 @@ func DeleteProductById(c *gin.Context) {
 
 	email, _ := c.Get("email")
 
-	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
-		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You can only delete your own products..."})
+	var allowedToEdit bool = false
+
+	if isAdmin(fmt.Sprint(email)) {
+		allowedToEdit = true
+	}
+
+	if !allowedToEdit {
+		if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
+			allowedToEdit = false
+		} else {
+			allowedToEdit = true
+		}
+	}
+
+	if !allowedToEdit {
+		c.JSON(http.StatusNotAcceptable, gin.H{"err": "You are not allowed to delete this product"})
 		return
 	}
 
