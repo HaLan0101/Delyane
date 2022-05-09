@@ -162,6 +162,12 @@ func DeleteUserById(c *gin.Context) {
 		os.Remove("." + imagePath)
 	}
 
+	products := repository.GetProductByUserId(c.Params.ByName("id"))
+
+	for _, product := range products {
+		os.Remove("." + product.Image)
+	}
+
 	repository.DeleteUserById(c.Params.ByName("id"))
 
 	c.String(http.StatusOK, "User successfully deleted")

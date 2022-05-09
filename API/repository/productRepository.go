@@ -138,3 +138,38 @@ func DeleteProductById(uuid string) {
 		panic(err)
 	}
 }
+
+// GetProductByUserId return all products linked to a user
+func GetProductByUserId(id string) []models.Product {
+	rows, err := currentDB.Query("SELECT * FROM product WHERE uuid = $1", id)
+
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var title string
+	var description string
+	var price uint
+	var image string
+	var uuid_category sql.NullString
+	var uuid_user string
+	var technical sql.NullString
+	var dimension sql.NullString
+	var authentification sql.NullString
+	var support sql.NullString
+
+	var products []models.Product
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &title, &description, &price, &image, &uuid_category, &uuid_user, &technical, &dimension, &authentification, &support)
+
+		if err != nil {
+			panic(err)
+		}
+
+		products = append(products, models.Product{UUID: uuid, Title: title, Description: description, Price: price, Image: image, UUID_category: uuid_category.String, UUID_user: uuid_user, Technical: technical.String, Dimension: dimension.String, Authentification: authentification.String, Support: support.String})
+	}
+
+	return products
+}
