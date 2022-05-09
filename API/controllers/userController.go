@@ -165,7 +165,11 @@ func DeleteUserById(c *gin.Context) {
 	products := repository.GetProductByUserId(c.Params.ByName("id"))
 
 	for _, product := range products {
-		os.Remove("." + product.Image)
+		err := os.Remove("." + product.Image)
+
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 	}
 
 	repository.DeleteUserById(c.Params.ByName("id"))
@@ -181,13 +185,6 @@ func LoginUser(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"err": err.Error()})
 		return
 	}
-
-	fmt.Println(input)
-	fmt.Println(input.Identifier)
-	fmt.Println(input.Password)
-
-	fmt.Println(c.Params.ByName("identifier"))
-	fmt.Println(c.Params.ByName("password"))
 
 	var userUsername models.User
 

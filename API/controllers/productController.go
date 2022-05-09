@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -60,7 +61,9 @@ func PostProduct(c *gin.Context) {
 		panic(err)
 	}
 
-	imageName := generateImageName(image, c.Params.ByName("id"))
+	imageNameTmp := input.Title + fmt.Sprint(time.Now().UnixNano())
+
+	imageName := generateImageName(image, imageNameTmp)
 
 	// Upload the file to specific dst.
 	c.SaveUploadedFile(image, "./images/products/"+imageName)
@@ -85,6 +88,19 @@ func PostProduct(c *gin.Context) {
 	}
 
 	repository.PostProduct(input, userID)
+
+	for _, product := range repository.GetProductByTitle(input.Title) {
+		if product.Image == imageNameTmp {
+			os.Remove("." + input.Image)
+
+			input.Image = generateImageName(image, product.UUID)
+			c.SaveUploadedFile(image, "./images/products/"+imageName)
+
+			repository.PutProductById(product.UUID, input)
+
+			break
+		}
+	}
 
 	c.JSON(http.StatusCreated, input)
 }
