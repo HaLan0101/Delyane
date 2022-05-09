@@ -108,7 +108,21 @@ func PutProductById(c *gin.Context) {
 
 	input.Title = c.PostForm("title")
 
-	if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
+	var allowedToEdit bool = false
+
+	if isAdmin(fmt.Sprint(email)) {
+		allowedToEdit = true
+	}
+
+	if !allowedToEdit {
+		if repository.GetUserByEmail(fmt.Sprint(email))[0].UUID != repository.GetProductById(c.Params.ByName("id")).UUID_user {
+			allowedToEdit = false
+		} else {
+			allowedToEdit = true
+		}
+	}
+
+	if !allowedToEdit {
 		c.JSON(http.StatusNotAcceptable, gin.H{"error": "You are not the owner of this product"})
 		return
 	}
