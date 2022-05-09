@@ -67,7 +67,24 @@ func PostProduct(c *gin.Context) {
 
 	input.Image = "/images/products/" + imageName
 
-	repository.PostProduct(input, repository.GetUserByEmail(fmt.Sprint(email))[0].UUID)
+	var userID string
+
+	if isAdmin(fmt.Sprint(email)) {
+		userID = c.PostForm("uuid_user")
+		if userID != "" {
+			if repository.GetUserById(userID).UUID == "" {
+				c.JSON(http.StatusBadRequest, "This user does not exist")
+				return
+			}
+		} else {
+			c.JSON(http.StatusBadRequest, "A user must be specified")
+			return
+		}
+	} else {
+		userID = repository.GetUserByEmail(fmt.Sprint(email))[0].UUID
+	}
+
+	repository.PostProduct(input, userID)
 
 	c.JSON(http.StatusCreated, input)
 }

@@ -76,3 +76,4 @@ func main() {
 
 // TODO :
 //  - if a user is deleted -> should also delete pictures of product linked to him
+//  - admin should specify to which user a product is linked
