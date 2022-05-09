@@ -30,6 +30,9 @@ func main() {
 			public.GET("/", controllers.GetRoot)
 			public.POST("/upload", controllers.SaveImage)
 
+			// Admin
+			public.POST("/admin/login", controllers.LoginAdmin)
+
 			// User
 			public.GET("/user/:id", controllers.GetUserById)
 			public.POST("/user", controllers.PostUser)

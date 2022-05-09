@@ -142,7 +142,7 @@ func DeleteUserById(c *gin.Context) {
 // LoginUser handle /user/login for login in a user - PUBLIC
 func LoginUser(c *gin.Context) {
 	// Validate input
-	var input models.LoginUser
+	var input models.Login
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"err": err.Error()})
 		return

@@ -31,7 +31,7 @@ type PostUser struct {
 }
 
 // LoginUser is the struct used to log a user
-type LoginUser struct {
+type Login struct {
 	Identifier string `json:"identifier"`
 	Password   string `json:"password"`
 }
@@ -46,7 +46,7 @@ func (user *CreateUser) EncryptPassword() {
 	user.Password = string(bytes)
 }
 
-func (user *LoginUser) EncryptPassword() {
+func (user *Login) EncryptPassword() {
 	bytes, _ := bcrypt.GenerateFromPassword([]byte(user.Password), 14)
 	user.Password = string(bytes)
 }
