@@ -11,12 +11,11 @@
 	text-align: center;
 	grid-template-columns: repeat(2, 1fr);
 	background-color: var(--white-color);
-	/* box-shadow: 0px 0px 19px 5px rgba(0,0,0,0.19); */
     width: 100%;
 }
 
 .admin__image {
-    background: url('https://media.artsper.com/homepage/mainImageDesktop.jpg') no-repeat right;
+    background: url('https://media.artsper.com/artwork/1298400_1_m.jpg') no-repeat center;
 	background-size: cover;
 	height: 100vh;
 }

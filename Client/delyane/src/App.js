@@ -3,11 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 
 import './App.css';
 
+import Admin from './components/Admin/Admin/Admin';
 import Authentication from './components/Authentication/Authentication';
+import Dashboard from './components/Admin/Dashboard/Dashboard/Dashboard';
 import Error from './components/Error/Error';
 import Home from './components/Home/Home';
 import Favorite from './components/Favorite/Favorite';
-import Admin from './components/Admin/Admin/Admin';
 import Product from './components/Product/[uuid]/Product';
 import Products from './components/Product/Products';
 import Register from './components/Register/Register';
@@ -22,9 +23,10 @@ const App = () => {
     <div className="App">
       <Switch >
         <Route exact path='/' component={Home} />
-        <Route exact path='/authentication' component={Authentication} />
-        <Route exact path='/favorite' component={Favorite} />
         <Route exact path='/admin' component={Admin} />
+        <Route exact path='/authentication' component={Authentication} />
+        <Route exact path='/dashboard' component={Dashboard} />
+        <Route exact path='/favorite' component={Favorite} />
         <Route exact path='/painting' component={Products} />
         <Route exact path='/painting/:uuid' component={Product} />
         <Route exact path='/register' component={Register} />
