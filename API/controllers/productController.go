@@ -90,7 +90,7 @@ func PostProduct(c *gin.Context) {
 	repository.PostProduct(input, userID)
 
 	for _, product := range repository.GetProductByTitle(input.Title) {
-		if product.Image == imageName {
+		if product.Image == input.Image {
 			os.Remove("." + input.Image)
 
 			input.Image = generateImageName(image, product.UUID)
