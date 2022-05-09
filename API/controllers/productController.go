@@ -83,8 +83,10 @@ func PostProduct(c *gin.Context) {
 		if product.Image == input.Image {
 			fmt.Println("Product found")
 
-			input.Image = "/images/products/" + generateImageName(image, product.UUID)
-			c.SaveUploadedFile(image, "./images/products/"+input.Image)
+			imageName := generateImageName(image, product.UUID)
+
+			input.Image = "/images/products/" + imageName
+			c.SaveUploadedFile(image, "./images/products/"+imageName)
 
 			repository.PutProductById(product.UUID, input)
 
