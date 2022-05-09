@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -61,15 +60,6 @@ func PostProduct(c *gin.Context) {
 		panic(err)
 	}
 
-	imageNameTmp := input.Title + fmt.Sprint(time.Now().UnixNano())
-
-	imageName := generateImageName(image, imageNameTmp)
-
-	// Upload the file to specific dst.
-	c.SaveUploadedFile(image, "./images/products/"+imageName)
-
-	input.Image = "/images/products/" + imageName
-
 	var userID string
 
 	if isAdmin(fmt.Sprint(email)) {
@@ -91,10 +81,10 @@ func PostProduct(c *gin.Context) {
 
 	for _, product := range repository.GetProductByTitle(input.Title) {
 		if product.Image == input.Image {
-			os.Remove("." + input.Image)
+			fmt.Println("Product found")
 
 			input.Image = generateImageName(image, product.UUID)
-			c.SaveUploadedFile(image, "./images/products/"+imageName)
+			c.SaveUploadedFile(image, "./images/products/"+input.Image)
 
 			repository.PutProductById(product.UUID, input)
 
