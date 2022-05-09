@@ -182,6 +182,13 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
+	fmt.Println(input)
+	fmt.Println(input.Identifier)
+	fmt.Println(input.Password)
+
+	fmt.Println(c.Params.ByName("identifier"))
+	fmt.Println(c.Params.ByName("password"))
+
 	var userUsername models.User
 
 	if len(repository.GetUserByUsername(input.Identifier)) == 1 {
