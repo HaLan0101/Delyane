@@ -76,3 +76,4 @@ func main() {
 
 // TODO :
 //  - if a user is deleted -> should also delete pictures of product linked to him - WIP
+//  - when creating a product -> image as no name (maybe create an empty one and then edit the data)
