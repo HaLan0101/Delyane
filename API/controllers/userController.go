@@ -21,6 +21,11 @@ func GetUserById(c *gin.Context) {
 	c.JSON(http.StatusOK, repository.GetUserById(c.Params.ByName("id")))
 }
 
+// GetUsers handle /users (GET) - PRIVATE
+func GetUsers(c *gin.Context) {
+	c.JSON(http.StatusOK, repository.GetUsers())
+}
+
 // PostUser handle /user for creating a new user (POST) - PUBLIC
 func PostUser(c *gin.Context) {
 	// Validate input

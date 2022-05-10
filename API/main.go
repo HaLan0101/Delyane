@@ -34,6 +34,7 @@ func main() {
 			public.POST("/admin/login", controllers.LoginAdmin)
 
 			// User
+			public.GET("/users", controllers.GetUsers)
 			public.GET("/user/:id", controllers.GetUserById)
 			public.POST("/user", controllers.PostUser)
 			public.POST("/user/login", controllers.LoginUser)

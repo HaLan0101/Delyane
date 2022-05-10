@@ -5,6 +5,37 @@ import (
 	"delyaneAPI/models"
 )
 
+// GetUsers return a user from db
+func GetUsers() []models.User {
+	rows, err := currentDB.Query(`SELECT * FROM "user"`)
+
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var username string
+	var password string
+	var email string
+	var firstname sql.NullString
+	var lastname sql.NullString
+	var image sql.NullString
+
+	var users []models.User
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
+
+		if err != nil {
+			panic(err)
+		}
+
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String})
+	}
+
+	return users
+}
+
 // GetUserById return a unique user from db using id
 func GetUserById(id string) models.User {
 	rows, err := currentDB.Query(`SELECT * FROM "user" WHERE uuid = $1`, id)
