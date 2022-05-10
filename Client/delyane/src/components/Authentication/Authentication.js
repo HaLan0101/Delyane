@@ -14,6 +14,7 @@ const Authentication = () => {
         const url = 'http://90.22.250.124:8080/user/login';
         try {
             await axios.post(url, user);
+            localStorage.setItem('username',user.identifier);
             console.log("log in ok", user);
             window.location = "/painting";
         } catch (err) {

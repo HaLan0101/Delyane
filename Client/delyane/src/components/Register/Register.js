@@ -13,6 +13,8 @@ const Register = () => {
         const url = 'http://90.22.250.124:8080/user';
         try {
             await axios.post(url, user);
+            localStorage.setItem('username',user.identifier);
+            window.location = "/painting";
         } catch (err) {
             console.log(err)
         }

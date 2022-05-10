@@ -10,6 +10,7 @@ import Favorite from './components/Favorite/Favorite';
 import Product from './components/Product/[uuid]/Product';
 import Products from './components/Product/Products';
 import Register from './components/Register/Register';
+import Profil from './components/Profil/Profil';
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faBasketShopping, faUser, faHeart, faChevronRight, faChevronLeft, faHeartCirclePlus } from "@fortawesome/free-solid-svg-icons";
@@ -26,6 +27,7 @@ const App = () => {
         <Route exact path='/painting' component={Products} />
         <Route exact path='/painting/:uuid' component={Product} />
         <Route exact path='/register' component={Register} />
+        <Route exact path='/profil' component={Profil} />
         <Route component={Error} />
       </Switch>
     </div>
