@@ -8,7 +8,14 @@ const Header = () => {
     const handleClick = () => {
         setLinks(!links)
     }
-
+    const handleLink=()=>{
+        if(localStorage.getItem('username')){
+            window.location = "/profil";
+        }
+        else{
+            window.location = "/authentication";
+        }
+    }
     return (
         <div className={`header__main ${links ? 'show__nav' : 'hide__nav'}`}>
             <div className='header__logo'>DELYANE</div>
@@ -21,13 +28,13 @@ const Header = () => {
                     <a href='/painting' className='nav__link'>Painting</a>
                 </li>
                 <li className='nav__item'>
-                    <a href='/authentication' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-user" /></a>
+                    <a onClick={handleLink} className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-user" /></a>
                 </li>
                 <li className='nav__item'>
                     <a href='/favorite' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-heart" /></a>
                 </li>
                 <li className='nav__item'>
-                    <a href='/authentication' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
+                    <a onClick={handleLink} className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
                 </li>
             </ul>
             <button className='nav__burger' onClick={handleClick}>
