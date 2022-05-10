@@ -164,7 +164,13 @@ func DeleteUserById(c *gin.Context) {
 
 	products := repository.GetProductByUserId(c.Params.ByName("id"))
 
+	// TODO : here
+
 	for _, product := range products {
+		fmt.Println("Product found :", product.Title, "with UUID :", product.UUID)
+
+		fmt.Println("Trying to delete the following pic :", product.Image)
+
 		err := os.Remove("." + product.Image)
 
 		if err != nil {
