@@ -2,6 +2,7 @@ package main
 
 import (
 	"delyaneAPI/controllers"
+	"delyaneAPI/middlewares"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,37 +22,57 @@ func main() {
 
 	router.Static("/images", "./images") // for static path
 
-	// Demo
-	router.GET("/", controllers.GetRoot)
-	router.POST("/upload", controllers.SaveImage)
+	api := router.Group("/")
+	{
+		public := router.Group("/")
+		{
+			// Demo
+			public.GET("/", controllers.GetRoot)
+			public.POST("/upload", controllers.SaveImage)
 
-	// User CRUD
-	router.POST("/user/login", controllers.LoginUser)
+			// Admin
+			public.POST("/admin/login", controllers.LoginAdmin)
 
-	router.GET("/user/:id", controllers.GetUserById)
-	router.PUT("/user/:id", controllers.MiddlewareBasicAuth, controllers.PutUserById)
-	router.DELETE("/user/:id", controllers.MiddlewareBasicAuth, controllers.DeleteUserById)
-	router.POST("/user", controllers.PostUser)
+			// User
+			public.GET("/user/:id", controllers.GetUserById)
+			public.POST("/user", controllers.PostUser)
+			public.POST("/user/login", controllers.LoginUser)
 
-	// Category CRUD
-	router.GET("/categories", controllers.GetCategories)
-	router.GET("/category/:id", controllers.GetCategoryById)
-	router.PUT("/category/:id", controllers.MiddlewareBasicAuth, controllers.PutCategoryById)
-	router.DELETE("/category/:id", controllers.MiddlewareBasicAuth, controllers.DeleteCategoryById)
-	router.POST("/category", controllers.MiddlewareBasicAuth, controllers.PostCategory)
+			// Category
+			public.GET("/categories", controllers.GetCategories)
+			public.GET("/category/:id", controllers.GetCategoryById)
 
-	// Product CRUD
-	router.GET("/products", controllers.GetProducts)
-	router.GET("/product/:id", controllers.GetProductById)
-	router.PUT("/product/:id", controllers.MiddlewareBasicAuth, controllers.PutProductById)
-	router.DELETE("/product/:id", controllers.MiddlewareBasicAuth, controllers.DeleteProductById)
-	router.POST("/product", controllers.MiddlewareBasicAuth, controllers.PostProduct)
+			// Product
+			public.GET("/products", controllers.GetProducts)
+			public.GET("/product/:id", controllers.GetProductById)
 
-	// Newsletter CRUD
-	router.GET("/newsletters", controllers.GetNewsletters)
-	router.POST("/newsletter", controllers.PostNewsletter)
+			// Newsletters
+			public.GET("/newsletters", controllers.GetNewsletters)
+			public.POST("/newsletter", controllers.PostNewsletter)
+		}
+
+		protected := api.Group("/").Use(middlewares.JWT)
+		{
+			// User
+			protected.PUT("/user/:id", controllers.PutUserById)
+			protected.DELETE("/user/:id", controllers.DeleteUserById)
+
+			// Category
+			protected.PUT("/category/:id", controllers.PutCategoryById)
+			protected.DELETE("/category/:id", controllers.DeleteCategoryById)
+			protected.POST("/category", controllers.PostCategory)
+
+			// Product
+			protected.PUT("/product/:id", controllers.PutProductById)
+			protected.DELETE("/product/:id", controllers.DeleteProductById)
+			protected.POST("/product", controllers.PostProduct)
+		}
+	}
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+//  - if a user is deleted -> should also delete pictures of product linked to him - WIP

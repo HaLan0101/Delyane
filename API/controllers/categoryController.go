@@ -8,17 +8,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetCategoryById handle /category/id (GET)
+// GetCategoryById handle /category/id (GET) - PIBLIC
 func GetCategoryById(c *gin.Context) {
+	if repository.GetCategoryByName(c.Params.ByName("id")).UUID != "" {
+		c.JSON(http.StatusNotFound, gin.H{"err": "Category with this ID doesn't exist"})
+		return
+	}
+
 	c.JSON(http.StatusOK, repository.GetCategoryById(c.Params.ByName("id")))
 }
 
-// GetCategories handle /categories (GET)
+// GetCategories handle /categories (GET) - PUBLIC
 func GetCategories(c *gin.Context) {
 	c.JSON(http.StatusOK, repository.GetCategories())
 }
 
-// PostCategory handle /category for a new entry (POST)
+// PostCategory handle /category for a new entry (POST) - PRIVATE
 func PostCategory(c *gin.Context) {
 	// Validate input
 	var input models.PostCategory
@@ -28,7 +33,7 @@ func PostCategory(c *gin.Context) {
 	}
 
 	if repository.GetCategoryByName(input.Name).UUID != "" {
-		c.String(http.StatusNoContent, "Category with this ID doesn't exist")
+		c.JSON(http.StatusConflict, "This category already exist")
 		return
 	}
 
@@ -37,7 +42,7 @@ func PostCategory(c *gin.Context) {
 	c.JSON(http.StatusCreated, input)
 }
 
-// PutCategoryById handle /category/id for editing informations (PUT)
+// PutCategoryById handle /category/id for editing informations (PUT) - PRIVATE
 func PutCategoryById(c *gin.Context) {
 	// Validate input
 	var input models.PostCategory
@@ -47,7 +52,7 @@ func PutCategoryById(c *gin.Context) {
 	}
 
 	if repository.GetCategoryByName(input.Name).UUID != "" {
-		c.String(http.StatusNoContent, "Category with this ID doesn't exist")
+		c.JSON(http.StatusNotFound, "Category with this ID doesn't exist")
 		return
 	}
 
@@ -56,10 +61,10 @@ func PutCategoryById(c *gin.Context) {
 	c.JSON(http.StatusOK, input)
 }
 
-// DeleteCategoryById handle /category/id for deleting an existing category (DELETE)
+// DeleteCategoryById handle /category/id for deleting an existing category (DELETE) - PRIVATE
 func DeleteCategoryById(c *gin.Context) {
 	if repository.GetCategoryById(c.Params.ByName("id")).UUID == "" {
-		c.String(http.StatusNoContent, "Category with this ID doesn't exist")
+		c.String(http.StatusNotFound, "Category with this ID doesn't exist")
 		return
 	}
 
