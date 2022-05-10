@@ -142,34 +142,34 @@ func DeleteUserById(c *gin.Context) {
 		return
 	}
 
-	email, _ := c.Get("email")
+	// email, _ := c.Get("email")
 
-	var allowedToEdit bool = false
+	// var allowedToEdit bool = false
 
-	if isAdmin(fmt.Sprint(email)) {
-		allowedToEdit = true
-	}
+	// if isAdmin(fmt.Sprint(email)) {
+	// 	allowedToEdit = true
+	// }
 
-	if !allowedToEdit {
-		if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
-			allowedToEdit = false
-		} else {
-			allowedToEdit = true
-		}
-	}
+	// if !allowedToEdit {
+	// 	if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
+	// 		allowedToEdit = false
+	// 	} else {
+	// 		allowedToEdit = true
+	// 	}
+	// }
 
-	if !allowedToEdit {
-		c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
-		return
-	}
+	// if !allowedToEdit {
+	// 	c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
+	// 	return
+	// }
 
-	if imagePath := repository.GetUserById(c.Params.ByName("id")).Image; imagePath != "/images/static/profile.png" {
-		os.Remove("." + imagePath)
-	}
+	// if imagePath := repository.GetUserById(c.Params.ByName("id")).Image; imagePath != "/images/static/profile.png" {
+	// 	os.Remove("." + imagePath)
+	// }
 
-	for _, product := range repository.GetProductByUserId(c.Params.ByName("id")) {
-		os.Remove("." + product.Image)
-	}
+	// for _, product := range repository.GetProductByUserId(c.Params.ByName("id")) {
+	// 	os.Remove("." + product.Image)
+	// }
 
 	repository.DeleteUserById(c.Params.ByName("id"))
 

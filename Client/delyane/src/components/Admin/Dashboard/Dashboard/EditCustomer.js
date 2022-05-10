@@ -57,6 +57,14 @@ const EditCustomer = ({ ...rest }) => {
         }
     };
 
+    const deleteCustomer = async () => {
+        try {
+            await axios.delete(`http://90.22.250.124:8080/user/${uuid}`);
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     console.log('test:', customer)
 
     return (
@@ -138,7 +146,6 @@ const EditCustomer = ({ ...rest }) => {
                                         }}
                                         value={updatedCustomer.username || ''}
                                         onChange={handleUpdateCustomer}
-
                                     />
                                 </Box>
                             </Grid>
@@ -151,6 +158,7 @@ const EditCustomer = ({ ...rest }) => {
                         </form>
                     </Paper>
                 </Grid>
+                <button onClick={deleteCustomer}>Delete</button>
             </Card>
         </div>
     );

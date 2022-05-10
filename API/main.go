@@ -2,7 +2,6 @@ package main
 
 import (
 	"delyaneAPI/controllers"
-	"delyaneAPI/middlewares"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -52,7 +51,8 @@ func main() {
 			public.POST("/newsletter", controllers.PostNewsletter)
 		}
 
-		protected := api.Group("/").Use(middlewares.JWT)
+		// protected := api.Group("/").Use(middlewares.JWT)
+		protected := api.Group("/").Use()
 		{
 			// User
 			protected.PUT("/user/:id", controllers.PutUserById)
