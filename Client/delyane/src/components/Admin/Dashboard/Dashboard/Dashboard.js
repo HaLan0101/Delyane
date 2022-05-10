@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Headers from '../Navbar/Headers';
@@ -26,7 +27,6 @@ const columns = [
     { id: 'view', label: '', minWidth: 100, align: 'center' },
 ];
 
-
 const Dashboard = ({ className, staticContext, ...rest }) => {
     const [page, setPage] = useState(0);
     const [users, setUsers] = useState([]);
@@ -39,6 +39,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
             try {
                 const result = await axios.get('http://90.22.250.124:8080/users')
                 setUsers(result.data);
+                console.log(result.data);
             } catch (err) {
                 console.log(err)
             }
@@ -88,7 +89,9 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                     <TableCell align="center">
                         <div>
                             <Tooltip title="Details" placement="top">
-                                <button>View</button>
+                                <Link to={`/admin/editcustomer/${user.uuid}`}>
+                                    <button>View</button>
+                                </Link>
                             </Tooltip>
                         </div>
                     </TableCell>
@@ -131,7 +134,9 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                         {/* <Button href="/admin/newcustomer">
                             Create a new customer
                         </Button> */}
-                        <button>Create a new customer</button>
+                        <Link to={'/admin/newcustomer'}>
+                            <button>Create a new customer</button>
+                        </Link>
                     </div>
 
                     <Divider />

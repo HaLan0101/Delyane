@@ -5,7 +5,9 @@ import './App.css';
 
 import Admin from './components/Admin/Admin/Admin';
 import Authentication from './components/Authentication/Authentication';
+import CreateCustomer from './components/Admin/Dashboard/Dashboard/CreateCustomer';
 import Dashboard from './components/Admin/Dashboard/Dashboard/Dashboard';
+import EditCustomer from './components/Admin/Dashboard/Dashboard/EditCustomer';
 import Error from './components/Error/Error';
 import Home from './components/Home/Home';
 import Favorite from './components/Favorite/Favorite';
@@ -24,8 +26,10 @@ const App = () => {
       <Switch >
         <Route exact path='/' component={Home} />
         <Route exact path='/admin' component={Admin} />
+        <Route exact path='/admin/dashboard' component={Dashboard} />
+        <Route exact path='/admin/newcustomer' component={CreateCustomer} />
+        <Route exact path='/admin/editcustomer/:uuid' component={EditCustomer} />
         <Route exact path='/authentication' component={Authentication} />
-        <Route exact path='/dashboard' component={Dashboard} />
         <Route exact path='/favorite' component={Favorite} />
         <Route exact path='/painting' component={Products} />
         <Route exact path='/painting/:uuid' component={Product} />
