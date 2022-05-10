@@ -20,16 +20,13 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 const columns = [
-    { id: 'firstname', label: 'Firstname', minWidth: 100, align: 'center' },
-    { id: 'lastname', label: 'Lastname', minWidth: 100, align: 'center' },
-    { id: 'email', label: 'Email', minWidth: 100, align: 'center' },
-    { id: 'username', label: 'Username', minWidth: 100, align: 'center' },
-    { id: 'view', label: '', minWidth: 100, align: 'center' },
+    { id: 'title', label: 'Title', minWidth: 100, align: 'center' },
+    { id: 'price', label: 'Price', minWidth: 100, align: 'center' }
 ];
 
-const Dashboard = ({ className, staticContext, ...rest }) => {
+const Painting = ({ ...rest }) => {
     const [page, setPage] = useState(0);
-    const [users, setUsers] = useState([]);
+    const [products, setProducts] = useState([]);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -37,8 +34,8 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
     useEffect(() => {
         const getDatas = async () => {
             try {
-                const result = await axios.get('http://90.22.250.124:8080/users')
-                setUsers(result.data);
+                const result = await axios.get('http://90.22.250.124:8080/products')
+                setProducts(result.data);
                 console.log(result.data);
             } catch (err) {
                 console.log(err)
@@ -66,32 +63,30 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
         </TableCell>
     ));
 
-    const mainContent = users
+    const mainContent = products
         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
         .filter(
-            (user) =>
+            (product) =>
                 !searchTerm ||
-                user.username.toLowerCase().includes(searchTerm.toLowerCase())
+                product.titre.toLowerCase().includes(searchTerm.toLowerCase())
         )
-        .map((user) => {
+        .map((product) => {
             return (
                 <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
-                    key={user.uuid}
+                    key={product.uuid}
                 >
-                    <TableCell align="center">{user.firstname}</TableCell>
-                    <TableCell align="center">{user.lastname}</TableCell>
-                    <TableCell align="center">{user.email}</TableCell>
-                    <TableCell align="center">{user.username}</TableCell>
+                    <TableCell align="center">{product.title}</TableCell>
+                    <TableCell align="center">{product.price} €</TableCell>
 
                     <TableCell align="center">
                         <div>
                             <Tooltip title="Details" placement="top">
-                                <Link to={`/admin/editcustomer/${user.uuid}`}>
-                                    <button>View</button>
-                                </Link>
+                                {/* <Link to={`/admin/editcustomer/${user.uuid}`}> */}
+                                <button>View</button>
+                                {/* </Link> */}
                             </Tooltip>
                         </div>
                     </TableCell>
@@ -100,7 +95,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
         });
 
     return (
-        <>
+        <div>
             <Headers />
             <div >
                 <Card elevation={2} {...rest}>
@@ -110,7 +105,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                         variant="h4"
                         component="h1"
                     >
-                        Customers
+                        Products
                     </Typography>
 
                     <div>
@@ -135,7 +130,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                             Create a new customer
                         </Button> */}
                         <Link to={'/admin/newcustomer'}>
-                            <button>Create a new customer</button>
+                            <button>Create a new product</button>
                         </Link>
                     </div>
 
@@ -164,8 +159,8 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                     </Grid>
                 </Card>
             </div>
-        </>
+        </div>
     );
 }
 
-export default Dashboard;
+export default Painting;
