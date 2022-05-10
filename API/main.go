@@ -74,6 +74,3 @@ func main() {
 	// PORT environment variable was defined.
 	router.Run()
 }
-
-// TODO :
-//  - if a user is deleted -> should also delete pictures of product linked to him - WIP
