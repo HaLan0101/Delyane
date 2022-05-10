@@ -61,13 +61,11 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                             icon={item.icon}
                         />
                     ))}
-                    {/* {isAdmin && */}
                     <NavItem
                         href={'/app/users'}
                         title={'User list'}
                     // icon={PeopleAltIcon}
                     />
-                    {/* } */}
                     <Hidden mdUp>
                         <NavItem
                             href={'/app/userprofile'}

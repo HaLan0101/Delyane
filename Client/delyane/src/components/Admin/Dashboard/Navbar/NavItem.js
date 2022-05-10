@@ -1,32 +1,17 @@
 import React from 'react';
+
 import PropTypes from 'prop-types';
 
-import Button from '@mui/material/Button';
 import ListItem from '@mui/material/ListItem';
 
-const NavItem = (
-    ...rest) => {
+const NavItem = ({ ...rest }) => {
 
     return (
-        <ListItem
-            disableGutters
-            {...rest}
-        >
-            <Button
-            // activeClassName={classes.active}
-            // component={NavLink}
-            // to={href}
-            >
-                {/* {Icon && (
-                    <Icon
-                        size="20"
-                    />
-                )} */}
-                <span >
-                    test
-                </span>
-            </Button>
-        </ListItem>
+        <ListItem disableGutters {...rest} >
+            <span >
+                Test
+            </span>
+        </ListItem >
     );
 };
 
