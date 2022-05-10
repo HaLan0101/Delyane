@@ -141,7 +141,7 @@ func DeleteProductById(uuid string) {
 
 // GetProductByUserId return all products linked to a user
 func GetProductByUserId(id string) []models.Product {
-	rows, err := currentDB.Query("SELECT * FROM product WHERE uuid = $1", id)
+	rows, err := currentDB.Query("SELECT * FROM product WHERE uuid_user = $1", id)
 
 	if err != nil {
 		panic(err)
