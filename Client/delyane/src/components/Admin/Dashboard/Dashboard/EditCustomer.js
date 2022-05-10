@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import Box from '@mui/material/Card';
 import Card from '@mui/material/Card';
@@ -10,12 +12,57 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 const EditCustomer = ({ ...rest }) => {
+    const { uuid } = useParams();
+    // const [saved, setSaved] = useState(false);
+    const [customer, setCustomer] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        username: ''
+    });
+
+    const [updatedCustomer, setUpdatedCustomer] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        username: ''
+    })
+
+    const handleUpdateCustomer = (e) => {
+        setUpdatedCustomer({
+            ...updatedCustomer,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    useEffect(() => {
+        const getDatas = async () => {
+            try {
+                const result = await axios.get(`http://90.22.250.124:8080/user/${uuid}`)
+                setCustomer(result.data);
+                setUpdatedCustomer(result.data);
+            } catch (err) {
+                console.log(err)
+            }
+        };
+        getDatas();
+    }, [uuid]);
+
+    const updateCustomer = async (e) => {
+        const url = `http://90.22.250.124:8080/user/${uuid}`;
+        try {
+            await axios.put(url, updatedCustomer).then((res) => console.log(res))
+        } catch (err) {
+            console.log(err)
+        }
+    };
+
+    console.log('test:', customer)
 
     return (
         <div>
             <Card elevation={2} {...rest}>
                 <Typography
-                    // className={classes.title}
                     gutterBottom
                     variant="h4"
                     component="h1"
@@ -28,12 +75,10 @@ const EditCustomer = ({ ...rest }) => {
                 <Grid>
                     <Paper >
                         <form
-                            // className={classes.editForm}
-                            // onSubmit={(e) => submitCustomer(e)}
+                            onSubmit={(e) => updateCustomer(e)}
                             autoComplete="off"
                         >
                             <TextField
-                                // className={classes.inputField}
                                 label="Firstname"
                                 type="text"
                                 name="firstname"
@@ -43,11 +88,11 @@ const EditCustomer = ({ ...rest }) => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                            // onChange={(e) => setCustomer({ ...customer, firstname: e.target.value })}
+                                value={updatedCustomer.firstname || ''}
+                                onChange={handleUpdateCustomer}
                             />
 
                             <TextField
-                                // className={classes.inputField}
                                 label="Lastname"
                                 type="text"
                                 name="lastname"
@@ -57,11 +102,11 @@ const EditCustomer = ({ ...rest }) => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                            // onChange={(e) => setCustomer({ ...customer, lastname: e.target.value })}
+                                value={updatedCustomer.lastname || ''}
+                                onChange={handleUpdateCustomer}
                             />
 
                             <TextField
-                                // className={classes.inputField}
                                 label="Email"
                                 type="text"
                                 name="email"
@@ -71,18 +116,17 @@ const EditCustomer = ({ ...rest }) => {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
-                            // onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
+                                value={updatedCustomer.email || ''}
+                                onChange={handleUpdateCustomer}
 
                             />
 
                             <Grid
-                                // className={classes.inputCont}
                                 container
                                 justifyContent="space-between"
                             >
                                 <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
                                     <TextField
-                                        // className={classes.inputField}
                                         label="Username"
                                         type="text"
                                         name="username"
@@ -92,24 +136,8 @@ const EditCustomer = ({ ...rest }) => {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                    // onChange={(e) => setCustomer({ ...customer, username: e.target.value })}
-
-                                    />
-                                </Box>
-
-                                <Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-                                    <TextField
-                                        // className={classes.inputField}
-                                        label="Password"
-                                        type="password"
-                                        name="password"
-                                        placeholder="Enter a password"
-                                        variant="outlined"
-                                        fullWidth
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    // onChange={(e) => setCustomer({ ...customer, password: e.target.value })}
+                                        value={updatedCustomer.username || ''}
+                                        onChange={handleUpdateCustomer}
 
                                     />
                                 </Box>
