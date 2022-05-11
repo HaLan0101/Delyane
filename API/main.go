@@ -1,7 +1,7 @@
 package main
 
 import (
-	"delyaneAPI/controllers"
+	"delyaneAPI/public"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,53 +21,92 @@ func main() {
 
 	router.Static("/images", "./images") // for static path
 
-	api := router.Group("/")
+	// apiFinal := router.Group("/")
+	// {
+	// 	public := router.Group("/")
+	// 	{
+	// 		// Demo
+	// 		public.GET("/", controllers.GetRoot)
+	// 		public.POST("/upload", controllers.SaveImage)
+
+	// 		// Admin
+	// 		public.POST("/admin/login", controllers.LoginAdmin)
+
+	// 		// User
+	// 		public.GET("/user/:id", controllers.GetUserById)
+	// 		public.POST("/user", controllers.PostUser)
+	// 		public.POST("/user/login", controllers.LoginUser)
+
+	// 		// Category
+	// 		public.GET("/categories", controllers.GetCategories)
+	// 		public.GET("/category/:id", controllers.GetCategoryById)
+
+	// 		// Product
+	// 		public.GET("/products", controllers.GetProducts)
+	// 		public.GET("/product/:id", controllers.GetProductById)
+
+	// 		// Newsletters
+	// 		public.GET("/newsletters", controllers.GetNewsletters)
+	// 		public.POST("/newsletter", controllers.PostNewsletter)
+	// 	}
+
+	// 	protected := apiFinal.Group("/").Use(middlewares.JWT)
+	// 	{
+	// 		// User
+	// 		protected.GET("/users", controllers.GetUsers)
+	// 		protected.PUT("/user/:id", controllers.PutUserById)
+	// 		protected.DELETE("/user/:id", controllers.DeleteUserById)
+
+	// 		// Category
+	// 		protected.PUT("/category/:id", controllers.PutCategoryById)
+	// 		protected.DELETE("/category/:id", controllers.DeleteCategoryById)
+	// 		protected.POST("/category", controllers.PostCategory)
+
+	// 		// Product
+	// 		protected.PUT("/product/:id", controllers.PutProductById)
+	// 		protected.DELETE("/product/:id", controllers.DeleteProductById)
+	// 		protected.POST("/product", controllers.PostProduct)
+	// 	}
+	// }
+
+	publicGroup := router.Group("/")
 	{
-		public := router.Group("/")
-		{
-			// Demo
-			public.GET("/", controllers.GetRoot)
-			public.POST("/upload", controllers.SaveImage)
+		// Admin
+		publicGroup.POST("/admin/login", public.LoginAdmin)
 
-			// Admin
-			public.POST("/admin/login", controllers.LoginAdmin)
+		// User
+		publicGroup.GET("/user/:id", public.GetUserById)
+		publicGroup.POST("/user", public.PostUser)
+		publicGroup.POST("/user/login", public.LoginUser)
 
-			// User
-			public.GET("/users", controllers.GetUsers)
-			public.GET("/user/:id", controllers.GetUserById)
-			public.POST("/user", controllers.PostUser)
-			public.POST("/user/login", controllers.LoginUser)
+		// Category
+		publicGroup.GET("/categories", public.GetCategories)
+		publicGroup.GET("/category/:id", public.GetCategoryById)
 
-			// Category
-			public.GET("/categories", controllers.GetCategories)
-			public.GET("/category/:id", controllers.GetCategoryById)
+		// Product
+		publicGroup.GET("/products", public.GetProducts)
+		publicGroup.GET("/product/:id", public.GetProductById)
 
-			// Product
-			public.GET("/products", controllers.GetProducts)
-			public.GET("/product/:id", controllers.GetProductById)
+		// Newsletters
+		publicGroup.GET("/newsletters", public.GetNewsletters)
+		publicGroup.POST("/newsletter", public.PostNewsletter)
 
-			// Newsletters
-			public.GET("/newsletters", controllers.GetNewsletters)
-			public.POST("/newsletter", controllers.PostNewsletter)
-		}
+		// Should be private under
 
-		// protected := api.Group("/").Use(middlewares.JWT)
-		protected := api.Group("/").Use()
-		{
-			// User
-			protected.PUT("/user/:id", controllers.PutUserById)
-			protected.DELETE("/user/:id", controllers.DeleteUserById)
+		// User
+		publicGroup.GET("/users", public.GetUsers)
+		publicGroup.PUT("/user/:id", public.PutUserById)
+		publicGroup.DELETE("/user/:id", public.DeleteUserById)
 
-			// Category
-			protected.PUT("/category/:id", controllers.PutCategoryById)
-			protected.DELETE("/category/:id", controllers.DeleteCategoryById)
-			protected.POST("/category", controllers.PostCategory)
+		// Category
+		publicGroup.PUT("/category/:id", public.PutCategoryById)
+		publicGroup.DELETE("/category/:id", public.DeleteCategoryById)
+		publicGroup.POST("/category", public.PostCategory)
 
-			// Product
-			protected.PUT("/product/:id", controllers.PutProductById)
-			protected.DELETE("/product/:id", controllers.DeleteProductById)
-			protected.POST("/product", controllers.PostProduct)
-		}
+		// Product
+		publicGroup.PUT("/product/:id", public.PutProductById)
+		publicGroup.DELETE("/product/:id", public.DeleteProductById)
+		publicGroup.POST("/product", public.PostProduct)
 	}
 
 	// By default it serves on :8080 unless a

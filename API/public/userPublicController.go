@@ -1,12 +1,13 @@
-package controllers
+package public
 
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
-	"fmt"
 	"log"
+	"mime/multipart"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,13 +24,7 @@ func GetUserById(c *gin.Context) {
 
 // GetUsers handle /users (GET) - PRIVATE
 func GetUsers(c *gin.Context) {
-	email, _ := c.Get("email")
-
-	if isAdmin(fmt.Sprint(email)) {
-		c.JSON(http.StatusOK, repository.GetUsers())
-	} else {
-		c.JSON(http.StatusUnauthorized, "You are not logged as admin")
-	}
+	c.JSON(http.StatusOK, repository.GetUsers())
 }
 
 // PostUser handle /user for creating a new user (POST) - PUBLIC
@@ -65,30 +60,9 @@ func PutUserById(c *gin.Context) {
 		return
 	}
 
-	email, _ := c.Get("email")
-
 	var input models.PostUser
 
 	input.Email = c.PostForm("email")
-
-	var allowedToEdit bool = false
-
-	if isAdmin(fmt.Sprint(email)) {
-		allowedToEdit = true
-	}
-
-	if !allowedToEdit {
-		if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
-			allowedToEdit = false
-		} else {
-			allowedToEdit = true
-		}
-	}
-
-	if !allowedToEdit {
-		c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
-		return
-	}
 
 	input.Username = c.PostForm("username")
 
@@ -145,27 +119,6 @@ func PutUserById(c *gin.Context) {
 func DeleteUserById(c *gin.Context) {
 	if !isUserExistById(c.Params.ByName("id")) {
 		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
-		return
-	}
-
-	email, _ := c.Get("email")
-
-	var allowedToEdit bool = false
-
-	if isAdmin(fmt.Sprint(email)) {
-		allowedToEdit = true
-	}
-
-	if !allowedToEdit {
-		if c.Params.ByName("id") != repository.GetUserByEmail(fmt.Sprint(email))[0].UUID {
-			allowedToEdit = false
-		} else {
-			allowedToEdit = true
-		}
-	}
-
-	if !allowedToEdit {
-		c.JSON(http.StatusUnauthorized, gin.H{"err": "You are not allowed to edit this user"})
 		return
 	}
 
@@ -240,4 +193,11 @@ func isUserExistById(uuid string) bool {
 	} else {
 		return true
 	}
+}
+
+// generateImageName generate an image name based on id and format
+func generateImageName(image *multipart.FileHeader, id string) string {
+	var format string = strings.Split(image.Header.Get("Content-Type"), "/")[1]
+
+	return id + "." + format
 }
