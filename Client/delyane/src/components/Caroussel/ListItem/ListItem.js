@@ -21,7 +21,6 @@ const ListItem = (props) => {
                     </Link>
                 </div>
                 <div className='listItem__content'>
-                    <p className='listItem__text'>{props.uuid_user}</p>
                     <p className='listItem__text'>{props.title}</p>
                     <p className='listItem__text listItem__style'>{props.price}€</p>
                     <p className='listItem__text'>{props.description}</p>

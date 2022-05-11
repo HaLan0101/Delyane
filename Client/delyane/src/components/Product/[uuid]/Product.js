@@ -9,8 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Product.css';
 const Product = () => {
     const [product, setProduct] = useState({});
+    const [category, setCategory] = useState({});
     const [user, setUser] = useState({});
     const {uuid} = useParams();
+    const idUser= product.uuid_user;
+    const idCategory= product.uuid_category;
     useEffect(() => {
         const getData = async () => {
             try {
@@ -22,21 +25,34 @@ const Product = () => {
         }
         getData();
     }, [uuid]);
-    const idUser= product.uuid_user;
-    console.log("here " +idUser);
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const result = await axios.get(`http://90.22.250.124:8080/user/${idUser}`)
-                setUser(result.data);
-                console.log(user);
-            } catch (err) {
-                console.log(err);
+        if(idUser){
+            const getData = async () => {
+                try {
+                    const result = await axios.get(`http://90.22.250.124:8080/user/${idUser}`)
+                    setUser(result.data);
+                    console.log(result.data.username);
+                } catch (err) {
+                    console.log(err);
+                }
             }
+            getData();
         }
-        getData();
     }, [idUser]);
-    
+    useEffect(() => {
+        if(idCategory){
+            const getData = async () => {
+                try {
+                    const result = await axios.get(`http://90.22.250.124:8080/category/${idCategory}`)
+                    setCategory(result.data);
+                    console.log(result.data.name);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            getData();
+        }
+    }, [idCategory]);
 
     return (
         <>
@@ -49,7 +65,7 @@ const Product = () => {
                         <img src={`http://90.22.250.124:8080${product.image}`} alt={product.image} />
                     </div>
                     <div className='product__info'>
-                        <p className='product__title'>{product.uuid_user}</p>
+                        <p className='product__title'>Artist name : {user.username}</p>
                         <p className='product__title'>{product.title}</p>
                         <p className='product__description'>{product.description}</p>
                         <p className='product__price'>{product.price}</p>
@@ -60,6 +76,11 @@ const Product = () => {
                 <div className='product__moreInfo'>
                     <h2>All about</h2>
                     <hr class="dividerSolid__bolder"></hr>
+                    <div className='product__moreInfoList'>
+                        <p className='product__category'>Category </p>
+                        <p className='product__category'>{category.name}</p>
+                    </div>
+                    <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__technical'>Technical </p>
                         <p className='product__technical'>{product.technical}</p>
