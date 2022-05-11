@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Product.css';
 const Product = () => {
     const [product, setProduct] = useState({});
+    const [user, setUser] = useState({});
     const {uuid} = useParams();
     useEffect(() => {
         const getData = async () => {
@@ -21,7 +22,20 @@ const Product = () => {
         }
         getData();
     }, [uuid]);
-
+    const idUser= product.uuid_user;
+    console.log("here " +idUser);
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const result = await axios.get(`http://90.22.250.124:8080/user/${idUser}`)
+                setUser(result.data);
+                console.log(user);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getData();
+    }, [idUser]);
     
 
     return (
@@ -35,6 +49,7 @@ const Product = () => {
                         <img src={`http://90.22.250.124:8080${product.image}`} alt={product.image} />
                     </div>
                     <div className='product__info'>
+                        <p className='product__title'>{product.uuid_user}</p>
                         <p className='product__title'>{product.title}</p>
                         <p className='product__description'>{product.description}</p>
                         <p className='product__price'>{product.price}</p>

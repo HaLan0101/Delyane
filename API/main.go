@@ -28,8 +28,7 @@ func main() {
 	// User CRUD
 	router.POST("/user/login", controllers.LoginUser)
 
-	// router.GET("/user/:id", controllers.GetUserById)
-	router.GET("/user/:username", controllers.GetUserByUsername)
+	router.GET("/user/:id", controllers.GetUserById)
 	router.PUT("/user/:id", controllers.MiddlewareBasicAuth, controllers.PutUserById)
 	router.DELETE("/user/:id", controllers.MiddlewareBasicAuth, controllers.DeleteUserById)
 	router.POST("/user", controllers.PostUser)

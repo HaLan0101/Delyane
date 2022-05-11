@@ -9,7 +9,7 @@ const Header = () => {
         setLinks(!links)
     }
     const handleLink=()=>{
-        if(localStorage.getItem('username')){
+        if(localStorage.getItem('uuid')){
             window.location = "/profil";
         }
         else{
