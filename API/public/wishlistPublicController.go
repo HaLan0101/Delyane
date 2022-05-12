@@ -2,6 +2,7 @@ package public
 
 import (
 	"delyaneAPI/repository"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -9,5 +10,11 @@ import (
 
 // GetWishlistById
 func GetWishlistById(c *gin.Context) {
-	c.JSON(http.StatusOK, repository.GetWishlistById(c.Params.ByName("id")))
+	wishlist := repository.GetWishlistById(c.Params.ByName("id"))
+
+	for _, value := range wishlist.Products {
+		fmt.Println(value)
+	}
+
+	c.JSON(http.StatusOK, wishlist)
 }
