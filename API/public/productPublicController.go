@@ -1,7 +1,6 @@
 package public
 
 import (
-	"database/sql"
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
 	"fmt"
@@ -32,9 +31,6 @@ func GetProductById(c *gin.Context) {
 func GetProducts(c *gin.Context) {
 	if category := c.DefaultQuery("category", "none"); category == "none" {
 		c.JSON(http.StatusOK, repository.GetProducts())
-	} else if category == "" {
-		var categoryNull sql.NullString
-		repository.GetProductsByCategory(categoryNull.String)
 	} else {
 		if len(category) == 36 {
 			if repository.GetCategoryById(category).UUID == "" {
@@ -43,9 +39,9 @@ func GetProducts(c *gin.Context) {
 			}
 		} else {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
+			return
 		}
 		c.JSON(http.StatusOK, repository.GetProductsByCategory(category))
-
 	}
 }
 

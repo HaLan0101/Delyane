@@ -108,7 +108,14 @@ func GetProducts() []models.Product {
 
 // GetProductsGetProductsByCategory return all products from db linked to a category
 func GetProductsByCategory(category string) []models.Product {
-	rows, err := currentDB.Query("SELECT * FROM product WHERE uuid_category = $1", category)
+	var rows *sql.Rows
+	var err error
+
+	if category == "null" {
+		rows, err = currentDB.Query("SELECT * FROM product WHERE uuid_category IS NULL")
+	} else {
+		rows, err = currentDB.Query("SELECT * FROM product WHERE uuid_category = $1", category)
+	}
 
 	if err != nil {
 		panic(err)
