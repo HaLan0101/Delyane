@@ -1,6 +1,7 @@
 package public
 
 import (
+	"delyaneAPI/models"
 	"delyaneAPI/repository"
 	"fmt"
 	"net/http"
@@ -11,11 +12,11 @@ import (
 
 // GetWishlistById
 func GetWishlistById(c *gin.Context) {
-	wishlist := repository.GetWishlistById(c.Params.ByName("id"))
+	wishlistDB := repository.GetWishlistById(c.Params.ByName("id"))
 
 	var uuids string
 
-	for _, value := range wishlist.Products {
+	for _, value := range wishlistDB.Products {
 		uuids += string(value)
 	}
 
@@ -26,6 +27,8 @@ func GetWishlistById(c *gin.Context) {
 	for _, v := range uuidTab {
 		fmt.Println(v)
 	}
+
+	wishlist := models.Wishlist{UUID: wishlistDB.UUID, Products: uuidTab}
 
 	c.JSON(http.StatusOK, wishlist)
 }
