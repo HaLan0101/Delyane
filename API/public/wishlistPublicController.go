@@ -12,8 +12,16 @@ import (
 func GetWishlistById(c *gin.Context) {
 	wishlist := repository.GetWishlistById(c.Params.ByName("id"))
 
-	for _, value := range wishlist.Products {
-		fmt.Println(value)
+	var uuid string
+
+	for index, value := range wishlist.Products {
+		// fmt.Println(value)
+		if index%32 == 0 {
+			fmt.Println(uuid)
+			uuid = ""
+		} else {
+			uuid += string(value)
+		}
 	}
 
 	c.JSON(http.StatusOK, wishlist)
