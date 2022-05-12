@@ -1,6 +1,7 @@
 package public
 
 import (
+	"database/sql"
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
 	"fmt"
@@ -32,7 +33,8 @@ func GetProducts(c *gin.Context) {
 	if category := c.DefaultQuery("category", "none"); category == "none" {
 		c.JSON(http.StatusOK, repository.GetProducts())
 	} else if category == "" {
-		repository.GetProductsByCategory("")
+		var categoryNull sql.NullString
+		repository.GetProductsByCategory(categoryNull.String)
 	} else {
 		if len(category) == 36 {
 			if repository.GetCategoryById(category).UUID == "" {
