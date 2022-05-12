@@ -55,7 +55,7 @@ func GetUserById(id string) models.User {
 	var uuid_wishlist sql.NullString
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, uuid_wishlist)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, &uuid_wishlist)
 
 		if err != nil {
 			panic(err)
@@ -85,7 +85,7 @@ func GetUserByEmail(mail string) []models.User {
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, uuid_wishlist)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, &uuid_wishlist)
 
 		if err != nil {
 			panic(err)
