@@ -15,7 +15,7 @@ func GetWishlistById(c *gin.Context) {
 	var uuid string
 	var uuidTab []string
 
-	for _, value := range wishlist.Products {
+	for index, value := range wishlist.Products {
 		// fmt.Println(value)
 		// if index%32 == 0 {
 		// 	fmt.Println(uuid)
@@ -25,6 +25,10 @@ func GetWishlistById(c *gin.Context) {
 		// }
 		uuid += string(value)
 		if string(value) == "," {
+			uuidTab = append(uuidTab, uuid)
+			uuid = ""
+		}
+		if index == len(wishlist.Products) {
 			uuidTab = append(uuidTab, uuid)
 			uuid = ""
 		}
