@@ -13,15 +13,25 @@ func GetWishlistById(c *gin.Context) {
 	wishlist := repository.GetWishlistById(c.Params.ByName("id"))
 
 	var uuid string
+	var uuidTab []string
 
-	for index, value := range wishlist.Products {
+	for _, value := range wishlist.Products {
 		// fmt.Println(value)
-		if index%32 == 0 {
-			fmt.Println(uuid)
+		// if index%32 == 0 {
+		// 	fmt.Println(uuid)
+		// 	uuid = ""
+		// } else {
+		// 	uuid += string(value)
+		// }
+		uuid = string(uuid)
+		if string(value) == "," {
+			uuidTab = append(uuidTab, uuid)
 			uuid = ""
-		} else {
-			uuid += string(value)
 		}
+	}
+
+	for _, uuid := range uuidTab {
+		fmt.Println(uuid)
 	}
 
 	c.JSON(http.StatusOK, wishlist)
