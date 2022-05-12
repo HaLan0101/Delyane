@@ -32,9 +32,12 @@ func GetProducts(c *gin.Context) {
 	if category := c.DefaultQuery("category", "none"); category == "none" {
 		c.JSON(http.StatusOK, repository.GetProducts())
 	} else {
-		if repository.GetCategoryById(category).UUID == "" {
+		if len(category) != 36 {
+			if repository.GetCategoryById(category).UUID == "" {
+				c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
+				return
+			}
 			c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
-			return
 		}
 		c.JSON(http.StatusOK, repository.GetProductsByCategory(category))
 	}
