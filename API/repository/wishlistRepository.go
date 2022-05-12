@@ -4,7 +4,7 @@ import (
 	"delyaneAPI/models"
 )
 
-func GetWishlistById(id string) models.Wishlist {
+func GetWishlistById(id string) models.WishlistDB {
 	rows, err := currentDB.Query(`SELECT * FROM "wishlist" WHERE uuid = $1`, id)
 
 	if err != nil {
@@ -22,5 +22,5 @@ func GetWishlistById(id string) models.Wishlist {
 		}
 	}
 
-	return models.Wishlist{UUID: uuid, Products: products}
+	return models.WishlistDB{UUID: uuid, Products: products}
 }

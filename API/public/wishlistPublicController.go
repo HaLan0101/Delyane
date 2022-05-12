@@ -4,6 +4,7 @@ import (
 	"delyaneAPI/repository"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,30 +13,18 @@ import (
 func GetWishlistById(c *gin.Context) {
 	wishlist := repository.GetWishlistById(c.Params.ByName("id"))
 
-	var uuid string
-	var uuidTab []string
+	var uuids string
 
-	for index, value := range wishlist.Products {
-		// fmt.Println(value)
-		// if index%32 == 0 {
-		// 	fmt.Println(uuid)
-		// 	uuid = ""
-		// } else {
-		// 	uuid += string(value)
-		// }
-		uuid += string(value)
-		if string(value) == "," {
-			uuidTab = append(uuidTab, uuid)
-			uuid = ""
-		}
-		if index == len(wishlist.Products)-1 {
-			uuidTab = append(uuidTab, uuid)
-			uuid = ""
-		}
+	for _, value := range wishlist.Products {
+		uuids += string(value)
 	}
 
-	for _, uuid := range uuidTab {
-		fmt.Println(uuid)
+	uuids = uuids[1 : len(uuids)-1]
+
+	uuidTab := strings.Split(uuids, ",")
+
+	for _, v := range uuidTab {
+		fmt.Println(v)
 	}
 
 	c.JSON(http.StatusOK, wishlist)
