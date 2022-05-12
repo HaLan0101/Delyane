@@ -1,0 +1,73 @@
+.title {
+    color: var(--black-color);
+    text-align: center;
+    margin: none;
+    margin: 25px;
+}
+
+.diviser {
+    background-color: var(--blue-color);
+    margin: 0 20px 0 20px;
+    border-color: none;
+    height: 5px;
+}
+
+.mainTable {
+    margin: 20px;
+}
+
+.editForm {
+    display: grid;
+    padding: 2% 5%;
+}
+
+.input_imput {
+    border: 1px solid var(--lightgray-color);
+    padding-left: 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    height: 40px;
+}
+
+.button {
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    border-radius: 4px;
+    margin-left: 30px;
+    margin-top: 40px;
+    font-weight: 600;
+    height: 40px;
+    border: none;
+    min-width: 10%;
+}
+
+.btnContainer {
+    text-align: right;
+}
+
+.input_title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.testi {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ------- RESPONSIVE -------  */
+
+@media screen and (max-width: 420px) {
+    .btnContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .button {
+        width: 100px;
+        margin-bottom: 20px;
+    }
+
+}

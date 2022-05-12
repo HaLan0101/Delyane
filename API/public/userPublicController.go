@@ -188,6 +188,10 @@ func LoginUser(c *gin.Context) {
 
 // isUserExistById return true if the user exist in the db
 func isUserExistById(uuid string) bool {
+	if len(uuid) != 36 {
+		return false
+	}
+
 	if repository.GetUserById(uuid).UUID == "" {
 		return false
 	} else {
