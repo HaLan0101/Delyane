@@ -4,13 +4,14 @@ import "golang.org/x/crypto/bcrypt"
 
 // User is the struct used to return an existing user
 type User struct {
-	UUID      string `json:"uuid"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
-	FirstName string `json:"firstname"`
-	LastName  string `json:"lastname"`
-	Image     string `json:"image"`
+	UUID          string `json:"uuid"`
+	Username      string `json:"username"`
+	Password      string `json:"password"`
+	Email         string `json:"email"`
+	FirstName     string `json:"firstname"`
+	LastName      string `json:"lastname"`
+	Image         string `json:"image"`
+	UUID_wishlist string `json:"uuid_wishlist"`
 }
 
 // PostUser is the struct used to create a new user

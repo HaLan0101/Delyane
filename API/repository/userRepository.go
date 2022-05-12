@@ -20,17 +20,18 @@ func GetUsers() []models.User {
 	var firstname sql.NullString
 	var lastname sql.NullString
 	var image sql.NullString
+	var uuid_wishlist sql.NullString
 
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, &uuid_wishlist)
 
 		if err != nil {
 			panic(err)
 		}
 
-		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String})
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String, UUID_wishlist: uuid_wishlist.String})
 	}
 
 	return users
@@ -51,16 +52,17 @@ func GetUserById(id string) models.User {
 	var firstname sql.NullString
 	var lastname sql.NullString
 	var image sql.NullString
+	var uuid_wishlist sql.NullString
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, uuid_wishlist)
 
 		if err != nil {
 			panic(err)
 		}
 	}
 
-	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String}
+	return models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String, UUID_wishlist: uuid_wishlist.String}
 }
 
 // GetUserByEmail return a user from db using email
@@ -78,17 +80,18 @@ func GetUserByEmail(mail string) []models.User {
 	var firstname sql.NullString
 	var lastname sql.NullString
 	var image sql.NullString
+	var uuid_wishlist sql.NullString
 
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, uuid_wishlist)
 
 		if err != nil {
 			panic(err)
 		}
 
-		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String})
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String, UUID_wishlist: uuid_wishlist.String})
 	}
 
 	return users
@@ -109,17 +112,18 @@ func GetUserByUsername(name string) []models.User {
 	var firstname sql.NullString
 	var lastname sql.NullString
 	var image sql.NullString
+	var uuid_wishlist sql.NullString
 
 	var users []models.User
 
 	for rows.Next() {
-		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image)
+		err = rows.Scan(&uuid, &username, &password, &email, &firstname, &lastname, &image, &uuid_wishlist)
 
 		if err != nil {
 			panic(err)
 		}
 
-		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String})
+		users = append(users, models.User{UUID: uuid, Username: username, Password: password, Email: email, FirstName: firstname.String, LastName: lastname.String, Image: image.String, UUID_wishlist: uuid_wishlist.String})
 	}
 
 	return users
