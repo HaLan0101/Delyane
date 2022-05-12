@@ -28,7 +28,7 @@ func GetWishlistById(c *gin.Context) {
 			uuidTab = append(uuidTab, uuid)
 			uuid = ""
 		}
-		if index == len(wishlist.Products) {
+		if index == len(wishlist.Products)-1 {
 			uuidTab = append(uuidTab, uuid)
 			uuid = ""
 		}
