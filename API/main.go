@@ -79,6 +79,9 @@ func main() {
 		publicGroup.POST("/user", public.PostUser)
 		publicGroup.POST("/user/login", public.LoginUser)
 
+		// Wishlist
+		publicGroup.GET("/wishlist/:id", public.GetWishlistById)
+
 		// Category
 		publicGroup.GET("/categories", public.GetCategories)
 		publicGroup.GET("/category/:id", public.GetCategoryById)
