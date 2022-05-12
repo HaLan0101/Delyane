@@ -31,6 +31,8 @@ func GetProductById(c *gin.Context) {
 func GetProducts(c *gin.Context) {
 	if category := c.DefaultQuery("category", "none"); category == "none" {
 		c.JSON(http.StatusOK, repository.GetProducts())
+	} else if category == "null" {
+		c.JSON(http.StatusOK, repository.GetProductsByCategory(category))
 	} else {
 		if len(category) == 36 {
 			if repository.GetCategoryById(category).UUID == "" {
