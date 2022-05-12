@@ -23,7 +23,7 @@ func GetWishlistById(c *gin.Context) {
 		// } else {
 		// 	uuid += string(value)
 		// }
-		uuid = string(uuid)
+		uuid += string(uuid)
 		if string(value) == "," {
 			uuidTab = append(uuidTab, uuid)
 			uuid = ""
