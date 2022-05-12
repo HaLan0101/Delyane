@@ -12,7 +12,7 @@ func GetWishlistById(id string) models.Wishlist {
 	}
 
 	var uuid string
-	var products []string
+	var products []uint8
 
 	for rows.Next() {
 		err = rows.Scan(&uuid, &products)
