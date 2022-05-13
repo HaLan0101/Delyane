@@ -4,6 +4,7 @@ import (
 	"delyaneAPI/models"
 )
 
+// GetWishlistById get a wishlist from a specific user in db
 func GetWishlistById(id string) models.WishlistDB {
 	rows, err := currentDB.Query(`SELECT * FROM "wishlist" WHERE uuid = $1`, id)
 
@@ -25,11 +26,12 @@ func GetWishlistById(id string) models.WishlistDB {
 	return models.WishlistDB{UUID: uuid, Products: products}
 }
 
-func PutWishlistById(uuid string, updatedWishlist []uint8) {
+// PutWishlistById allows to add and delete wishlist item from db for a specific user
+func PutWishlistById(updatedWishlist models.WishlistDB) {
 	// dynamic
 	updateDynStmt := `update "wishlist" SET products = $2 where uuid = $1`
 
-	_, err := currentDB.Exec(updateDynStmt, uuid, updatedWishlist)
+	_, err := currentDB.Exec(updateDynStmt, updatedWishlist.UUID, updatedWishlist.Products)
 	if err != nil {
 		panic(err)
 	}

@@ -188,21 +188,23 @@ func LoginUser(c *gin.Context) {
 
 // GetUserWishlist handle /user/:id/wishlist
 func GetUserWishlist(c *gin.Context) {
-	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
-
-	var uuids string
-
-	for _, value := range wishlistDB.Products {
-		uuids += string(value)
+	if !isUserExistById(c.Params.ByName("id")) {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
+		return
 	}
 
-	wishlist := models.Wishlist{UUID: wishlistDB.UUID, Products: strings.Split(uuids[1:len(uuids)-1], ",")}
+	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
 
-	c.JSON(http.StatusOK, wishlist)
+	c.JSON(http.StatusOK, models.WishlistAPI{UUID: wishlistDB.UUID, Products: wishlistDB.ConvertProductsToDisplay()})
 }
 
 // GetUserWishlist handle /user/:id/wishlist
 func PutUserWishlist(c *gin.Context) {
+	if !isUserExistById(c.Params.ByName("id")) {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
+		return
+	}
+
 	// Validate input
 	var input models.PostWishlist
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -210,22 +212,11 @@ func PutUserWishlist(c *gin.Context) {
 		return
 	}
 
-	var productsuint8 []uint8
+	wishlist := models.WishlistDB{UUID: repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, Products: input.ConvertProductsToPost()}
 
-	productsStr := strings.Join(input.Products, ",")
+	repository.PutWishlistById(wishlist)
 
-	productsuint8 = append(productsuint8, uint8('{'))
-
-	for _, v := range productsStr {
-		tmp := uint8(v)
-		productsuint8 = append(productsuint8, tmp)
-	}
-
-	productsuint8 = append(productsuint8, uint8('}'))
-
-	repository.PutWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, productsuint8)
-
-	c.JSON(http.StatusOK, "wishlist")
+	c.JSON(http.StatusOK, wishlist)
 }
 
 // isUserExistById return true if the user exist in the db

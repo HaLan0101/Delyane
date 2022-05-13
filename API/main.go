@@ -120,3 +120,4 @@ func main() {
 
 // TODO :
 //  - Get wishlist with /user/:id/wishlist
+//  - Middleware de test de base pour chaque table (CRUD)
