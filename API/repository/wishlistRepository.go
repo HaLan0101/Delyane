@@ -25,11 +25,11 @@ func GetWishlistById(id string) models.WishlistDB {
 	return models.WishlistDB{UUID: uuid, Products: products}
 }
 
-func PutWishlistById(uuid string, updatedWishlist models.Wishlist) {
+func PutWishlistById(uuid string, updatedWishlist []uint8) {
 	// dynamic
 	updateDynStmt := `update "wishlist" SET products = $2 where uuid = $1`
 
-	_, err := currentDB.Exec(updateDynStmt, uuid, updatedWishlist.Products)
+	_, err := currentDB.Exec(updateDynStmt, uuid, updatedWishlist)
 	if err != nil {
 		panic(err)
 	}

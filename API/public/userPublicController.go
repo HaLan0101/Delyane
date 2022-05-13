@@ -7,6 +7,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -218,11 +219,31 @@ func PutUserWishlist(c *gin.Context) {
 		uuids += string(value)
 	}
 
-	wishlist := models.Wishlist{UUID: wishlistDB.UUID, Products: strings.Split(uuids[1:len(uuids)-1], ",")}
+	products := strings.Split(uuids[1:len(uuids)-1], ",")
 
-	repository.PutWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, wishlist)
+	var productsuint8 []uint8
 
-	c.JSON(http.StatusOK, wishlist)
+	test, _ := strconv.ParseUint("{", 10, 8)
+
+	productsuint8 = append(productsuint8, uint8(test))
+
+	for _, v := range products {
+
+		for _, value := range v {
+			tmp, _ := strconv.ParseUint(string(value), 10, 8)
+
+			productsuint8 = append(productsuint8, uint8(tmp))
+
+		}
+	}
+
+	test, _ = strconv.ParseUint("}", 10, 8)
+
+	productsuint8 = append(productsuint8, uint8(test))
+
+	repository.PutWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, productsuint8)
+
+	c.JSON(http.StatusOK, "wishlist")
 }
 
 // isUserExistById return true if the user exist in the db
