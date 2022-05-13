@@ -212,7 +212,32 @@ func PutUserWishlist(c *gin.Context) {
 		return
 	}
 
-	wishlist := models.WishlistDB{UUID: repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, Products: input.ConvertProductsToPost()}
+	var finalProducts []string
+
+	for _, product := range input.Products {
+		// Does the product with this ID exist
+		if len(product) == 36 {
+			if repository.GetProductById(product).UUID == "" {
+				continue
+			}
+		} else {
+			continue
+		}
+
+		finalProducts = append(finalProducts, product)
+	}
+
+	var output []uint8
+
+	output = append(output, uint8('{'))
+
+	for _, r := range strings.Join(finalProducts, ",") {
+		output = append(output, uint8(r))
+	}
+
+	output = append(output, uint8('}'))
+
+	wishlist := models.WishlistDB{UUID: repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, Products: output}
 
 	repository.PutWishlistById(wishlist)
 
