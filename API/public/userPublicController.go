@@ -210,19 +210,9 @@ func PutUserWishlist(c *gin.Context) {
 		return
 	}
 
-	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
-
-	var uuids string
-
-	for _, value := range wishlistDB.Products {
-		uuids += string(value)
-	}
-
-	products := strings.Split(uuids[1:len(uuids)-1], ",")
-
 	var productsuint8 []uint8
 
-	productsStr := strings.Join(products, ",")
+	productsStr := strings.Join(input.Products, ",")
 
 	productsuint8 = append(productsuint8, uint8('{'))
 
