@@ -186,6 +186,21 @@ func LoginUser(c *gin.Context) {
 	}
 }
 
+// GetUserWishlist handle /user/:id/wishlist
+func GetUserWishlist(c *gin.Context) {
+	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
+
+	var uuids string
+
+	for _, value := range wishlistDB.Products {
+		uuids += string(value)
+	}
+
+	wishlist := models.Wishlist{UUID: wishlistDB.UUID, Products: strings.Split(uuids[1:len(uuids)-1], ",")}
+
+	c.JSON(http.StatusOK, wishlist)
+}
+
 // isUserExistById return true if the user exist in the db
 func isUserExistById(uuid string) bool {
 	if len(uuid) != 36 {

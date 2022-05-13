@@ -80,7 +80,7 @@ func main() {
 		publicGroup.POST("/user/login", public.LoginUser)
 
 		// Wishlist
-		publicGroup.GET("/wishlist/:id", public.GetWishlistById)
+		publicGroup.GET("/user/:id/wishlist", public.GetUserWishlist)
 
 		// Category
 		publicGroup.GET("/categories", public.GetCategories)
@@ -116,3 +116,6 @@ func main() {
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+//  - Get wishlist with /user/:id/wishlist
