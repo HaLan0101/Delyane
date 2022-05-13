@@ -201,6 +201,30 @@ func GetUserWishlist(c *gin.Context) {
 	c.JSON(http.StatusOK, wishlist)
 }
 
+// GetUserWishlist handle /user/:id/wishlist
+func PutUserWishlist(c *gin.Context) {
+	// Validate input
+	var input models.PostWishlist
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
+
+	var uuids string
+
+	for _, value := range wishlistDB.Products {
+		uuids += string(value)
+	}
+
+	wishlist := models.Wishlist{UUID: wishlistDB.UUID, Products: strings.Split(uuids[1:len(uuids)-1], ",")}
+
+	repository.PutWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, wishlist)
+
+	c.JSON(http.StatusOK, wishlist)
+}
+
 // isUserExistById return true if the user exist in the db
 func isUserExistById(uuid string) bool {
 	if len(uuid) != 36 {

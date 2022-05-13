@@ -9,3 +9,7 @@ type Wishlist struct {
 	UUID     string   `json:"UUID"`
 	Products []string `json:"products"`
 }
+
+type PostWishlist struct {
+	Products []string `json:"products"`
+}
