@@ -7,7 +7,6 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
-	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -223,23 +222,16 @@ func PutUserWishlist(c *gin.Context) {
 
 	var productsuint8 []uint8
 
-	test, _ := strconv.ParseUint("{", 10, 8)
+	productsStr := strings.Join(products, ",")
 
-	productsuint8 = append(productsuint8, uint8(test))
+	productsuint8 = append(productsuint8, uint8('{'))
 
-	for _, v := range products {
-
-		for _, value := range v {
-			tmp, _ := strconv.ParseUint(string(value), 10, 8)
-
-			productsuint8 = append(productsuint8, uint8(tmp))
-
-		}
+	for _, v := range productsStr {
+		tmp := uint8(v)
+		productsuint8 = append(productsuint8, tmp)
 	}
 
-	test, _ = strconv.ParseUint("}", 10, 8)
-
-	productsuint8 = append(productsuint8, uint8(test))
+	productsuint8 = append(productsuint8, uint8('}'))
 
 	repository.PutWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, productsuint8)
 
