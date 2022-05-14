@@ -20,14 +20,15 @@ import NavItem from './NavItem';
 
 const items = [
     {
-        href: '/dashboard',
+        href: '/admin/painting',
         icon: LocalMallIcon,
-        title: 'Dashboard',
+        title: 'Product list'
     },
     {
-        href: '/admin/painting',
+
+        href: '/admin/user',
         icon: PersonIcon,
-        title: 'product list'
+        title: 'User list',
     }
 ];
 

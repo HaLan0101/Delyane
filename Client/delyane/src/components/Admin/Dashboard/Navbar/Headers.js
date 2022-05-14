@@ -1,28 +1,61 @@
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+import clsx from 'clsx';
+
 
 import Navbar from './Navbar';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Hidden from '@mui/material/Hidden';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import {
+    AppBar,
+    Box,
+    Hidden,
+    IconButton,
+    Toolbar,
+    Typography,
+    makeStyles,
+} from '@material-ui/core';
+
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Headers = ({ ...rest }) => {
+const useStyles = makeStyles((theme) => ({
+    root: {},
+    toolbar: {
+        height: 64,
+        backgroundColor: 'var(--white-color)',
+    },
+    title: {
+        color: 'var(--black-color)',
+        [theme.breakpoints.down('xl')]: {
+            marginLeft: -70,
+        },
+        [theme.breakpoints.down('lg')]: {
+            marginLeft: 20,
+        },
+        [theme.breakpoints.down('md')]: {
+            marginLeft: 70,
+        },
+        [theme.breakpoints.down('sm')]: {
+            fontSize: 15,
+        },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: 12,
+        },
+    }
+}));
+
+const Headers = ({ className, ...rest }) => {
+    const classes = useStyles();
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
     return (
-        <AppBar elevation={0} {...rest}>
+        <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
             <Navbar
                 onMobileClose={() => setMobileNavOpen(false)}
                 openMobile={isMobileNavOpen}
             />
             <Toolbar>
-                <Typography variant="h5" component="h1">
+                <Typography className={classes.title} variant="h5" component="h1">
                     Delyane® - Administrator Dashboard
                 </Typography>
 

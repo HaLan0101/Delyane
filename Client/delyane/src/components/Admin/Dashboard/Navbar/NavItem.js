@@ -26,22 +26,22 @@ const useStyles = makeStyles((theme) => ({
         width: '100%'
     },
     icon: {
-        color: 'white',
+        color: 'var(--white-color)',
         marginRight: theme.spacing(1)
     },
     title: {
-        color: 'white',
+        color: 'var(--white-color)',
         marginRight: 'auto'
     },
     active: {
-        color: 'white',
+        color: 'var(--white-color)',
         background: 'linear-gradient(270deg, #F0F6FF 0%, #71A5EB 0.01%, #113D78 96.34%)',
         '& $title': {
             fontWeight: theme.typography.fontWeightBold
         },
         '& $icon': {
             transform: 'scale(1.3)',
-            color: 'white'
+            color: 'var(--white-color)'
         }
     }
 }));

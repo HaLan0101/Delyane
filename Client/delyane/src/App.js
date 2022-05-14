@@ -27,7 +27,7 @@ const App = () => {
       <Switch >
         <Route exact path='/' component={Home} />
         <Route exact path='/admin' component={Admin} />
-        <Route exact path='/admin/dashboard' component={Dashboard} />
+        <Route exact path='/admin/user' component={Dashboard} />
         <Route exact path='/admin/newcustomer' component={CreateCustomer} />
         <Route exact path='/admin/editcustomer/:uuid' component={EditCustomer} />
         <Route exact path='/admin/painting' component={Painting} />
