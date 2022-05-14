@@ -1,54 +1,83 @@
 import React, { Fragment, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Hidden from '@mui/material/Hidden';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
+import {
+    Box,
+    Drawer,
+    Hidden,
+    List,
+    Typography,
+    makeStyles
+} from '@material-ui/core';
 
-// import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
-// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-// import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-// import InputIcon from '@material-ui/icons/Input';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 import NavItem from './NavItem';
 
 const items = [
     {
         href: '/dashboard',
-        // icon: DashboardRoundedIcon,
+        icon: LocalMallIcon,
         title: 'Dashboard',
-    }, {
-        href: '/dashboard',
-        // icon: DashboardRoundedIcon,
-        title: 'Dashboard',
+    },
+    {
+        href: '/admin/painting',
+        icon: PersonIcon,
+        title: 'product list'
     }
 ];
 
+const useStyles = makeStyles(() => ({
+    mobileDrawer: {
+        backgroundColor: 'var(--blue-color)',
+        width: 256
+    },
+    desktopDrawer: {
+        backgroundColor: 'var(--blue-color)',
+        width: 256,
+        top: 64,
+        height: 'calc(100% - 64px)'
+    },
+    name: {
+        marginTop: '15px',
+        color: 'white',
+        textAlign: 'center'
+    },
+}));
+
 const Navbar = ({ onMobileClose, openMobile }) => {
+    const classes = useStyles();
+    const location = useLocation();
+    // const history = useHistory();
+
+    // const handleLogout = (e) => {
+    //     e.preventDefault();
+    //     axios
+    //       .post('')
+    //       .then((result) => {
+    //         console.log('RES DATA :', result.data);
+    //         history.push('/login');
+    //       })
+    //       .catch(err => {
+    //         console.error(err)
+    //       });
+    //   };
 
     useEffect(() => {
         if (openMobile && onMobileClose === false) {
             onMobileClose();
         }
-    }, [onMobileClose, openMobile]);
+    }, [location.pathname, onMobileClose, openMobile]);
 
     const content = (
-        <Box
-            height="100%"
-            display="flex"
-            flexDirection="column"
-        >
-            <Box
-                alignItems="center"
-                display="flex"
-                flexDirection="column"
-                p={2}
-            >
-                <Typography
-                    variant="h6"
-                >
-
+        <Box height="100%" display="flex" flexDirection="column" >
+            <Box alignItems="center" display="flex" flexDirection="column" p={2} >
+                <Typography className={classes.name} variant="h6">
+                    Menu
                 </Typography>
             </Box>
             <Box p={2}>
@@ -61,31 +90,16 @@ const Navbar = ({ onMobileClose, openMobile }) => {
                             icon={item.icon}
                         />
                     ))}
-                    <NavItem
-                        href={'/app/users'}
-                        title={'User list'}
-                    // icon={PeopleAltIcon}
-                    />
-                    <Hidden mdUp>
-                        <NavItem
-                            href={'/app/userprofile'}
-                            title={'My profile'}
-                        // icon={AccountCircleIcon}
-                        />
-                    </Hidden>
                 </List>
             </Box>
             <Box flexGrow={1} />
-            <Box
-                p={2}
-                m={2}
-            >
+            <Box p={2} m={2} >
                 <List>
                     <NavItem
-                        href='/login'
+                        href='/authentication'
                         key='Logout'
                         title='Logout'
-                    // icon={InputIcon}
+                        icon={LogoutIcon}
                     // onClick={handleLogout}
                     />
                 </List>
@@ -98,6 +112,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
             <Hidden mdUp>
                 <Drawer
                     anchor="left"
+                    classes={{ paper: classes.mobileDrawer }}
                     onClose={onMobileClose}
                     open={openMobile}
                     variant="temporary"
@@ -108,6 +123,7 @@ const Navbar = ({ onMobileClose, openMobile }) => {
             <Hidden smDown>
                 <Drawer
                     anchor="left"
+                    classes={{ paper: classes.desktopDrawer }}
                     open
                     variant="persistent"
                 >

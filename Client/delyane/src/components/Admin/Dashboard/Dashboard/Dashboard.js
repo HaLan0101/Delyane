@@ -104,12 +104,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
             <Headers />
             <div >
                 <Card elevation={2} {...rest}>
-                    <Typography
-
-                        gutterBottom
-                        variant="h4"
-                        component="h1"
-                    >
+                    <Typography gutterBottom variant="h4" component="h1">
                         Customers
                     </Typography>
 
@@ -130,10 +125,6 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                         //     ),
                         // }}
                         />
-
-                        {/* <Button href="/admin/newcustomer">
-                            Create a new customer
-                        </Button> */}
                         <Link to={'/admin/newcustomer'}>
                             <button>Create a new customer</button>
                         </Link>

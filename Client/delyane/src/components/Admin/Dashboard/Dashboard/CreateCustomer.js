@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import Headers from '../Navbar/Headers';
+// import Headers from '../Navbar/Headers';
 
 import Card from '@mui/material/Card';
 import Grid from '@mui/material/Grid';
@@ -25,20 +25,20 @@ const CreateCustomer = ({ ...rest }) => {
     };
 
     return (
-        <div>
-            <Headers />
+        <div className='createCustomer'>
+            {/* <Headers /> */}
 
             <Card elevation={2} {...rest}>
-                <h2 className='title'>Create a new customer</h2>
+                <h2 className='createCustomer__title'>Create a new customer</h2>
 
-                <hr className='diviser' />
+                <hr className='createCustomer__diviser' />
 
                 <Grid>
-                    <Paper className='mainTable'>
-                        <form className='editForm' onSubmit={(e) => submitCustomer(e)} autoComplete="off">
-                            <p className='input_title'>Firstname:</p>
+                    <Paper className='createCustomer__table'>
+                        <form className='createCustomer__form' onSubmit={(e) => submitCustomer(e)} autoComplete="off">
+                            <p className='createCustomer__subtitle'>Firstname:</p>
                             <input
-                                className='input_imput'
+                                className='createCustomer__input'
                                 label="Firstname"
                                 type="text"
                                 name="firstname"
@@ -46,9 +46,9 @@ const CreateCustomer = ({ ...rest }) => {
                                 onChange={(e) => setCustomer({ ...customer, firstname: e.target.value })}
                             />
 
-                            <p className='input_title'>Lastname:</p>
+                            <p className='createCustomer__subtitle'>Lastname:</p>
                             <input
-                                className='input_imput'
+                                className='createCustomer__input'
                                 label="Lastname"
                                 type="text"
                                 name="lastname"
@@ -56,9 +56,9 @@ const CreateCustomer = ({ ...rest }) => {
                                 onChange={(e) => setCustomer({ ...customer, lastname: e.target.value })}
                             />
 
-                            <p className='input_title'>Email:</p>
+                            <p className='createCustomer__subtitle'>Email:</p>
                             <input
-                                className='input_imput'
+                                className='createCustomer__input'
                                 label="Email"
                                 type="text"
                                 name="email"
@@ -66,9 +66,9 @@ const CreateCustomer = ({ ...rest }) => {
                                 onChange={(e) => setCustomer({ ...customer, email: e.target.value })}
                             />
 
-                            <p className='input_title'>Username:</p>
+                            <p className='createCustomer__subtitle'>Username:</p>
                             <input
-                                className='input_imput'
+                                className='createCustomer__input'
                                 label="Username"
                                 type="text"
                                 name="username"
@@ -76,9 +76,9 @@ const CreateCustomer = ({ ...rest }) => {
                                 onChange={(e) => setCustomer({ ...customer, username: e.target.value })}
                             />
 
-                            <p className='input_title'>Password:</p>
+                            <p className='createCustomer__subtitle'>Password:</p>
                             <input
-                                className='input_imput'
+                                className='createCustomer__input'
                                 label="Password"
                                 type="password"
                                 name="password"
@@ -86,11 +86,11 @@ const CreateCustomer = ({ ...rest }) => {
                                 onChange={(e) => setCustomer({ ...customer, password: e.target.value })}
                             />
 
-                            <div className='btnContainer'>
+                            <div className='createCustomer__btnContainer'>
                                 <Link to={'/admin/dashboard'}>
-                                    <button className='button'>Back</button>
+                                    <button className='createCustomer__button'>Back</button>
                                 </Link>
-                                <button type="submit" className='button'>
+                                <button type="submit" className='createCustomer__button'>
                                     Save
                                 </button>
                             </div>

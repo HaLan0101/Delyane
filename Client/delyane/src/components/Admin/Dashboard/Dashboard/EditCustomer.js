@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 const EditCustomer = ({ ...rest }) => {
     const { uuid } = useParams();
     // const [saved, setSaved] = useState(false);
@@ -81,6 +83,7 @@ const EditCustomer = ({ ...rest }) => {
                 <Divider />
 
                 <Grid>
+                    <button onClick={deleteCustomer} icon={DeleteForeverIcon}>Delete</button>
                     <Paper >
                         <form
                             onSubmit={(e) => updateCustomer(e)}
@@ -126,12 +129,9 @@ const EditCustomer = ({ ...rest }) => {
                                 }}
                                 value={updatedCustomer.email || ''}
                                 onChange={handleUpdateCustomer}
-
                             />
 
-                            <Grid
-                                container
-                                justifyContent="space-between"
+                            <Grid container justifyContent="space-between"
                             >
                                 <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
                                     <TextField
@@ -158,7 +158,6 @@ const EditCustomer = ({ ...rest }) => {
                         </form>
                     </Paper>
                 </Grid>
-                <button onClick={deleteCustomer}>Delete</button>
             </Card>
         </div>
     );

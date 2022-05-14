@@ -1,17 +1,63 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
-import ListItem from '@mui/material/ListItem';
+import clsx from 'clsx';
 
-const NavItem = ({ ...rest }) => {
+import {
+    Button,
+    ListItem,
+    makeStyles
+} from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+    item: {
+        display: 'flex',
+        paddingTop: 0,
+        paddingBottom: 0
+    },
+    button: {
+        color: theme.palette.text.secondary,
+        fontWeight: theme.typography.fontWeightMedium,
+        justifyContent: 'flex-start',
+        letterSpacing: 0,
+        padding: '10px 8px',
+        textTransform: 'none',
+        width: '100%'
+    },
+    icon: {
+        color: 'white',
+        marginRight: theme.spacing(1)
+    },
+    title: {
+        color: 'white',
+        marginRight: 'auto'
+    },
+    active: {
+        color: 'white',
+        background: 'linear-gradient(270deg, #F0F6FF 0%, #71A5EB 0.01%, #113D78 96.34%)',
+        '& $title': {
+            fontWeight: theme.typography.fontWeightBold
+        },
+        '& $icon': {
+            transform: 'scale(1.3)',
+            color: 'white'
+        }
+    }
+}));
+
+const NavItem = ({ className, href, icon: Icon, title, ...rest }) => {
+    const classes = useStyles();
 
     return (
-        <ListItem disableGutters {...rest} >
-            <span >
-                Test
-            </span>
-        </ListItem >
+        <ListItem className={clsx(classes.item, className)} disableGutters {...rest}>
+            <Button activeClassName={classes.active} className={classes.button} component={NavLink} to={href} >
+                {Icon && (<Icon className={classes.icon} size="20" />)}
+                <span className={classes.title}>
+                    {title}
+                </span>
+            </Button>
+        </ListItem>
     );
 };
 

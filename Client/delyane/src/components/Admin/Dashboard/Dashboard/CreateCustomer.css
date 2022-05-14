@@ -1,27 +1,33 @@
-.title {
+.createCustomer__title {
     color: var(--black-color);
     text-align: center;
     margin: none;
     margin: 25px;
 }
 
-.diviser {
+.createCustomer__diviser {
     background-color: var(--blue-color);
     margin: 0 20px 0 20px;
     border-color: none;
     height: 5px;
 }
 
-.mainTable {
+.createCustomer__table {
     margin: 20px;
 }
 
-.editForm {
+.createCustomer__form {
     display: grid;
     padding: 2% 5%;
 }
 
-.input_imput {
+.createCustomer__subtitle {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.createCustomer__input {
     border: 1px solid var(--lightgray-color);
     padding-left: 16px;
     margin-bottom: 10px;
@@ -29,7 +35,7 @@
     height: 40px;
 }
 
-.button {
+.createCustomer__button {
     background-color: var(--blue-color);
     color: var(--white-color);
     border-radius: 4px;
@@ -41,31 +47,20 @@
     min-width: 10%;
 }
 
-.btnContainer {
+.createCustomer__btnContainer {
     text-align: right;
-}
-
-.input_title {
-    font-weight: 600;
-    margin-bottom: 5px;
-    font-size: 12px;
-}
-
-.testi {
-    display: flex;
-    justify-content: space-between;
 }
 
 /* ------- RESPONSIVE -------  */
 
 @media screen and (max-width: 420px) {
-    .btnContainer {
+    .createCustomer__btnContainer {
         display: flex;
         align-items: center;
         flex-direction: row;
     }
 
-    .button {
+    .createCustomer__button {
         width: 100px;
         margin-bottom: 20px;
     }
