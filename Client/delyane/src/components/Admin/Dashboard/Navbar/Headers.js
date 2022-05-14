@@ -19,10 +19,12 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
+    root: {
+        backgroundColor: 'white',
+    },
     toolbar: {
         height: 64,
-        backgroundColor: 'var(--white-color)',
+        backgroundColor: 'white',
     },
     title: {
         color: 'var(--black-color)',
