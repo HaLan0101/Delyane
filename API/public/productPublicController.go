@@ -29,7 +29,22 @@ func GetProductById(c *gin.Context) {
 
 // GetProducts handle /products for all products (GET) - PUBLIC
 func GetProducts(c *gin.Context) {
-	c.JSON(http.StatusOK, repository.GetProducts())
+	if category := c.DefaultQuery("category", "none"); category == "none" {
+		c.JSON(http.StatusOK, repository.GetProducts())
+	} else if category == "null" {
+		c.JSON(http.StatusOK, repository.GetProductsByCategory(category))
+	} else {
+		if len(category) == 36 {
+			if repository.GetCategoryById(category).UUID == "" {
+				c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
+				return
+			}
+		} else {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "This category doesn't exist"})
+			return
+		}
+		c.JSON(http.StatusOK, repository.GetProductsByCategory(category))
+	}
 }
 
 // PostProduct handle /product for creating a new product (POST) - PRIVATE

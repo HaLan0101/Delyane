@@ -79,6 +79,10 @@ func main() {
 		publicGroup.POST("/user", public.PostUser)
 		publicGroup.POST("/user/login", public.LoginUser)
 
+		// Wishlist
+		publicGroup.GET("/user/:id/wishlist", public.GetUserWishlist)
+		publicGroup.PUT("/user/:id/wishlist", public.PutUserWishlist)
+
 		// Category
 		publicGroup.GET("/categories", public.GetCategories)
 		publicGroup.GET("/category/:id", public.GetCategoryById)
@@ -113,3 +117,7 @@ func main() {
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+//  - Get wishlist with /user/:id/wishlist
+//  - Middleware de test de base pour chaque table (CRUD)

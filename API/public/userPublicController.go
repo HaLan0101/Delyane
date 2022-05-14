@@ -186,8 +186,70 @@ func LoginUser(c *gin.Context) {
 	}
 }
 
+// GetUserWishlist handle /user/:id/wishlist
+func GetUserWishlist(c *gin.Context) {
+	if !isUserExistById(c.Params.ByName("id")) {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
+		return
+	}
+
+	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
+
+	c.JSON(http.StatusOK, models.WishlistAPI{UUID: wishlistDB.UUID, Products: wishlistDB.ConvertProductsToDisplay()})
+}
+
+// GetUserWishlist handle /user/:id/wishlist
+func PutUserWishlist(c *gin.Context) {
+	if !isUserExistById(c.Params.ByName("id")) {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
+		return
+	}
+
+	// Validate input
+	var input models.PostWishlist
+	if err := c.ShouldBindJSON(&input); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	var finalProducts []string
+
+	for _, product := range input.Products {
+		// Does the product with this ID exist
+		if len(product) == 36 {
+			if repository.GetProductById(product).UUID == "" {
+				continue
+			}
+		} else {
+			continue
+		}
+
+		finalProducts = append(finalProducts, product)
+	}
+
+	var output []uint8
+
+	output = append(output, uint8('{'))
+
+	for _, r := range strings.Join(finalProducts, ",") {
+		output = append(output, uint8(r))
+	}
+
+	output = append(output, uint8('}'))
+
+	wishlist := models.WishlistDB{UUID: repository.GetUserById(c.Params.ByName("id")).UUID_wishlist, Products: output}
+
+	repository.PutWishlistById(wishlist)
+
+	c.JSON(http.StatusOK, wishlist)
+}
+
 // isUserExistById return true if the user exist in the db
 func isUserExistById(uuid string) bool {
+	if len(uuid) != 36 {
+		return false
+	}
+
 	if repository.GetUserById(uuid).UUID == "" {
 		return false
 	} else {
