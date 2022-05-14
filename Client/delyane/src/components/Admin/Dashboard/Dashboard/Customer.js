@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import clsx from 'clsx';
 
@@ -23,6 +23,7 @@ import {
 } from '@material-ui/core';
 
 import SearchIcon from '@material-ui/icons/Search';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const columns = [
@@ -35,7 +36,7 @@ const columns = [
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: 'var(--app-bg)',
+        backgroundColor: 'var(--lightgray-color)',
         position: 'absolute',
         display: 'flex',
         height: '100%',
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100%',
         marginTop: '0px',
     },
-    root2: {
+    secondRoot: {
         margin: '20px 20px',
         marginBottom: '50px',
         padding: '20px 20px',
@@ -127,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Dashboard = ({ className, staticContext, ...rest }) => {
+const Customer = ({ className, staticContext, ...rest }) => {
     const classes = useStyles();
     const [page, setPage] = useState(0);
     const [users, setUsers] = useState([]);
@@ -196,27 +197,18 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
             <div className={classes.wrapper}>
                 <div className={classes.contentContainer}>
                     <div className={classes.content}>
+
                         <Headers />
+
                         <div className={clsx(classes.pageContainer, className)}>
-                            <Card className={clsx(classes.root2, className)} elevation={2} {...rest}>
-                                <Typography
-                                    className={classes.title}
-                                    gutterBottom
-                                    variant="h4"
-                                    component="h1"
-                                >
+                            <Card className={clsx(classes.secondRoot, className)} elevation={2} {...rest}>
+                                <Typography className={classes.title} gutterBottom variant="h4" component="h1">
                                     Customers list
                                 </Typography>
 
                                 <div className={classes.space}>
-                                    <TextField
-                                        className={classes.search}
-                                        id="outlined-search"
-                                        label="Search"
-                                        type="search"
-                                        onChange={(event) => {
-                                            setSearchTerm(event.target.value);
-                                        }}
+                                    <TextField className={classes.search} id="outlined-search" label="Search" type="search"
+                                        onChange={(event) => { setSearchTerm(event.target.value) }}
                                         InputProps={{
                                             endAdornment: (
                                                 <InputAdornment position="end">
@@ -255,6 +247,7 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
                                 </Grid>
                             </Card>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -262,4 +255,4 @@ const Dashboard = ({ className, staticContext, ...rest }) => {
     );
 }
 
-export default Dashboard;
+export default Customer;
