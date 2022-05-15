@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import clsx from "clsx";
 
@@ -16,6 +17,9 @@ import {
 } from "@material-ui/core";
 
 import { makeStyles } from '@material-ui/core/styles';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -107,6 +111,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateCustomer = ({ className, staticContext, ...rest }) => {
     const [customer, setCustomer] = useState({});
+    const history = useHistory();
     const classes = useStyles();
 
     const submitCustomer = async (e) => {
@@ -115,9 +120,39 @@ const CreateCustomer = ({ className, staticContext, ...rest }) => {
         const url = 'http://90.22.250.124:8080/user';
         try {
             await axios.post(url, customer);
+            toasterSucc();
         } catch (err) {
-            console.log(err)
+            err.response && toasterErr(err.response.data);
         }
+    };
+
+    const toasterSucc = () => {
+        return (
+            toast.success('Customer successfully created!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                onClose: () => history.push(`/admin/user`),
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        );
+    };
+
+    const toasterErr = (error) => {
+        return (
+            toast.error(`${error}`, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        );
     };
 
     return (
@@ -190,9 +225,9 @@ const CreateCustomer = ({ className, staticContext, ...rest }) => {
                                                     />
                                                 </Box>
 
-                                                <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
+                                                <Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
                                                     <TextField
-                                                        className='createCustomer__input'
+                                                        className={classes.inputField}
                                                         label="Password"
                                                         type="password"
                                                         name="password"
@@ -204,7 +239,6 @@ const CreateCustomer = ({ className, staticContext, ...rest }) => {
                                                     />
                                                 </Box>
                                             </Grid>
-
                                             <div className={classes.btnContainer}>
                                                 <Button className={classes.button} href='/admin/user'>Back</Button>
                                                 <Button className={classes.button} type="submit">Save</Button>
@@ -213,6 +247,7 @@ const CreateCustomer = ({ className, staticContext, ...rest }) => {
                                     </Paper>
                                 </Grid>
                             </Card>
+                            <ToastContainer />
                         </div>
                     </div >
                 </div >

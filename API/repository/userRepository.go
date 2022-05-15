@@ -7,7 +7,7 @@ import (
 
 // GetUsers return a user from db
 func GetUsers() []models.User {
-	rows, err := currentDB.Query(`SELECT * FROM "user"`)
+	rows, err := currentDB.Query(`SELECT * FROM "user" ORDER BY lastname ASC`)
 
 	if err != nil {
 		panic(err)
