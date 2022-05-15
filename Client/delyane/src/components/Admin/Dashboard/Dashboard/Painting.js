@@ -28,6 +28,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const columns = [
     { id: 'title', label: 'Title', minWidth: 100, align: 'center' },
+    { id: 'description', label: 'Description', minWidth: 100, align: 'center' },
     { id: 'price', label: 'Price', minWidth: 100, align: 'center' },
     { id: 'view', label: '', minWidth: 100, align: 'center' },
 ];
@@ -170,9 +171,11 @@ const Painting = ({ className, staticContext, ...rest }) => {
             return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={product.uuid}>
                     <TableCell align="center">{product.title}</TableCell>
+                    <TableCell align="center">{product.description}</TableCell>
                     <TableCell align="center">{product.price} €</TableCell>
                     <TableCell align="center">
-                        <Button className={classes.button} href={`/admin/editproduct/${product.uuid}`}>View</Button>
+                        <Button className={classes.button} href={`/painting/${product.uuid}`}>View</Button>
+                        <Button className={classes.button} href={`/admin/editproduct/${product.uuid}`}>Edit</Button>
                     </TableCell>
                 </TableRow>
             );

@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import Headers from '../Navbar/Headers';
 
 import {
-    Box,
     Button,
     Card,
     Divider,
