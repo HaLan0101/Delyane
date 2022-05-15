@@ -3,6 +3,7 @@ package public
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
+	"fmt"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -197,6 +198,12 @@ func GetUserWishlist(c *gin.Context) {
 	}
 
 	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
+
+	fmt.Println(wishlistDB.Products)
+
+	for _, v := range wishlistDB.Products {
+		fmt.Println(v)
+	}
 
 	c.JSON(http.StatusOK, models.WishlistAPI{UUID: wishlistDB.UUID, Products: wishlistDB.ConvertProductsToDisplay()})
 }
