@@ -122,7 +122,7 @@ const CreateCustomer = ({ className, staticContext, ...rest }) => {
             await axios.post(url, customer);
             toasterSucc();
         } catch (err) {
-            err.response && toasterErr(err.response.data);
+            err && toasterErr(err);
         }
     };
 

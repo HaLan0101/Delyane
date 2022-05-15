@@ -6,6 +6,7 @@ import './App.css';
 import Admin from './components/Admin/Admin/Admin';
 import Authentication from './components/Authentication/Authentication';
 import CreateCustomer from './components/Admin/Dashboard/Dashboard/CreateCustomer';
+import CreatePainting from './components/Admin/Dashboard/Dashboard/CreatePainting';
 import Customer from './components/Admin/Dashboard/Dashboard/Customer';
 import EditCustomer from './components/Admin/Dashboard/Dashboard/EditCustomer';
 import Error from './components/Error/Error';
@@ -29,6 +30,7 @@ const App = () => {
         <Route exact path='/admin' component={Admin} />
         <Route exact path='/admin/user' component={Customer} />
         <Route exact path='/admin/newcustomer' component={CreateCustomer} />
+        <Route exact path='/admin/newpainting' component={CreatePainting} />
         <Route exact path='/admin/editcustomer/:uuid' component={EditCustomer} />
         <Route exact path='/admin/painting' component={Painting} />
         <Route exact path='/authentication' component={Authentication} />

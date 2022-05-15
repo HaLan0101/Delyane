@@ -203,7 +203,7 @@ const Painting = ({ className, staticContext, ...rest }) => {
                                             ),
                                         }}
                                     />
-                                    <Button className={classes.button}>
+                                    <Button className={classes.button} href='/admin/newpainting'>
                                         Create a new product
                                     </Button>
                                 </div>

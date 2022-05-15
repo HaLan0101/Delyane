@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import clsx from 'clsx';
 
@@ -19,6 +19,9 @@ import {
 import DeleteForeverRoundedIcon from '@material-ui/icons/DeleteForeverRounded';
 
 import { makeStyles } from '@material-ui/core';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -119,7 +122,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 const EditCustomer = ({ className, staticContext, ...rest }) => {
+    const [saved, setSaved] = useState(false);
     const { uuid } = useParams();
+    const history = useHistory();
     const classes = useStyles();
 
     const [customer, setCustomer] = useState({
@@ -143,6 +148,35 @@ const EditCustomer = ({ className, staticContext, ...rest }) => {
         })
     }
 
+    const toasterSucc = () => {
+        return (
+            toast.success('Customer successfully edited/deleted!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                onClose: () => history.push(`/admin/user`),
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        );
+    };
+
+    const toasterErr = (error) => {
+        return (
+            toast.error(`${error}`, {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined
+            })
+        );
+    };
+
     useEffect(() => {
         const getDatas = async () => {
             try {
@@ -154,26 +188,34 @@ const EditCustomer = ({ className, staticContext, ...rest }) => {
             }
         };
         getDatas();
+
+        return () => setCustomer([]);
+
     }, [uuid]);
 
     const updateCustomer = async (e) => {
         const url = `http://90.22.250.124:8080/user/${uuid}`;
         try {
             await axios.put(url, updatedCustomer).then((res) => console.log(res))
+            toasterSucc();
+            setSaved(true);
         } catch (err) {
-            console.log(err)
+            err && toasterErr(err);
         }
     };
 
     const deleteCustomer = async () => {
         try {
             await axios.delete(`http://90.22.250.124:8080/user/${uuid}`);
+            toasterSucc();
         } catch (err) {
-            console.log(err)
+            err && toasterErr(err);
         }
     }
 
-    return (
+    console.log(customer)
+
+    return customer ? (
         <div className={classes.root}>
             <div className={classes.wrapper}>
                 <div className={classes.contentContainer}>
@@ -194,7 +236,6 @@ const EditCustomer = ({ className, staticContext, ...rest }) => {
                                 <Grid>
                                     <Paper className={classes.mainTable}>
                                         <form className={classes.editForm} onSubmit={(e) => updateCustomer(e)} autoComplete="off" >
-
                                             <TextField
                                                 className={classes.inputField}
                                                 label="Firstname"
@@ -240,56 +281,40 @@ const EditCustomer = ({ className, staticContext, ...rest }) => {
                                                 onChange={handleUpdateCustomer}
                                             />
 
-                                            <Grid className={classes.inputCont} container justifyContent="space-between" >
-                                                <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-                                                    <TextField
-                                                        className={classes.inputField}
-                                                        label="Username"
-                                                        type="text"
-                                                        name="username"
-                                                        placeholder="Enter a username"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        value={updatedCustomer.username || ''}
-                                                        onChange={handleUpdateCustomer}
-                                                    />
-                                                </Box>
+                                            <TextField
+                                                className={classes.inputField}
+                                                label="Username"
+                                                type="text"
+                                                name="username"
+                                                placeholder="Enter a username"
+                                                variant="outlined"
+                                                fullWidth
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
+                                                value={updatedCustomer.username || ''}
+                                                onChange={handleUpdateCustomer}
+                                            />
 
-                                                <Box flex={1} mr={{ xs: 0, sm: "0.5em" }}>
-                                                    <TextField
-                                                        className={classes.inputField}
-                                                        label="Username"
-                                                        type="text"
-                                                        name="username"
-                                                        placeholder="Enter a username"
-                                                        variant="outlined"
-                                                        fullWidth
-                                                        InputLabelProps={{
-                                                            shrink: true,
-                                                        }}
-                                                        value={updatedCustomer.username || ''}
-                                                        onChange={handleUpdateCustomer}
-                                                    />
-                                                </Box>
-                                            </Grid>
                                             <div className={classes.btnContainer}>
-                                                <Button href='/admin/dashboard' className={classes.button}>Back</Button>
+                                                {customer === updatedCustomer || saved ? (
+                                                    <Button href='/admin/user' className={classes.button}>Back</Button>
+                                                ) : (
+                                                    <Button href='/admin/user' className={classes.button}>Cancel</Button>
+                                                )}
                                                 <Button className={classes.button} type="submit">Save</Button>
                                             </div>
                                         </form>
                                     </Paper>
                                 </Grid>
                             </Card>
+                            <ToastContainer />
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    );
+    ) : null;
 }
 
 export default EditCustomer;
