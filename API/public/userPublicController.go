@@ -48,7 +48,10 @@ func PostUser(c *gin.Context) {
 
 	input.EncryptPassword()
 
+	// Create Wishlist to create a user
 	repository.PostUser(input)
+
+	repository.PostWishlist(repository.GetUserByEmail(input.Email)[0].UUID_wishlist)
 
 	c.JSON(http.StatusCreated, input)
 }
@@ -130,6 +133,7 @@ func DeleteUserById(c *gin.Context) {
 		os.Remove("." + product.Image)
 	}
 
+	repository.DeleteWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
 	repository.DeleteUserById(c.Params.ByName("id"))
 
 	c.String(http.StatusOK, "User successfully deleted")

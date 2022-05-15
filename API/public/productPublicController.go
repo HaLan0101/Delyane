@@ -73,9 +73,7 @@ func PostProduct(c *gin.Context) {
 		panic(err)
 	}
 
-	var userID string
-
-	userID = c.PostForm("uuid_user")
+	userID := c.PostForm("uuid_user")
 	if userID != "" {
 		if repository.GetUserById(userID).UUID == "" {
 			c.JSON(http.StatusBadRequest, "This user does not exist")
