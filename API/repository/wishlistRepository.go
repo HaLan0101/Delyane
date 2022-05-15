@@ -31,7 +31,7 @@ func PostWishlist(wishlistId string) {
 	// dynamic
 	insertDynStmt := `insert into "wishlist"("uuid", "products") values($1, $2)`
 
-	_, err := currentDB.Exec(insertDynStmt, wishlistId, []uint8{})
+	_, err := currentDB.Exec(insertDynStmt, wishlistId, []uint8{123, 125})
 	if err != nil {
 		panic(err)
 	}
