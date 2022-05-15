@@ -46,3 +46,8 @@
     color: white;
     width: 35%;
 }
+.favorite__art{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+}

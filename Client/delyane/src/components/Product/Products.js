@@ -45,7 +45,7 @@ const Product = () => {
                 <div className='product__content'>
                     <h1 className='product__title'>Painting</h1>
 
-                    <ul className='product__list'>
+                    <ul className='product__list'> 
                         <li className='product__filter'>
                             <div className='product__category'>
                                 <select name="genre" id="genre" onChange={(e)=> handleValue(e.target.value) }>
