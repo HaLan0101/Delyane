@@ -83,6 +83,8 @@ func main() {
 		publicGroup.GET("/user/:id/wishlist", public.GetUserWishlist)
 		publicGroup.PUT("/user/:id/wishlist", public.PutUserWishlist)
 
+		publicGroup.GET("/wishlist/:id", public.GetWishlistById)
+
 		// Category
 		publicGroup.GET("/categories", public.GetCategories)
 		publicGroup.GET("/category/:id", public.GetCategoryById)
