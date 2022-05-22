@@ -7,11 +7,12 @@ import './Favorite.css';
 const Favorite = () => {
     const [products, setProducts] = useState([]);
     const uuid_user = localStorage.getItem('uuid');
+    const uuid_wishlist = localStorage.getItem('uuid_wishlist');
     useEffect(() => {
         const getData = async () => {
             try {
                 console.log("user: " +uuid_user);
-                const result = await axios.get(`http://90.22.250.124:8080/user/${uuid_user}/wishlist`)
+                const result = await axios.get(`http://90.22.250.124:8080/wishlist/${uuid_wishlist}`)
                 setProducts(result.data.products);
                 console.log("Here "+ products);
             } catch (err) {

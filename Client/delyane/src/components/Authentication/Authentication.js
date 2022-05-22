@@ -15,7 +15,9 @@ const Authentication = () => {
         try {
             const result = await axios.post(url, user);
             const uuid= result.data.user.uuid;
+            const uuid_wishlist= result.data.uuid_wishlist;
             localStorage.setItem('uuid',uuid);
+            localStorage.setItem('uuid_wishlist',uuid_wishlist);
             console.log("log in ok", user);
             window.location = "/painting";
         } catch (err) {
