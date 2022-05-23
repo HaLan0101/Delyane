@@ -48,11 +48,11 @@ func GetWishlistByTime(timeLocation []uint8) models.WishlistDB {
 }
 
 // PostWishlist allows to add and delete wishlist item from db for a specific user
-func PostWishlist(timelocation []uint8) {
+func PostWishlist(uuid string, timelocation []uint8) {
 	// dynamic
 	insertDynStmt := `insert into "wishlist"("uuid","products") values($1, $2)`
 
-	_, err := currentDB.Exec(insertDynStmt, "d222770b-e4db-4675-851e-6a947533048g", timelocation)
+	_, err := currentDB.Exec(insertDynStmt, uuid, timelocation)
 	if err != nil {
 		panic(err)
 	}

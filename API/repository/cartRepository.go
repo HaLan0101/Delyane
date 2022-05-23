@@ -46,11 +46,11 @@ func GetCartByTime(timeLocation []uint8) models.CartDB {
 }
 
 // PostCart allows to create item from db for a specific user
-func PostCart(timeLocation []uint8) {
+func PostCart(uuid string, timeLocation []uint8) {
 	// dynamic
-	insertDynStmt := `insert into "cart"("products") values($1)`
+	insertDynStmt := `insert into "cart"("uuid", "products") values($1, $2)`
 
-	_, err := currentDB.Exec(insertDynStmt, timeLocation)
+	_, err := currentDB.Exec(insertDynStmt, uuid, timeLocation)
 	if err != nil {
 		panic(err)
 	}
