@@ -1,7 +1,7 @@
 package main
 
 import (
-	"delyaneAPI/controllers"
+	"delyaneAPI/public"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,37 +21,105 @@ func main() {
 
 	router.Static("/images", "./images") // for static path
 
-	// Demo
-	router.GET("/", controllers.GetRoot)
-	router.POST("/upload", controllers.SaveImage)
+	// apiFinal := router.Group("/")
+	// {
+	// 	public := router.Group("/")
+	// 	{
+	// 		// Demo
+	// 		public.GET("/", controllers.GetRoot)
+	// 		public.POST("/upload", controllers.SaveImage)
 
-	// User CRUD
-	router.POST("/user/login", controllers.LoginUser)
+	// 		// Admin
+	// 		public.POST("/admin/login", controllers.LoginAdmin)
 
-	router.GET("/user/:id", controllers.GetUserById)
-	router.PUT("/user/:id", controllers.MiddlewareBasicAuth, controllers.PutUserById)
-	router.DELETE("/user/:id", controllers.MiddlewareBasicAuth, controllers.DeleteUserById)
-	router.POST("/user", controllers.PostUser)
+	// 		// User
+	// 		public.GET("/user/:id", controllers.GetUserById)
+	// 		public.POST("/user", controllers.PostUser)
+	// 		public.POST("/user/login", controllers.LoginUser)
 
-	// Category CRUD
-	router.GET("/categories", controllers.GetCategories)
-	router.GET("/category/:id", controllers.GetCategoryById)
-	router.PUT("/category/:id", controllers.MiddlewareBasicAuth, controllers.PutCategoryById)
-	router.DELETE("/category/:id", controllers.MiddlewareBasicAuth, controllers.DeleteCategoryById)
-	router.POST("/category", controllers.MiddlewareBasicAuth, controllers.PostCategory)
+	// 		// Category
+	// 		public.GET("/categories", controllers.GetCategories)
+	// 		public.GET("/category/:id", controllers.GetCategoryById)
 
-	// Product CRUD
-	router.GET("/products", controllers.GetProducts)
-	router.GET("/product/:id", controllers.GetProductById)
-	router.PUT("/product/:id", controllers.MiddlewareBasicAuth, controllers.PutProductById)
-	router.DELETE("/product/:id", controllers.MiddlewareBasicAuth, controllers.DeleteProductById)
-	router.POST("/product", controllers.MiddlewareBasicAuth, controllers.PostProduct)
+	// 		// Product
+	// 		public.GET("/products", controllers.GetProducts)
+	// 		public.GET("/product/:id", controllers.GetProductById)
 
-	// Newsletter CRUD
-	router.GET("/newsletters", controllers.GetNewsletters)
-	router.POST("/newsletter", controllers.PostNewsletter)
+	// 		// Newsletters
+	// 		public.GET("/newsletters", controllers.GetNewsletters)
+	// 		public.POST("/newsletter", controllers.PostNewsletter)
+	// 	}
+
+	// 	protected := apiFinal.Group("/").Use(middlewares.JWT)
+	// 	{
+	// 		// User
+	// 		protected.GET("/users", controllers.GetUsers)
+	// 		protected.PUT("/user/:id", controllers.PutUserById)
+	// 		protected.DELETE("/user/:id", controllers.DeleteUserById)
+
+	// 		// Category
+	// 		protected.PUT("/category/:id", controllers.PutCategoryById)
+	// 		protected.DELETE("/category/:id", controllers.DeleteCategoryById)
+	// 		protected.POST("/category", controllers.PostCategory)
+
+	// 		// Product
+	// 		protected.PUT("/product/:id", controllers.PutProductById)
+	// 		protected.DELETE("/product/:id", controllers.DeleteProductById)
+	// 		protected.POST("/product", controllers.PostProduct)
+	// 	}
+	// }
+
+	publicGroup := router.Group("/")
+	{
+		// Admin
+		publicGroup.POST("/admin/login", public.LoginAdmin)
+
+		// User
+		publicGroup.GET("/user/:id", public.GetUserById)
+		publicGroup.POST("/user", public.PostUser)
+		publicGroup.POST("/user/login", public.LoginUser)
+
+		// Wishlist
+		publicGroup.GET("/user/:id/wishlist", public.GetUserWishlist)
+		publicGroup.PUT("/user/:id/wishlist", public.PutUserWishlist)
+
+		publicGroup.GET("/wishlist/:id", public.GetWishlistById)
+
+		// Category
+		publicGroup.GET("/categories", public.GetCategories)
+		publicGroup.GET("/category/:id", public.GetCategoryById)
+
+		// Product
+		publicGroup.GET("/products", public.GetProducts)
+		publicGroup.GET("/product/:id", public.GetProductById)
+
+		// Newsletters
+		publicGroup.GET("/newsletters", public.GetNewsletters)
+		publicGroup.POST("/newsletter", public.PostNewsletter)
+
+		// Should be private under
+
+		// User
+		publicGroup.GET("/users", public.GetUsers)
+		publicGroup.PUT("/user/:id", public.PutUserById)
+		publicGroup.DELETE("/user/:id", public.DeleteUserById)
+
+		// Category
+		publicGroup.PUT("/category/:id", public.PutCategoryById)
+		publicGroup.DELETE("/category/:id", public.DeleteCategoryById)
+		publicGroup.POST("/category", public.PostCategory)
+
+		// Product
+		publicGroup.PUT("/product/:id", public.PutProductById)
+		publicGroup.DELETE("/product/:id", public.DeleteProductById)
+		publicGroup.POST("/product", public.PostProduct)
+	}
 
 	// By default it serves on :8080 unless a
 	// PORT environment variable was defined.
 	router.Run()
 }
+
+// TODO :
+//  - Get wishlist with /user/:id/wishlist
+//  - Middleware de test de base pour chaque table (CRUD)
