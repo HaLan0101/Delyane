@@ -69,6 +69,8 @@ func PostUser(c *gin.Context) {
 
 	repository.PostCart(result)
 
+	fmt.Println(repository.GetWishlistByTime(result).UUID)
+
 	repository.SetUserWishlist(repository.GetWishlistByTime(result).UUID, repository.GetUserByEmail(input.Email)[0].UUID)
 	repository.SetUserCart(repository.GetCartByTime(result).UUID, repository.GetUserByEmail(input.Email)[0].UUID)
 
