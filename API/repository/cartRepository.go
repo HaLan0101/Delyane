@@ -55,3 +55,13 @@ func PostCart(uuid string, timeLocation []uint8) {
 		panic(err)
 	}
 }
+
+func ClearUserCart(uuid string) {
+	// dynamic
+	updateDynStmt := `update "cart" SET products = $2 where uuid = $1`
+
+	_, err := currentDB.Exec(updateDynStmt, uuid, []uint8{123, 125})
+	if err != nil {
+		panic(err)
+	}
+}

@@ -79,3 +79,13 @@ func DeleteWishlistById(uuid string) {
 		panic(err)
 	}
 }
+
+func ClearUserWishlist(uuid string) {
+	// dynamic
+	updateDynStmt := `update "wishlist" SET products = $2 where uuid = $1`
+
+	_, err := currentDB.Exec(updateDynStmt, uuid, []uint8{123, 125})
+	if err != nil {
+		panic(err)
+	}
+}
