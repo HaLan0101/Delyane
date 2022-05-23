@@ -34,7 +34,7 @@ const Header = () => {
                     <a href='/favorite' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-heart" /></a>
                 </li>
                 <li className='nav__item'>
-                    <a onClick={handleLink} className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
+                    <a href='/cart' className='nav__link'><FontAwesomeIcon className='nav__icon' icon="fa-solid fa-basket-shopping" /></a>
                 </li>
             </ul>
             <button className='nav__burger' onClick={handleClick}>

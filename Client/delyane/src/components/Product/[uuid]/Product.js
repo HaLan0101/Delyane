@@ -66,9 +66,9 @@ const Product = () => {
                     </div>
                     <div className='product__info'>
                         <p className='product__title'>Artist name : {user.username}</p>
-                        <p className='product__title'>{product.title}</p>
-                        <p className='product__description'>{product.description}</p>
-                        <p className='product__price'>{product.price}</p>
+                        <p className='product__title'>Title: {product.title}</p>
+                        <p className='product__description'>Description: {product.description}</p>
+                        <p className='product__price'>Prix: {product.price} €</p>
                         <Button title="Add to cart" className="product__button"/><br />
                         <FontAwesomeIcon className="product__favorite" icon="fa-solid fa-heart-circle-plus" />
                     </div>
