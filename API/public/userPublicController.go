@@ -199,7 +199,13 @@ func GetUserWishlist(c *gin.Context) {
 
 	wishlistDB := repository.GetWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
 
-	c.JSON(http.StatusOK, models.WishlistAPI{UUID: wishlistDB.UUID, Products: wishlistDB.ConvertProductsToDisplay()})
+	var products []models.Product
+
+	for _, productUUID := range wishlistDB.ConvertProductsToDisplay() {
+		products = append(products, repository.GetProductById(productUUID))
+	}
+
+	c.JSON(http.StatusOK, models.WishlistProduct{UUID: wishlistDB.UUID, Products: products})
 }
 
 // GetUserWishlist handle /user/:id/wishlist

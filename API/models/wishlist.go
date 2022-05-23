@@ -16,6 +16,11 @@ type PostWishlist struct {
 	Products []string `json:"products"`
 }
 
+type WishlistProduct struct {
+	UUID     string    `json:"uuid"`
+	Products []Product `json:"products"`
+}
+
 func (wishlist *WishlistDB) ConvertProductsToDisplay() []string {
 	var output string
 
