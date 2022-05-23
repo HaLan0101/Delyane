@@ -26,12 +26,33 @@ func GetWishlistById(id string) models.WishlistDB {
 	return models.WishlistDB{UUID: uuid, Products: products}
 }
 
-// PostWishlist allows to add and delete wishlist item from db for a specific user
-func PostWishlist(wishlistId string) {
-	// dynamic
-	insertDynStmt := `insert into "wishlist"("uuid", "products") values($1, $2)`
+func GetWishlistByTime(timeLocation []uint8) models.WishlistDB {
+	rows, err := currentDB.Query(`SELECT * FROM "wishlist" WHERE products = $1`, timeLocation)
 
-	_, err := currentDB.Exec(insertDynStmt, wishlistId, []uint8{123, 125})
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var products []uint8
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &products)
+
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	return models.WishlistDB{UUID: uuid, Products: products}
+}
+
+// PostWishlist allows to add and delete wishlist item from db for a specific user
+func PostWishlist(timelocation []uint8) {
+	// dynamic
+	insertDynStmt := `insert into "wishlist"("products") values($1)`
+
+	_, err := currentDB.Exec(insertDynStmt, timelocation)
 	if err != nil {
 		panic(err)
 	}

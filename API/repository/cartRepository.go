@@ -23,3 +23,35 @@ func GetCartById(id string) models.CartDB {
 
 	return models.CartDB{UUID: uuid, Products: products}
 }
+
+func GetCartByTime(timeLocation []uint8) models.CartDB {
+	rows, err := currentDB.Query(`SELECT * FROM "cart" WHERE products = $1`, timeLocation)
+
+	if err != nil {
+		panic(err)
+	}
+
+	var uuid string
+	var products []uint8
+
+	for rows.Next() {
+		err = rows.Scan(&uuid, &products)
+
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	return models.CartDB{UUID: uuid, Products: products}
+}
+
+// PostCart allows to create item from db for a specific user
+func PostCart(timeLocation []uint8) {
+	// dynamic
+	insertDynStmt := `insert into "cart"("products") values($1)`
+
+	_, err := currentDB.Exec(insertDynStmt, timeLocation)
+	if err != nil {
+		panic(err)
+	}
+}

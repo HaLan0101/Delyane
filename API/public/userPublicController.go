@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -52,7 +53,24 @@ func PostUser(c *gin.Context) {
 	// Create Wishlist to create a user
 	repository.PostUser(input)
 
-	repository.PostWishlist(repository.GetUserByEmail(input.Email)[0].UUID_wishlist)
+	uniqu := fmt.Sprint(time.Now().UnixMicro())
+
+	var result []uint8
+
+	result = append(result, 123)
+
+	for _, digit := range uniqu {
+		result = append(result, uint8(digit))
+	}
+
+	result = append(result, 125)
+
+	repository.PostWishlist(result)
+
+	repository.PostCart(result)
+
+	repository.SetUserWishlist(repository.GetWishlistByTime(result).UUID, repository.GetUserByEmail(input.Email)[0].UUID)
+	repository.SetUserCart(repository.GetCartByTime(result).UUID, repository.GetUserByEmail(input.Email)[0].UUID)
 
 	c.JSON(http.StatusCreated, input)
 }

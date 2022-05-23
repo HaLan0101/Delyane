@@ -165,3 +165,23 @@ func DeleteUserById(uuid string) {
 		panic(err)
 	}
 }
+
+func SetUserWishlist(uuidWishlist, uuidUser string) {
+	// dynamic
+	insertDynStmt := `UPDATE public."user" SET uuid_wishlist=$2::uuid WHERE uuid=$1::uuid::uuid;`
+
+	_, err := currentDB.Exec(insertDynStmt, uuidUser, uuidWishlist)
+	if err != nil {
+		panic(err)
+	}
+}
+
+func SetUserCart(uuidCart, uuidUser string) {
+	// dynamic
+	insertDynStmt := `UPDATE public."user" SET uuid_cart=$2::uuid WHERE uuid=$1::uuid::uuid;`
+
+	_, err := currentDB.Exec(insertDynStmt, uuidUser, uuidCart)
+	if err != nil {
+		panic(err)
+	}
+}
