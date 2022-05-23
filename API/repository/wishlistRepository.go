@@ -52,7 +52,7 @@ func PostWishlist(timelocation []uint8) {
 	// dynamic
 	insertDynStmt := `insert into "wishlist"("uuid","products") values($1, $2)`
 
-	_, err := currentDB.Exec(insertDynStmt, "d222770b-e4db-4675-851e-6a947533048f", timelocation)
+	_, err := currentDB.Exec(insertDynStmt, "d222770b-e4db-4675-851e-6a947533048g", timelocation)
 	if err != nil {
 		panic(err)
 	}
