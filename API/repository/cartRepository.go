@@ -4,7 +4,7 @@ import "delyaneAPI/models"
 
 // GetCartById get a cart from a specific user in db
 func GetCartById(id string) models.CartDB {
-	rows, err := currentDB.Query(`SELECT * FROM "wishlist" WHERE uuid = $1`, id)
+	rows, err := currentDB.Query(`SELECT * FROM "cart" WHERE uuid = $1`, id)
 
 	if err != nil {
 		panic(err)
