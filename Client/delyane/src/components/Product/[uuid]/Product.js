@@ -9,7 +9,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './Product.css';
 const Product = () => {
     const [product, setProduct] = useState({});
+    const [category, setCategory] = useState({});
+    const [user, setUser] = useState({});
     const {uuid} = useParams();
+    const idUser= product.uuid_user;
+    const idCategory= product.uuid_category;
     useEffect(() => {
         const getData = async () => {
             try {
@@ -21,8 +25,34 @@ const Product = () => {
         }
         getData();
     }, [uuid]);
-
-    
+    useEffect(() => {
+        if(idUser){
+            const getData = async () => {
+                try {
+                    const result = await axios.get(`http://90.22.250.124:8080/user/${idUser}`)
+                    setUser(result.data);
+                    console.log(result.data.username);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            getData();
+        }
+    }, [idUser]);
+    useEffect(() => {
+        if(idCategory){
+            const getData = async () => {
+                try {
+                    const result = await axios.get(`http://90.22.250.124:8080/category/${idCategory}`)
+                    setCategory(result.data);
+                    console.log(result.data.name);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            getData();
+        }
+    }, [idCategory]);
 
     return (
         <>
@@ -35,6 +65,7 @@ const Product = () => {
                         <img src={`http://90.22.250.124:8080${product.image}`} alt={product.image} />
                     </div>
                     <div className='product__info'>
+                        <p className='product__title'>Artist name : {user.username}</p>
                         <p className='product__title'>{product.title}</p>
                         <p className='product__description'>{product.description}</p>
                         <p className='product__price'>{product.price}</p>
@@ -46,29 +77,34 @@ const Product = () => {
                     <h2>All about</h2>
                     <hr class="dividerSolid__bolder"></hr>
                     <div className='product__moreInfoList'>
+                        <p className='product__category'>Category </p>
+                        <p className='product__category'>{category.name}</p>
+                    </div>
+                    <hr class="dividerSolid"></hr>
+                    <div className='product__moreInfoList'>
                         <p className='product__technical'>Technical </p>
-                        <p className='product__technical'>Technical name</p>
+                        <p className='product__technical'>{product.technical}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__dimension'>Dimension </p>
-                        <p className='product__dimension'>500x450</p>
+                        <p className='product__dimension'>{product.dimension}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__support'>Support </p>
-                        <p className='product__support'>Support here</p>
+                        <p className='product__support'>{product.support}</p>
                     </div>
                     <hr class="dividerSolid"></hr>
                     <div className='product__moreInfoList'>
                         <p className='product__auth'>Authentification </p>
-                        <p className='product__auth'>bla bla bla bla bla</p>
+                        <p className='product__auth'>{product.authentification}</p>
                     </div>
                     <hr class="dividerSolid__bolder"></hr>
                 </div>
                 <div className='product__sameStyle'>
                     <h2>Same Style</h2>
-                    <List></List>
+                    <List/>
                 </div>
             </div>
         </div>

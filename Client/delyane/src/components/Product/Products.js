@@ -9,7 +9,9 @@ import './Products.css';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
-
+    const handleValue = (value) => {
+        getDataCategory(value);
+    };
     useEffect(() => {
         const getData = async () => {
             try {
@@ -22,7 +24,20 @@ const Product = () => {
         }
         getData();
     }, []);
-
+    const getDataCategory = (idCategory) => {
+        if(idCategory){
+            const getData = async () => {
+                try {
+                    const result = await axios.get(`http://90.22.250.124:8080/products?category=${idCategory}`)
+                    setProducts(result.data);
+                    console.log("here "+result.data);
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            getData();
+        }
+    };
     return (
         <>
             <Header />
@@ -30,36 +45,32 @@ const Product = () => {
                 <div className='product__content'>
                     <h1 className='product__title'>Painting</h1>
 
-                    <ul className='product__list'>
+                    <ul className='product__list'> 
                         <li className='product__filter'>
                             <div className='product__category'>
-                                <select name="genre" id="genre">
-                                    <option>Category</option>
-                                    <option value="1" >Painting</option>
-                                    <option value="2" >Photography</option>
-                                    <option value="3" >Editing</option>
-                                    <option value="4" >Sculpture</option>
-                                    <option value="5" >Design</option>
-                                </select>
-                            </div>
-                            <div className='product__price'>
-                                <select name="genre" id="genre">
-                                    <option>Price</option>
-                                    <option value="1" > Lower than 500€ </option>
-                                    <option value="2" > 501€ - 1 000€</option>
-                                    <option value="3" > 1 001€ - 5 000€</option>
-                                    <option value="4" > 5 001€ - 10 000€</option>
-                                    <option value="5" > Higher than 10 000€</option>
+                                <select name="genre" id="genre" onChange={(e)=> handleValue(e.target.value) }>
+                                    <option >Category</option>
+                                    <option value="899a55e4-fdb8-4ebf-84c5-cf1781086f53" >Painting</option>
+                                    <option value="4bdcbc09-3634-4a51-9979-88ba8da3c6b9" >Photography</option>
+                                    <option value="460462ab-4446-454b-8249-edabdd55c2db" >Editing</option>
+                                    <option value="a7c6488c-6c58-4b25-aabe-303121df72d7" >Sculpture</option>
+                                    <option value="ae596731-14b9-466f-9509-d4be54fd8ef8" >Design</option>
                                 </select>
                             </div>
                         </li>
-                        <li className='product__art'>
-                            {products.map(product => {
-                                return (
-                                    <ListItem title={product.title} description={product.description} category={product.category} price={product.price} image={product.image} uuid={product.uuid} />
-                                )
-                            })}
-                        </li>
+                        {products ? (
+                        <>
+                            <li className='product__art'>
+                                {products.map(product => {
+                                    return (
+                                        <ListItem title={product.title} description={product.description} category={product.category} price={product.price} image={product.image} uuid={product.uuid} />
+                                    )
+                                })}
+                            </li>
+                        </>
+                        ) : (
+                        ""
+                        )}
                     </ul>
                 </div>
 
