@@ -3,7 +3,6 @@ package public
 import (
 	"delyaneAPI/models"
 	"delyaneAPI/repository"
-	"fmt"
 	"log"
 	"mime/multipart"
 	"net/http"
@@ -203,7 +202,6 @@ func GetUserWishlist(c *gin.Context) {
 	var products []models.Product
 
 	for _, productUUID := range wishlistDB.ConvertProductsToDisplay() {
-		fmt.Println(productUUID)
 		products = append(products, repository.GetProductById(productUUID))
 	}
 
