@@ -256,6 +256,25 @@ func PutUserWishlist(c *gin.Context) {
 	c.JSON(http.StatusOK, "Wishlist updated")
 }
 
+// GetUserCart handle /user/:id/cart
+func GetUserCart(c *gin.Context) {
+	if !isUserExistById(c.Params.ByName("id")) {
+		c.JSON(http.StatusNotFound, gin.H{"err": "User not found with this ID"})
+		return
+	}
+
+	cartDB := repository.GetCartById(repository.GetUserById(c.Params.ByName("id")).UUID_cart)
+
+	var products []models.Product
+
+	for _, productUUID := range cartDB.ConvertProductsToDisplay() {
+		fmt.Println(productUUID)
+		products = append(products, repository.GetProductById(productUUID))
+	}
+
+	c.JSON(http.StatusOK, models.WishlistProduct{UUID: cartDB.UUID, Products: products})
+}
+
 // isUserExistById return true if the user exist in the db
 func isUserExistById(uuid string) bool {
 	if len(uuid) != 36 {

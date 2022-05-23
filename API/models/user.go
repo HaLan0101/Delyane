@@ -12,6 +12,7 @@ type User struct {
 	LastName      string `json:"lastname"`
 	Image         string `json:"image"`
 	UUID_wishlist string `json:"uuid_wishlist"`
+	UUID_cart     string `json:"uuid_cart"`
 }
 
 // PostUser is the struct used to create a new user
