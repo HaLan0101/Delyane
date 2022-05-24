@@ -17,18 +17,20 @@ A list of technologies used within the project:
 
 ## Installation
 ***
-A little intro about the installation.
+First, clone this repo
+```bash
+$ git clone https://github.com/LittleDuckSugar/Delyane.git
+```
 
 The API is not requierd for trying this project. The API is available at [90.22.250.124:8080](http://90.22.250.124:8080)
-```
-$ git clone https://github.com/LittleDuckSugar/Delyane.git
+```bash
 $ cd Delyane/API
 $ go run main.go
 ```
 
 Launch client
-```
-$ cd Delyane/API
+```bash
+$ cd Delyane/Client/delyane
 $ npm install
 $ npm start
 ```
