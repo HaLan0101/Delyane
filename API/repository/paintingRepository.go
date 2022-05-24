@@ -1,7 +1,10 @@
 package repository
 
-import "delyaneAPI/models"
+import (
+	"delyaneAPI/models"
+)
 
-func GetPaintingById(id int) models.Painting {
+// GetPaintingById return a demo model of painting DEMO
+func GetPaintingById(id string) models.Painting {
 	return models.Painting{Title: "Painting 1"}
 }
