@@ -65,3 +65,14 @@ func ClearUserCart(uuid string) {
 		panic(err)
 	}
 }
+
+// DeleteCartById delete a user from db
+func DeleteCartById(uuid string) {
+	// dynamic
+	deleteDynStmt := `delete from "cart" where uuid = $1`
+
+	_, err := currentDB.Exec(deleteDynStmt, uuid)
+	if err != nil {
+		panic(err)
+	}
+}

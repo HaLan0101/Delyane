@@ -158,6 +158,7 @@ func DeleteUserById(c *gin.Context) {
 	}
 
 	repository.DeleteWishlistById(repository.GetUserById(c.Params.ByName("id")).UUID_wishlist)
+	repository.DeleteCartById(repository.GetUserById(c.Params.ByName("id")).UUID_cart)
 	repository.DeleteUserById(c.Params.ByName("id"))
 
 	c.String(http.StatusOK, "User successfully deleted")
