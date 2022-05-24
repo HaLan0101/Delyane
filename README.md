@@ -19,8 +19,7 @@ A list of technologies used within the project:
 ***
 A little intro about the installation.
 
-The API is not requierd for trying this project. The API is available at [90.22.250.124:8080](90.22.250.124:8080)
-Launch API
+The API is not requierd for trying this project. The API is available at [90.22.250.124:8080](http://90.22.250.124:8080)
 ```
 $ git clone https://github.com/LittleDuckSugar/Delyane.git
 $ cd Delyane/API
@@ -30,12 +29,13 @@ $ go run main.go
 Launch client
 ```
 $ cd Delyane/API
-$ go run main.go
+$ npm install
+$ npm start
 ```
 
 ## Collaboration
 ***
 This project was made by :
-> PAIVA Delphine
-> DANG Ngoc Ha Lan
+> PAIVA Delphine - 
+> DANG Ngoc Ha Lan - 
 > BERNARD Antoine
